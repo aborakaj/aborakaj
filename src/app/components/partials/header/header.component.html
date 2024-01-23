@@ -1,0 +1,28 @@
+<div class="header">
+    <div class="logo">
+      <ng-template #logoTemplate>
+        <img
+          src="assets/logo.png"
+          alt="Logo"
+          style="height: 30px; vertical-align: middle"
+        />
+      </ng-template>
+      <div *ngTemplateOutlet="logoTemplate"></div>
+    </div>
+    
+    <div class="menu">
+      <p-menubar [model]="items">
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+      </p-menubar>
+    </div>
+    
+    <div class="menu-button">
+      <button
+        pButton
+        type="button"
+        (click)="menu.toggle($event)"
+        label="Profile"
+      ></button>
+      <p-menu #menu [model]="profileItems" [popup]="true"></p-menu>
+    </div>
+  </div>
