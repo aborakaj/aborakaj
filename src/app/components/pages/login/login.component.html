@@ -1,0 +1,31 @@
+<div class="login-container">
+  <h2>Welcome!</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <span class="p-float-label">
+        <input id="username" type="text" pInputText formControlName="identifier" [ngClass]="{'p-invalid': isSubmitted && fc['identifier'].invalid}"/>
+        <label for="username">Username</label>
+      </span>
+      <div *ngIf="isSubmitted && fc['identifier'].errors" class="invalid-feedback">
+        <div *ngIf="fc['identifier'].errors['required']">
+          Email is required.
+        </div>
+        <div *ngIf="fc['identifier'].errors['email']">
+          Email must be a valid email address.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <span class="p-float-label">
+        <input id="password" type="password" pInputText formControlName="password" [ngClass]="{'p-invalid': isSubmitted && fc['password'].invalid}"/>
+        <label for="password">Password</label>
+      </span>
+      <div *ngIf="isSubmitted && fc['password'].errors" class="invalid-feedback">
+        <div *ngIf="fc['password'].errors['required']">
+          Password is required.
+        </div>
+      </div>
+    </div>
+    <button type="submit" pButton label="Login" style="background-color: rgb(76, 76, 76); border-color: rgb(76, 76, 76);"></button>
+  </form>
+</div>
