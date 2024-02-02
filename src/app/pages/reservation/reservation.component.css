@@ -1,0 +1,114 @@
+.office-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+  }
+  
+  .room, .meeting-room {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+  }
+  
+  .desk {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .desk:hover {
+    background-color: #bbb;
+  }
+  
+  .meeting-room {
+    width: 300px;
+    height: 150px;
+    text-align: center;
+    line-height: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .meeting-room:hover {
+    background-color: #bbb;
+  }
+  
+  .selected {
+    background-color: #888;
+  }
+  
+  .meeting-room {
+    width: 200px;
+    text-align: center;
+    line-height: 50px;
+    border: 1px solid #ccc;
+  }
+  
+  .reservation-sidebar {
+    width: 350px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    right: -350px;
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 1000;
+  }
+  
+  .reservation-sidebar.show {
+    right: 0;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+  }
+  
+  .overlay.show {
+    display: block;
+  }
+  
+  .status {
+    margin: 10px 0;
+  }
+  
+  .status .available {
+    color: green;
+  }
+  
+  button {
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  

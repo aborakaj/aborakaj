@@ -1,18 +1,15 @@
 <div class="header">
     <div class="logo">
-      <ng-template #logoTemplate>
         <img
           src="assets/logo.png"
           alt="Logo"
           style="height: 30px; vertical-align: middle"
         />
-      </ng-template>
-      <div *ngTemplateOutlet="logoTemplate"></div>
     </div>
     
     <div class="menu">
       <p-menubar [model]="items">
-        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+        <p-menu #mainMenu [model]="items" [popup]="true"></p-menu>
       </p-menubar>
     </div>
     
@@ -20,9 +17,8 @@
       <button
         pButton
         type="button"
-        (click)="menu.toggle($event)"
-        label="Profile"
+        (click)="profileMenu.toggle($event)"
+        icon="pi pi-fw pi-user"
       ></button>
-      <p-menu #menu [model]="profileItems" [popup]="true"></p-menu>
+      <p-menu #profileMenu [model]="profileItems" [popup]="true"></p-menu>
     </div>
-  </div>

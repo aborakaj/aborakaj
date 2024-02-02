@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -7,16 +10,29 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  
-  items!: MenuItem[]; 
+  items!: MenuItem[];
   profileItems: MenuItem[];
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.items = [
       {
-        label: 'File',
+        label: 'Reservation',
         items: [
-          { label: 'New', icon: 'pi pi-fw pi-plus', command: () => {} },
-          { label: 'Open', icon: 'pi pi-fw pi-download', command: () => {} },
+          {
+            label: 'New reservation',
+            icon: 'pi pi-fw pi-plus',
+            command: () => {
+              this.router.navigate(['/new-reservation']);
+            },
+          },
+          {
+            label: 'My reservations',
+            icon: 'pi pi-fw pi-user',
+            command: () => {},
+          },
         ],
       },
       {
@@ -32,12 +48,22 @@ export class HeaderComponent {
       {
         label: 'Profile',
         items: [
-          { label: 'Update', icon: 'pi pi-fw pi-user-edit', command: () => {} },
+          { label: 'Dashboard', icon: 'pi pi-table', command: () => {} },
           { label: 'Settings', icon: 'pi pi-fw pi-cog', command: () => {} },
-          { label: 'Logout', icon: 'pi pi-fw pi-sign-out', command: () => {} },
+          {
+            label: 'Logout',
+            icon: 'pi pi-fw pi-sign-out',
+            command: () => this.logout(),
+          },
         ],
       },
     ];
+  }
+
+  logout() {
+    this.authService.clearToken();
+    this.toastr.success('Logged out successfully', 'Success');
+    this.router.navigate(['/login']);
   }
 
   toggle(event: any) {}
