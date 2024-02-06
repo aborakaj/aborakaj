@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { USER_URL } from '../shared/constants/url';
+import { DESKS_URL } from '../shared/constants/url';
 import { AuthService } from './auth.service';
 
-export interface User {
+export interface Desk {
   id: string;
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
+  name: string;
+  status: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class DeskService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -33,11 +31,11 @@ export class UserService {
     }
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(USER_URL, this.getHeaders());
+  getDesks(): Observable<Desk[]> {
+    return this.http.get<Desk[]>(DESKS_URL, this.getHeaders());
   }
 
-  getUserById(id: string): Observable<any> {
-    return this.http.get(`${USER_URL}/${id}`, this.getHeaders());
+  getDeskById(id: string): Observable<Desk> {
+    return this.http.get<Desk>(`${DESKS_URL}/${id}`, this.getHeaders());
   }
 }

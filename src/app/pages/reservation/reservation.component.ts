@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ReservationService } from '../../services/reservation.service';
+import { User, UserService } from '../../services/user.service';
+import { Desk, DeskService } from '../../services/desk.service';
+import { Room, RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-reservation',
@@ -8,69 +11,120 @@ import { ReservationService } from '../../services/reservation.service';
   styleUrls: ['./reservation.component.css'],
 })
 export class ReservationComponent {
-
-  rooms = [
-    {
-      desks: Array(5)
-        .fill({})
-        .map((v, i) => ({ id: `desk-${i}`, available: true })),
-    },
-    {
-      desks: Array(5)
-        .fill({})
-        .map((v, i) => ({ id: `desk-${i + 5}`, available: true })),
-    },
-  ];
-  meetingRoom = { id: 'meeting-room', available: true };
   selectedSpace: any = null;
   reservation = {
-    date: '', 
+    date: '',
     startTime: '',
     endTime: '',
   };
   isAvailable = true;
-  reservationId: string | null = null;
 
-  constructor(private toastr: ToastrService, private reservationService: ReservationService) {}
+  reservationId: string | null = null;
+  selectedSpaceId: string | null = null;
+  selectedUserId: string | null = null;
+
+  rooms: Room[] = [];
+  users: User[] = [];
+  desks: Desk[] = [];
+
+  reservations: any[] = [];
+  editingReservation: any = null;
+
+  constructor(
+    private toastr: ToastrService,
+    private reservationService: ReservationService,
+    private userService: UserService,
+    private deskService: DeskService,
+    private roomService: RoomService
+  ) {}
+
+  ngOnInit() {
+    this.fetchUsers();
+    this.fetchRooms();
+    this.fetchDesks();
+    this.fetchReservations();
+  }
+
+  fetchUsers() {
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching users');
+      },
+    });
+  }
+
+  fetchDesks() {
+    this.deskService.getDesks().subscribe({
+      next: (desks) => {
+        console.log('Desks fetched', desks);
+        this.desks = desks;
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching users');
+      },
+    });
+  }
+
+  fetchRooms() {
+    this.roomService.getRooms().subscribe({
+      next: (rooms) => {
+        this.rooms = rooms;
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching rooms');
+      },
+    });
+  }
+
+  fetchReservations() {
+    this.reservationService.getReservation().subscribe({
+      next: (reservationsData) => {
+        this.reservations = reservationsData;
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching reservations');
+      },
+    });
+  }
 
   selectSpace(space: any) {
     this.selectedSpace = space;
-    this.isAvailable = space.available;
+    this.isAvailable = space.status === 'available';
+    this.selectedSpaceId = space.id;
   }
 
   submitReservation() {
-    try {
-      const startTimeISO = new Date(this.reservation.startTime).toISOString();
-      const endTimeISO = new Date(this.reservation.endTime).toISOString();
-  
-      const reservationData = {
-        startTime: startTimeISO,
-        endTime: endTimeISO,
-        userId: '6163888f-0853-4fd5-8105-3f3f742e9c90',
-        deskId: 'cbdd9c79-6445-4d5e-ab3b-510a2f57a0ee', 
-        action: 'BOOKED',
-        createdBy: '6163888f-0853-4fd5-8105-3f3f742e9c90'
-      };
-  
-      console.log('Sending reservation data:', reservationData);
-  
-      this.reservationService.submitReservation(reservationData).subscribe({
-        next: (response) => {
-          this.toastr.success('Reservation made', 'Success');
-          this.resetForm();
-        },
-        error: (errorResponse) => {
-          this.toastr.error('Error making reservation');
-          console.error('Error response:', errorResponse);
-          if (errorResponse.error && errorResponse.error.message) {
-            console.error('Error details:', errorResponse.error.message);
-          }
-        }
-      });
-    } catch (error) {
-      this.toastr.error('Invalid date or time provided');
-      console.error('Error with date or time:', error);
+    if (!this.selectedUserId || !this.selectedSpaceId) {
+      this.toastr.error('Please select a desk and ensure you are logged in.');
+      return;
     }
+
+    const startTimeISO = new Date(this.reservation.startTime).toISOString();
+    const endTimeISO = new Date(this.reservation.endTime).toISOString();
+
+    const reservationData = {
+      startTime: startTimeISO,
+      endTime: endTimeISO,
+      userId: this.selectedUserId,
+      deskId: this.selectedSpaceId,
+      action: 'BOOKED',
+      createdBy: this.selectedUserId,
+    };
+
+    this.reservationService.submitReservation(reservationData).subscribe({
+      next: (response) => {
+        this.toastr.success('Reservation made', 'Success');
+        this.resetForm();
+      },
+      error: (errorResponse) => {
+        this.toastr.error('Error making reservation');
+        if (errorResponse.error && errorResponse.error.message) {
+        }
+      },
+    });
   }
 
   cancelReservation() {
@@ -80,9 +134,42 @@ export class ReservationComponent {
           this.toastr.success('Reservation cancelled', 'Success');
           this.resetForm();
         },
-        error: (error) => this.toastr.error('Error cancelling reservation')
+        error: (error) => this.toastr.error('Error cancelling reservation'),
       });
     }
+  }
+
+  startEditReservation(reservation: any) {
+    this.editingReservation = { ...reservation };
+  }
+
+  submitEditReservation() {
+    const updatedReservationData = {
+      startTime: new Date(this.editingReservation.startTime).toISOString(),
+      endTime: new Date(this.editingReservation.endTime).toISOString(),
+
+    };
+    this.reservationService.updateReservation(this.editingReservation.id, updatedReservationData).subscribe({
+      next: (response) => {
+        this.toastr.success('Reservation updated', 'Success');
+        this.fetchReservations();
+        this.editingReservation = null;
+      },
+      error: (errorResponse) => {
+        this.toastr.error('Error updating reservation');
+        if (errorResponse.error && errorResponse.error.message) {
+        }
+      },
+    });
+  }
+
+  deleteReservation(reservationId: string) {
+    this.reservationService.deleteReservation(reservationId).subscribe({
+      next: (response) => {
+        this.fetchReservations();
+      },
+      error: (error) => this.toastr.error('Error cancelling reservation'),
+    });
   }
 
   resetForm() {

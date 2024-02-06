@@ -21,6 +21,14 @@ export class ReservationService {
     throw new Error('Authentication token not found');
   }
 
+  getReservation(): Observable<any> {
+    return this.http.get(RESERVATION_URL, { headers: this.getHeaders() });
+  }
+
+  getReservationById(id: string): Observable<any> {
+    return this.http.get(`${RESERVATION_URL}/${id}`, { headers: this.getHeaders() });
+  }
+
   submitReservation(reservationData: any): Observable<any> {
     return this.http.post(RESERVATION_URL, reservationData, { headers: this.getHeaders() });
   }
