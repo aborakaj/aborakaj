@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './features-or-modules/login/login.component';
+import { LoginComponent } from './core/components/login/login.component';
 import { AppRoutingModule } from './app.routes'; 
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './features-or-modules/home/home.component';
+import { LandingPageComponent } from './core/components/landing-page/landing-page.component'; 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from './core/components/header/header.component';
@@ -21,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    LandingPageComponent,
     HeaderComponent
   ],
   imports: [
