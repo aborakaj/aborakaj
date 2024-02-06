@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LOGIN_URL } from '../shared/constants/url';
+import { LOGIN_URL } from '../../shared/constants/url';
 
 @Injectable({
   providedIn: 'root'
