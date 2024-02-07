@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ReservationService } from '../../services/reservation.service';
+import { Reservation, ReservationService } from '../../services/reservation.service';
 import { User, UserService } from '../../services/user.service';
 import { Desk, DeskService } from '../../services/desk.service';
 import { Room, RoomService } from '../../services/room.service';
@@ -27,7 +27,7 @@ export class ReservationComponent {
   users: User[] = [];
   desks: Desk[] = [];
 
-  reservations: any[] = [];
+  reservations: Reservation[] = [];
   editingReservation: any = null;
 
   constructor(
@@ -59,7 +59,6 @@ export class ReservationComponent {
   fetchDesks() {
     this.deskService.getDesks().subscribe({
       next: (desks) => {
-        console.log('Desks fetched', desks);
         this.desks = desks;
       },
       error: (error) => {
@@ -98,7 +97,7 @@ export class ReservationComponent {
 
   submitReservation() {
     if (!this.selectedUserId || !this.selectedSpaceId) {
-      this.toastr.error('Please select a desk and ensure you are logged in.');
+      this.toastr.error('Please select a desk and a user!');
       return;
     }
 
@@ -139,7 +138,7 @@ export class ReservationComponent {
     }
   }
 
-  startEditReservation(reservation: any) {
+  startEditReservation(reservation: Reservation) {
     this.editingReservation = { ...reservation };
   }
 
@@ -166,6 +165,7 @@ export class ReservationComponent {
   deleteReservation(reservationId: string) {
     this.reservationService.deleteReservation(reservationId).subscribe({
       next: (response) => {
+        this.toastr.success('Reservation deleted', 'Success');
         this.fetchReservations();
       },
       error: (error) => this.toastr.error('Error cancelling reservation'),
@@ -182,3 +182,8 @@ export class ReservationComponent {
     this.reservationId = null;
   }
 }
+
+// if (!startTimeISO || !endTimeISO) {
+//   this.toastr.error('Please select a time and a date!');
+//   return;
+// }
