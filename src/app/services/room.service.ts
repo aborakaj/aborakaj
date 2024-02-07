@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 import { ROOM_URL } from '../shared/constants/url';
+import { AuthService } from '../core/services/auth.service';
 
 export interface Room {
   id: string;

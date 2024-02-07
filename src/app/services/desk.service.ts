@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DESKS_URL } from '../shared/constants/url';
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/services/auth.service';
 
 export interface Desk {
   id: string;
