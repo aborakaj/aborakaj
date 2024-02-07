@@ -65,8 +65,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let reservation of reservations">
-        <td>{{ reservation.userEmail }}</td>
-        <td>{{ reservation.deskName }}</td>
+        <td>{{ reservation.user }}</td>
+        <td>{{ reservation.desk }}</td>
         <td>{{ reservation.startTime | date : "short" }}</td>
         <td>{{ reservation.endTime | date : "short" }}</td>
         <td>
