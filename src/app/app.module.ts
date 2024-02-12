@@ -16,13 +16,23 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { AddUserComponent } from './features/add-user/add-user.component';
+import { CommonModule } from '@angular/common';
+import { CalendarModule } from 'primeng/calendar';
+import { PasswordModule } from 'primeng/password';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DividerModule } from 'primeng/divider';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddUserComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -37,7 +47,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
     ToastModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule,
+    CommonModule,
+    CalendarModule,
+    PasswordModule,
+    InputMaskModule,
+    DividerModule
   ],
   bootstrap: [AppComponent],
 })
