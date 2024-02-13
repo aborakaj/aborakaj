@@ -31,7 +31,7 @@ export class AddUserComponent implements OnInit {
     email: '',
     password: '',
     confirmPassword: '',
-    birthday: ''
+   
   };
 
   displayDialog: boolean = false;
@@ -77,6 +77,9 @@ export class AddUserComponent implements OnInit {
     
       // Remove the "confirmPassword" field from the userData object
       delete userData.confirmPassword;
+      // userData.rolesOrganization = '02a4b538-5a7d-498f-ad37-4bee0b8e2a34'
+
+      
       // Retrieve the JWT token from wherever it's stored in your application
       const jwtToken = this.authService.getToken() // Assuming the token is stored in localStorage
       console.log(jwtToken)
