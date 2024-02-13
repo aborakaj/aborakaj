@@ -25,7 +25,7 @@ export class HeaderComponent {
             label: 'New reservation',
             icon: 'pi pi-fw pi-plus',
             command: () => {
-              this.router.navigate(['/new-reservation']);
+              this.router.navigate(['/reservation']);
             },
           },
           {

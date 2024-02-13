@@ -31,6 +31,7 @@ export class ReservationService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       });
+      
     }
     throw new Error('Authentication token not found');
   }

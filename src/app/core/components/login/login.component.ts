@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  login(): void {
+ login(): void {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       this.toastr.error('Please correct the errors in the form', 'Error');
@@ -45,8 +45,16 @@ export class LoginComponent implements OnInit {
       this.authService.login(identifier, password).subscribe({
         next: (response) => {
           this.authService.saveToken(response.access_token);
+          const jwtData = response.access_token.split('.')[1]
+          const decodedJwtData = JSON.parse(atob(jwtData))
+
+          const isAdmin = decodedJwtData.role=='Admin';
+          if(isAdmin) { 
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/home']);
+          }
           this.toastr.success('Logged in successfully', 'Success');
-          this.router.navigate(['/home']);
         },
         error: (error) => {
           this.toastr.error('Login failed', 'Error');

@@ -17,6 +17,10 @@ import { LandingPageComponent } from './core/components/landing-page/landing-pag
 import { LoginComponent } from './core/components/login/login.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
+import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { DashboardComponent } from './features/user-dashboard/components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { ReservationComponent } from './features/reservation-management/componen
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-    ReservationComponent
+    ReservationComponent,
+    UserReservationComponent,
+    DashboardComponent //component not page
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,9 @@ import { ReservationComponent } from './features/reservation-management/componen
     ToastrModule.forRoot(),
     ToastModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule,
+    DialogModule,
   ],
   bootstrap: [AppComponent],
 })

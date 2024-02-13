@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<div class="desk-container">
+  <div *ngFor="let room of rooms; let roomIndex = index">
+    <div *ngFor="let desk of desks; let deskIndex = index" class="desk-button">
+      <button type="button" pButton label="Desk {{ deskIndex + 1 }}" (click)="showReservationModal(desk)"></button>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Reservation" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="startTime">Start Time</label>
+      <p-calendar [(ngModel)]="reservation.startTime" [showTime]="true" inputId="startTime" dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+    <div class="p-field">
+      <label for="endTime">End Time</label>
+      <p-calendar [(ngModel)]="reservation.endTime" [showTime]="true" inputId="endTime" dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+    <div class="p-field">
+      <label for="status">Status</label>
+      <input type="text" id="status" pInputText [(ngModel)]="reservation.action" disabled />
+    </div>
+    <button *ngIf="!isDeskReserved" type="button" pButton label="Reserve" (click)="submitReservation()"></button>
+    <button *ngIf="isDeskReserved" type="button" pButton label="Cancel Reservation" class="p-button-danger" (click)="cancelReservation()"></button>
+  </div>
+</p-dialog>

@@ -10,6 +10,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  getUserIdFromToken(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+  
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.sub;
+  }
+
   login(identifier: string, password: string): Observable<any> {
     return this.http.post(LOGIN_URL, { identifier, password });
   }

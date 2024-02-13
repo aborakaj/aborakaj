@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { USER_URL } from '../shared/constants/url';
 import { AuthService } from '../core/services/auth.service';
+import { Reservation } from './reservation.service';
 
 export interface User {
   id: string;
@@ -10,6 +11,7 @@ export interface User {
   lastName: string;
   username: string;
   email: string;
+  reservation: Reservation[];
 }
 
 @Injectable({
@@ -40,4 +42,8 @@ export class UserService {
   getUserById(id: string): Observable<any> {
     return this.http.get(`${USER_URL}/${id}`, this.getHeaders());
   }
+
+  // getUserReservations(id: string): Observable<User[]> {
+    
+  // }
 }
