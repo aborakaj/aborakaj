@@ -12,10 +12,6 @@
   </div>
 </div>
 
-<!-- <div *ngFor="let room of rooms" class="room" (click)="selectSpace(room)">
-    {{ room.name }}
-  </div>
-   -->
 <div class="reservation-sidebar" [class.show]="selectedSpace">
   <h2>Reservation</h2>
   <form (ngSubmit)="submitReservation()">

@@ -22,7 +22,7 @@
       <label for="status">Status</label>
       <input type="text" id="status" pInputText [(ngModel)]="reservation.action" disabled />
     </div>
-    <button *ngIf="!isDeskReserved" type="button" pButton label="Reserve" (click)="submitReservation()"></button>
-    <button *ngIf="isDeskReserved" type="button" pButton label="Cancel Reservation" class="p-button-danger" (click)="cancelReservation()"></button>
+    <p-button *ngIf="!isDeskReserved" type="button" pButton label="Reserve" (click)="submitReservation()"></p-button>
+    <p-button *ngIf="isDeskReserved" type="button" pButton label="Cancel Reservation" class="p-button-danger" (click)="cancelReservation()"></p-button>
   </div>
 </p-dialog>

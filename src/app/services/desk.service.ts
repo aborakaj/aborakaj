@@ -15,27 +15,13 @@ export interface Desk {
 })
 export class DeskService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
-
-  private getHeaders() {
-    const token = this.authService.getToken();
-    if (token) {
-      return {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      };
-    } else {
-      throw new Error('Authentication token not found');
-    }
-  }
+  constructor(private http: HttpClient) { }
 
   getDesks(): Observable<Desk[]> {
-    return this.http.get<Desk[]>(DESKS_URL, this.getHeaders());
+    return this.http.get<Desk[]>(DESKS_URL);
   }
 
   getDeskById(id: string): Observable<Desk> {
-    return this.http.get<Desk>(`${DESKS_URL}/${id}`, this.getHeaders());
+    return this.http.get<Desk>(`${DESKS_URL}/${id}`);
   }
 }

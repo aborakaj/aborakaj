@@ -22,27 +22,13 @@ export interface Desk {
 export class RoomService {
   
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  private getHeaders() {
-    const token = this.authService.getToken();
-    if (token) {
-      return {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      };
-    } else {
-      throw new Error('Authentication token not found');
-    }
-  }
+  constructor(private http: HttpClient) {}
 
   getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(ROOM_URL, this.getHeaders());
+    return this.http.get<Room[]>(ROOM_URL);
   }
 
   getRoomsById(id: string): Observable<Room> {
-    return this.http.get<Room>(`${ROOM_URL}/${id}`, this.getHeaders())
+    return this.http.get<Room>(`${ROOM_URL}/${id}`)
   }
 }

@@ -24,35 +24,23 @@ export interface Reservation {
 export class ReservationService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  private getHeaders(): HttpHeaders {
-    const token = this.authService.getToken();
-    if (token) {
-      return new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-      
-    }
-    throw new Error('Authentication token not found');
-  }
-
   getReservation(): Observable<any> {
-    return this.http.get(RESERVATION_URL, { headers: this.getHeaders() });
+    return this.http.get(RESERVATION_URL);
   }
 
   getReservationById(id: string): Observable<any> {
-    return this.http.get(`${RESERVATION_URL}/${id}`, { headers: this.getHeaders() });
+    return this.http.get(`${RESERVATION_URL}/${id}`);
   }
 
   submitReservation(reservationData: any): Observable<any> {
-    return this.http.post(RESERVATION_URL, reservationData, { headers: this.getHeaders() });
+    return this.http.post(RESERVATION_URL, reservationData);
   }
 
   updateReservation(id: string, reservationData: any): Observable<any> {
-    return this.http.put(`${RESERVATION_URL}/${id}`, reservationData, { headers: this.getHeaders() });
+    return this.http.put(`${RESERVATION_URL}/${id}`, reservationData);
   }
 
   deleteReservation(id: string): Observable<any> {
-    return this.http.delete(`${RESERVATION_URL}/${id}`, { headers: this.getHeaders() });
+    return this.http.delete(`${RESERVATION_URL}/${id}`);
   }
 }
