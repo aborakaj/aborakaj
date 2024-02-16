@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,13 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
   items: MenuItem[] | undefined;
   userMenuItems: MenuItem[] | undefined;
   profileLabel: string = 'B. Rodgers';
   profileIcon: string = 'pi pi-user';
   selectedItem: MenuItem[] | undefined;
+
+  @ViewChild('menuItems') menuItems!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -25,23 +27,31 @@ export class HeaderComponent {
     this.initializeUserMenuItems();
   }
 
+
   initializeUserMenuItems() {
     this.userMenuItems = [
       {
         label: 'My Profile',
         icon: 'pi pi-fw pi-user',
-        command: () => this.navigate('profile'),
+        command: () => { this.navigate('profile'); }
       },
       {
         label: 'Logout',
         icon: 'pi pi-fw pi-sign-out',
-        command: () => this.logout(),
+        command: () => { this.logout(); }
       },
     ];
   }
 
   navigate(path: string) {
     this.router.navigate([`/${path}`]);
+  }
+
+  onDropdownChange(event: any) {
+    if (event.value && event.value.command) {
+      event.value.command(event);
+    }
+    this.selectedItem = undefined;
   }
 
   logout() {
