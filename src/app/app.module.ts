@@ -24,7 +24,7 @@ import { DashboardComponent } from './features/user-dashboard/components/dashboa
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DropdownModule } from 'primeng/dropdown';
-import { AuthInterceptor } from './services/auth-interceptor.service';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 

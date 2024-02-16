@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RESERVATION_URL } from '../shared/constants/url';
+import { RESERVATION_URL } from '../../shared/constants/url';
 import { User } from './user.service';
 import { Desk } from './desk.service';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from './auth.service';
 
 export interface Reservation {
   id: string;

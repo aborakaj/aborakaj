@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Desk, DeskService } from '../../../../services/desk.service';
+import { Desk, DeskService } from '../../../../core/services/desk.service';
 import {
   Reservation,
   ReservationService,
-} from '../../../../services/reservation.service';
+} from '../../../../core/services/reservation.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Room, RoomService } from '../../../../services/room.service';
+import { Room, RoomService } from '../../../../core/services/room.service';
 
 @Component({
   selector: 'app-user-reservation',

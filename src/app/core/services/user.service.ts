@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { USER_URL } from '../shared/constants/url';
+import { USER_URL } from '../../shared/constants/url';
 import { Reservation } from './reservation.service';
 
 export interface User {
