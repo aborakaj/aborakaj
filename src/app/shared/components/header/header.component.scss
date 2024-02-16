@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Aclonica&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+.app-title {
+  font-family: "Aclonica", sans-serif;
+}
+
+.menu-link {
+  font-family: "Roboto", sans-serif;
+  color: #737373;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  position: relative; 
+}
+
+.menu-link:hover,
+.menu-link.active {
+  color: #202223;
+}
+
+.menu-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  width: 76px;
+  height: 4px;
+  background-color: #1E90FF;
+  border-radius: 2px 2px 0 0;
+  transform: translateX(-50%);
+  transition: all 0.7s ease;
+}
+
+.menu-link.active::after {
+  width: 100%;
+}
+
+.settings-icon {
+  color: #737373;
+}
+
+.settings-icon:hover {
+  color: #202223;
+}

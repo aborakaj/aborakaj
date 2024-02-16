@@ -3,32 +3,48 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './core/components/login/login.component';
-import { AppRoutingModule } from './app.routes'; 
-import { HttpClientModule } from '@angular/common/http';
-import { LandingPageComponent } from './core/components/landing-page/landing-page.component'; 
+import { AppRoutingModule } from './app.routes';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from './core/components/header/header.component';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
+import { LoginComponent } from './shared/components/login/login.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
+import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { DashboardComponent } from './features/user-dashboard/components/dashboard/dashboard.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
+import { LayoutComponent } from './shared/components/layout/layout.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    ReservationComponent,
+    UserReservationComponent,
+    DashboardComponent,
+    LayoutComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([]),
-    AppRoutingModule, 
+    AppRoutingModule,
     HttpClientModule,
     InputTextModule,
     ButtonModule,
@@ -37,7 +53,19 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
     ToastModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule,
+    DialogModule,
+    ToolbarModule,
+    SplitButtonModule,
+    DropdownModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
