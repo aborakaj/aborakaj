@@ -1,24 +1,49 @@
 <p-toolbar class="header-toolbar">
   <div class="flex align-items-center">
-    <img src="assets/logo.png" alt="Book Desk" class="logo mr-2 cursor-pointer" />
-    <span class="app-title mr-5 text-lg font-normal cursor-pointer">Book Desk</span>
+    <img
+      src="assets/logo.png"
+      alt="Book Desk"
+      class="logo mr-2 cursor-pointer"
+    />
+    <span class="app-title mr-5 text-lg font-normal cursor-pointer"
+      >Book Desk</span
+    >
     <div class="flex align-items-center gap-4 menu-items" #menuItems>
       <div class="col-4">
-        <a routerLink="/reservation" routerLinkActive="active" class="menu-link text-lg font-normal cursor-pointer">Dashboard</a>
+        <a
+          routerLink="/reservation"
+          routerLinkActive="active"
+          class="menu-link text-lg font-normal cursor-pointer"
+          >Dashboard</a
+        >
       </div>
       <div class="col-4">
-        <a routerLink="/home" routerLinkActive="active" class="menu-link text-lg font-normal cursor-pointer">Office</a>
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          class="menu-link text-lg font-normal cursor-pointer"
+          >Office</a
+        >
       </div>
       <div class="col-4">
-        <a routerLink="/booking-history" routerLinkActive="active" class="menu-link text-lg font-normal cursor-pointer">Booking History</a>
+        <a
+          routerLink="/booking-history"
+          routerLinkActive="active"
+          class="menu-link text-lg font-normal cursor-pointer"
+          >Booking History</a
+        >
       </div>
     </div>
   </div>
   <div class="flex align-items-center justify-content-end">
-    <i class="pi pi-cog settings-icon mr-3 cursor-pointer" (click)="navigate('settings')"></i>
+    <i
+      class="pi pi-cog settings-icon mr-3 cursor-pointer"
+      (click)="navigate('settings')"
+    ></i>
     <p-dropdown
       [options]="userMenuItems"
       placeholder="B. Rodgers"
+      (onChange)="onDropdownChange($event)"
       class="account-button p-ml-2 border-noround"
     ></p-dropdown>
   </div>

@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return next.handle(authReq);
     }
-    throw new Error('Authentication token not found');
+    return next.handle(req);
+  
   }
 }
