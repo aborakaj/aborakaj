@@ -1,106 +1,111 @@
-<!-- app.component.html -->
+<p-button (click)="showDialog()" icon="pi pi-plus" label="Create User"></p-button>
 
-<div>
-  <button type="button" (click)="showDialog()" pButton icon="pi pi-plus" label="Create User"></button>
-</div>
 
-<p-dialog header="Create User" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [modal]="true"
-  [draggable]="false" [maximizable]="true" [resizable]="false" [style]="{width: '50vw', height: '70vh'}">
+<p-dialog header="Create User" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [draggable]="false"
+  [maximizable]="true" [resizable]="false" [breakpoints]="{ '960px': '100vw' }" styleClass="w-25rem">
 
-  <form [formGroup]="userForm" (ngSubmit)="saveUser()">
-    <div class="p-fluid">
-      <div class="p-field">
-        <span class="p-float-label">
+  <form [formGroup]="userForm">
+    <div class="grid p-fluid mt-3 flex">
+      <div class="col-12  h-4rem">
+
+        <span class="p-float-label flex align-content-center">
           <input pInputText formControlName="firstName" />
           <label for="firstName">First Name</label>
         </span>
-        <div *ngIf="userForm?.get('firstName')?.invalid && userForm?.get('firstName')?.touched">
+        <!-- <div *ngIf="userForm?.get('firstName')?.invalid && userForm?.get('firstName')?.touched">
           <small *ngIf="userForm?.get('firstName')?.errors required">First Name is required.</small>
-        </div>
+        </div> -->
+
       </div>
 
-      <div class="p-field">
+      <div class="col-12  h-4rem">
+
         <span class="p-float-label">
           <input pInputText formControlName="lastName" />
           <label for="lastName">Last Name</label>
         </span>
-        <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+        <!-- <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
           <small *ngIf="userForm.get('lastName')?.errors required">Last Name is required.</small>
-        </div>
+        </div> -->
+
       </div>
 
-      <div class="p-field">
+      <div class="col-12  h-4rem">
+
         <span class="p-float-label">
           <input pInputText formControlName="username" />
           <label for="username">Username</label>
         </span>
-        <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+        <!-- <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
           <small *ngIf="userForm.get('username')?.errors required">Username is required.</small>
-        </div>
+        </div> -->
+
       </div>
 
-      <div class="p-field">
+      <div class="col-12  h-4rem">
+
         <span class="p-float-label">
           <input pInputText formControlName="email" />
           <label for="email">Email</label>
         </span>
-        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <!-- <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
           <small *ngIf="userForm.get('email')?.errors required">Email is required.</small>
           <small *ngIf="userForm.get('email')?.errors email">Invalid email format.</small>
-        </div>
+        </div> -->
+
       </div>
 
-      <div class="p-field">
+      <div class="col-12  h-4rem">
+
         <span class="p-float-label">
-          <p-password formControlName="password" [toggleMask]="true" appendTo="body" >
+          <p-password formControlName="password" [toggleMask]="true" appendTo="body">
             <ng-template pTemplate="header">
               <h6>Pick a password</h6>
-          </ng-template>
-          <ng-template pTemplate="footer">
+            </ng-template>
+            <ng-template pTemplate="footer">
               <p-divider></p-divider>
               <p class="mt-2">Suggestions</p>
               <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                  <li>At least one lowercase</li>
-                  <li>At least one uppercase</li>
-                  <li>At least one numeric</li>
-                  <li>Minimum 8 characters</li>
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
               </ul>
-          </ng-template>
+            </ng-template>
           </p-password>
           <label for="password">Password</label>
         </span>
-        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <!-- <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
           <small *ngIf="userForm.get('password')?.errors required">Password is required.</small>
-        </div>
+        </div> -->
+
       </div>
-      
-      <div class="p-field">
+
+      <div class="col-12  h-4rem">
+
         <span class="p-float-label">
-          <p-password formControlName="confirmPassword" [toggleMask]="true" ></p-password>
+          <p-password formControlName="confirmPassword" [toggleMask]="true"></p-password>
           <label for="confirmPassword">Confirm Password</label>
         </span>
-        <div *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched">
+        <!-- <div *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched">
           <small *ngIf="userForm.get('confirmPassword')?.errors required">Confirm Password is required.</small>
-        </div>
-        <div *ngIf="userForm.hasError('passwordMismatch') && (userForm.get('password')?.dirty || userForm.get('confirmPassword')?.dirty)">
+        </div> -->
+        <small
+          *ngIf="userForm.hasError('passwordMismatch') && (userForm.get('password')?.dirty || userForm.get('confirmPassword')?.dirty)">
           Passwords do not match
-        </div>
+      </small>
+
       </div>
 
-      <!-- <div class="p-field">
-        <span class="p-float-label">
-          <p-calendar formControlName="birthday" appendTo="body" dateFormat="dd.mm.yy" inputId="birthday"
-            [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
-          <label for="birthday">Birthday (DD.MM.YYYY)</label>
-        </span>
-      </div> -->
 
+      <div class="col-12  flex justify-content-center column-gap-6">
+
+        <p-button label="Cancel" (click)="onClose()" styleClass="p-button-secondary w-5rem" 
+          [raised]="true"></p-button>
+        <p-button label="Save " (click)="saveUser()" [disabled]="!userForm.valid" styleClass="p-button-success w-5rem"
+          [raised]="true"></p-button>
+
+      </div>
     </div>
-    <p-footer style="display: flex; justify-content: center;">
-      <button type="button" pButton label="Cancel" (click)="hideDialog()" class="p-button-secondary"
-        style="flex: 1; margin-left: 100px; margin-right: 20px;"></button>
-      <button type="submit" pButton label="Save" [disabled]="!userForm.valid" class="p-button-success"
-        style="flex: 1; margin-left: 20px; margin-right: 100px"></button>
-    </p-footer>
   </form>
 </p-dialog>

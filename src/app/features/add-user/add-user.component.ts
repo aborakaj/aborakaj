@@ -36,17 +36,10 @@ export class AddUserComponent implements OnInit {
 
   displayDialog: boolean = false;
 
-  calendarVal?: Date;
-  minDateVal: Date;
-  maxDateVal: Date;
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private authService: AuthService) {
-    // Calculate maxDateVal to today's date minus 18 years
-    const today = new Date();
-    this.minDateVal = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
-    this.maxDateVal = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   }
 
   ngOnInit() {
@@ -67,8 +60,10 @@ export class AddUserComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  hideDialog() {
+  onClose() {
     this.displayDialog = false;
+    this.userForm.reset();
+    
   }
 
   saveUser() {
@@ -77,7 +72,6 @@ export class AddUserComponent implements OnInit {
     
       // Remove the "confirmPassword" field from the userData object
       delete userData.confirmPassword;
-      // userData.rolesOrganization = '02a4b538-5a7d-498f-ad37-4bee0b8e2a34'
 
       
       // Retrieve the JWT token from wherever it's stored in your application
@@ -96,7 +90,7 @@ export class AddUserComponent implements OnInit {
         'Content-Type': 'application/json' // Assuming you're sending JSON data
       });
   
-      // Assuming your backend endpoint is '/api/saveUser' and it expects a POST request
+      
       this.http.post('http://localhost:3000/user', userData, { headers })
         .subscribe(response => {
           // Handle response from the backend if necessary
