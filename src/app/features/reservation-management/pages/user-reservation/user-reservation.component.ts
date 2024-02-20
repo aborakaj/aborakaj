@@ -90,14 +90,14 @@ export class UserReservationComponent implements OnInit {
       this.reservation = {
         startTime: reservation.startTime,
         endTime: reservation.endTime,
-        action: 'AVAILABLE',
+        action: 'BOOKED',
       };
       this.currentReservationId = reservation.id; 
     } else {
       this.reservation = {
         startTime: '',
         endTime: '',
-        action: 'AVAILABLE',
+        action: 'BOOKED',
       };
       this.currentReservationId = null;
     }
