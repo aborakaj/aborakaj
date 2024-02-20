@@ -90,14 +90,14 @@ export class UserReservationComponent implements OnInit {
       this.reservation = {
         startTime: reservation.startTime,
         endTime: reservation.endTime,
-        action: 'BOOKED',
+        action: 'AVAILABLE',
       };
       this.currentReservationId = reservation.id; 
     } else {
       this.reservation = {
         startTime: '',
         endTime: '',
-        action: 'BOOKED',
+        action: 'AVAILABLE',
       };
       this.currentReservationId = null;
     }
@@ -161,4 +161,9 @@ export class UserReservationComponent implements OnInit {
     this.displayModal = false;
     this.currentReservationId = null;
   }
+
+  onClose() {
+    this.displayModal = false;
+  }
+  
 }

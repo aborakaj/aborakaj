@@ -15,9 +15,6 @@ export class HeaderComponent {
   userMenuItems: MenuItem[] | undefined;
   profileLabel: string = 'B. Rodgers';
   profileIcon: string = 'pi pi-user';
-  selectedItem: MenuItem[] | undefined;
-
-  @ViewChild('menuItems') menuItems!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -51,7 +48,6 @@ export class HeaderComponent {
     if (event.value && event.value.command) {
       event.value.command(event);
     }
-    this.selectedItem = undefined;
   }
 
   logout() {
