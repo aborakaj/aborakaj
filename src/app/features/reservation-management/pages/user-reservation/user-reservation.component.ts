@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Desk, DeskService } from '../../../../core/services/desk.service';
-import {
-  Reservation,
-  ReservationService,
-} from '../../../../core/services/reservation.service';
+import { DeskService } from '../../../../core/services/desk.service';
+import { ReservationService } from '../../../../core/services/reservation.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Room, RoomService } from '../../../../core/services/room.service';
+import { Desk, Room, RoomService } from '../../../../core/services/room.service';
+import { Reservation } from '../../../../core/models/IReservation';
 
 @Component({
   selector: 'app-user-reservation',
@@ -16,7 +14,7 @@ import { Room, RoomService } from '../../../../core/services/room.service';
 export class UserReservationComponent implements OnInit {
   isDisplayModal: boolean = false;
   selectedDesk: Desk | null = null;
-  isDeskReserved: boolean = false; 
+  isDeskReserved: boolean = false;
   currentReservationId: string | null = null;
 
   reservation = {
@@ -64,41 +62,43 @@ export class UserReservationComponent implements OnInit {
     });
   }
 
-  // fetchReservations() {
-  //   this.reservationService.getReservation().subscribe({
-  //     next: (reservationsData) => {
-  //       this.reservations = reservationsData;
-  //     },
-  //     error: (error) => {
-  //       this.toastr.error('Error fetching reservations');
-  //     },
-  //   });
-  // }
-
-  showReservationModal(desk: Desk) {
-    this.selectedDesk = desk;
-    this.isDisplayModal = true;
-
-    this.selectDesk(desk);
+  fetchReservations() {
+    const userId = this.authService.getUserIdFromToken();
+    this.reservationService.getReservation().subscribe({
+      next: (reservationsData) => {
+        this.reservations = reservationsData.filter(
+          (res: Reservation) => res.userId === userId
+        );
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching reservations');
+      },
+    });
   }
 
-  selectDesk(desk: Desk) {
+  onDeskClicked(desk: Desk) {
+    this.showModal();
+    this.selectedDesk = desk;
+    this.getCurrentReservation(desk);
+  }
+
+  showModal() {
+    this.isDisplayModal = true;
+  }
+
+  getCurrentReservation(desk: Desk) {
     const reservation = this.reservations.find(
       (res) =>
         res.deskId === desk.id &&
         res.userId === this.authService.getUserIdFromToken()
     );
     this.isDeskReserved = !!reservation;
-  
+
     if (this.isDeskReserved && reservation) {
-      this.reservation = {
-        startTime: reservation.startTime,
-        endTime: reservation.endTime,
-        action: 'BOOKED',
-      };
-      this.currentReservationId = reservation.id; 
+      this.currentReservationId = reservation.id;
     } else {
       this.currentReservationId = null;
+      this.resetForm();
     }
   }
 
@@ -114,8 +114,12 @@ export class UserReservationComponent implements OnInit {
       return;
     }
 
-    const startTimeISO = new Date(receivedReservationData.startTime || this.reservation.startTime).toISOString();
-    const endTimeISO = new Date(receivedReservationData.endTime || this.reservation.endTime).toISOString();
+    const startTimeISO = new Date(
+      receivedReservationData.startTime || this.reservation.startTime
+    ).toISOString();
+    const endTimeISO = new Date(
+      receivedReservationData.endTime || this.reservation.endTime
+    ).toISOString();
 
     const reservationData = {
       startTime: startTimeISO,
@@ -130,6 +134,7 @@ export class UserReservationComponent implements OnInit {
       next: () => {
         this.toastr.success('Reservation made', 'Success');
         this.onModalClose();
+        this.resetForm();
       },
       error: (errorResponse) => {
         this.toastr.error('Error making reservation');
@@ -141,13 +146,15 @@ export class UserReservationComponent implements OnInit {
 
   cancelReservation() {
     if (this.currentReservationId) {
-      this.reservationService.deleteReservation(this.currentReservationId).subscribe({
-        next: () => {
-          this.toastr.success('Reservation cancelled', 'Success');
-          this.isDisplayModal = false; 
-        },
-        error: (error) => this.toastr.error('Error cancelling reservation'),
-      });
+      this.reservationService
+        .deleteReservation(this.currentReservationId)
+        .subscribe({
+          next: () => {
+            this.toastr.success('Reservation cancelled', 'Success');
+            this.onModalClose();
+          },
+          error: (error) => this.toastr.error('Error cancelling reservation'),
+        });
     }
   }
 
@@ -164,5 +171,4 @@ export class UserReservationComponent implements OnInit {
     this.resetForm();
     this.isDisplayModal = false;
   }
-  
 }

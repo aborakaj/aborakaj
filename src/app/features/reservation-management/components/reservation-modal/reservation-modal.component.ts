@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Reservation } from '../../../../core/services/reservation.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Reservation } from '../../../../core/models/IReservation';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -10,20 +11,28 @@ export class ReservationModalComponent implements OnInit {
   @Input() isDisplayModal: boolean = false;
   @Input() isDeskReserved: boolean = false;
   @Output() close = new EventEmitter<void>();
-  @Output() submitReservation = new EventEmitter<Partial<Reservation>>();
+  @Output() submitReservation = new EventEmitter<Reservation>();
 
-  reservation = {
-    startTime: '',
-    endTime: '',
-    action: 'BOOKED',
-  };
+  reservationForm!: FormGroup;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.reservationForm = this.fb.group({
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
+      action: [{ value: 'BOOKED', disabled: true }],
+    });
+  }
 
   onSubmitReservation() {
-    this.submitReservation.emit(this.reservation);
+    if (this.reservationForm.valid) {
+      this.submitReservation.emit(this.reservationForm.value);
+    }
   }
 
   onClose() {

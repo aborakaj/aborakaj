@@ -2,27 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RESERVATION_URL } from '../../shared/constants/url';
-import { User } from './user.service';
-import { Desk } from './desk.service';
-import { AuthService } from './auth.service';
-
-export interface Reservation {
-  id: string;
-  startTime: string;
-  endTime: string;
-  userId: string;
-  deskId: string;
-  action: string;
-  createdBy: string;
-  user: User[];
-  desk: Desk[];
-}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservationService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   getReservation(): Observable<any> {
     return this.http.get(RESERVATION_URL);
