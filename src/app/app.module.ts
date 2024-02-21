@@ -27,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     UserReservationComponent,
     DashboardComponent,
     LayoutComponent,
-    FooterComponent
+    FooterComponent,
+    ReservationModalComponent
   ],
   imports: [
     BrowserModule,

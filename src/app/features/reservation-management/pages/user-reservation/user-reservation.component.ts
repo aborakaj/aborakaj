@@ -14,7 +14,7 @@ import { Room, RoomService } from '../../../../core/services/room.service';
   styleUrls: ['./user-reservation.component.scss'],
 })
 export class UserReservationComponent implements OnInit {
-  displayModal: boolean = false;
+  isDisplayModal: boolean = false;
   selectedDesk: Desk | null = null;
   isDeskReserved: boolean = false; 
   currentReservationId: string | null = null;
@@ -77,15 +77,19 @@ export class UserReservationComponent implements OnInit {
 
   showReservationModal(desk: Desk) {
     this.selectedDesk = desk;
-    this.displayModal = true;
+    this.isDisplayModal = true;
 
+    this.selectDesk(desk);
+  }
+
+  selectDesk(desk: Desk) {
     const reservation = this.reservations.find(
       (res) =>
         res.deskId === desk.id &&
         res.userId === this.authService.getUserIdFromToken()
     );
     this.isDeskReserved = !!reservation;
-
+  
     if (this.isDeskReserved && reservation) {
       this.reservation = {
         startTime: reservation.startTime,
@@ -94,16 +98,11 @@ export class UserReservationComponent implements OnInit {
       };
       this.currentReservationId = reservation.id; 
     } else {
-      this.reservation = {
-        startTime: '',
-        endTime: '',
-        action: 'BOOKED',
-      };
       this.currentReservationId = null;
     }
   }
 
-  submitReservation() {
+  submitReservation(receivedReservationData: Partial<Reservation>) {
     const userId = this.authService.getUserIdFromToken();
     if (!userId) {
       this.toastr.error('User not authenticated');
@@ -115,8 +114,8 @@ export class UserReservationComponent implements OnInit {
       return;
     }
 
-    const startTimeISO = new Date(this.reservation.startTime).toISOString();
-    const endTimeISO = new Date(this.reservation.endTime).toISOString();
+    const startTimeISO = new Date(receivedReservationData.startTime || this.reservation.startTime).toISOString();
+    const endTimeISO = new Date(receivedReservationData.endTime || this.reservation.endTime).toISOString();
 
     const reservationData = {
       startTime: startTimeISO,
@@ -130,7 +129,7 @@ export class UserReservationComponent implements OnInit {
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
         this.toastr.success('Reservation made', 'Success');
-        this.resetForm();
+        this.onModalClose();
       },
       error: (errorResponse) => {
         this.toastr.error('Error making reservation');
@@ -145,7 +144,7 @@ export class UserReservationComponent implements OnInit {
       this.reservationService.deleteReservation(this.currentReservationId).subscribe({
         next: () => {
           this.toastr.success('Reservation cancelled', 'Success');
-          this.displayModal = false; 
+          this.isDisplayModal = false; 
         },
         error: (error) => this.toastr.error('Error cancelling reservation'),
       });
@@ -156,14 +155,14 @@ export class UserReservationComponent implements OnInit {
     this.reservation = {
       startTime: '',
       endTime: '',
-      action: '',
+      action: 'BOOKED',
     };
-    this.displayModal = false;
     this.currentReservationId = null;
   }
 
-  onClose() {
-    this.displayModal = false;
+  onModalClose() {
+    this.resetForm();
+    this.isDisplayModal = false;
   }
   
 }
