@@ -10,7 +10,7 @@ export interface User {
   lastName: string;
   username: string;
   email: string;
-  reservation: Reservation[];
+  reservation?: Reservation[];
 }
 
 @Injectable({
@@ -26,6 +26,18 @@ export class UserService {
 
   getUserById(id: string): Observable<any> {
     return this.http.get(`${USER_URL}/${id}`);
+  }
+
+  submitUser(userData: any): Observable<any> {
+    return this.http.post(USER_URL, userData);
+  }
+
+  updateUser(id: string, userData: any): Observable<any> {
+    return this.http.put(`${USER_URL}/${id}`, userData);
+  }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${USER_URL}/${id}`);
   }
 
 }
