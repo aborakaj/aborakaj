@@ -1,5 +1,5 @@
-import { Desk } from "../services/room.service";
-import { User } from "../services/user.service";
+import { Desk } from "./desk.interface";
+import { User } from "./user.interface";
 
 export interface Reservation {
     id: string;

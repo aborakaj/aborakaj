@@ -3,8 +3,10 @@ import { ToastrService } from 'ngx-toastr';
 import { DeskService } from '../../../../core/services/desk.service';
 import { ReservationService } from '../../../../core/services/reservation.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Desk, Room, RoomService } from '../../../../core/services/room.service';
-import { Reservation } from '../../../../core/models/IReservation';
+import { RoomService } from '../../../../core/services/room.service';
+import { Reservation } from '../../../../core/models/reservation.interface';
+import { Desk } from '../../../../core/models/desk.interface';
+import { Room } from '../../../../core/models/room.interface';
 
 @Component({
   selector: 'app-user-reservation',
@@ -138,25 +140,23 @@ export class UserReservationComponent implements OnInit {
       },
       error: (errorResponse) => {
         this.toastr.error('Error making reservation');
-        if (errorResponse.error && errorResponse.error.message) {
-        }
       },
     });
   }
 
-  cancelReservation() {
-    if (this.currentReservationId) {
-      this.reservationService
-        .deleteReservation(this.currentReservationId)
-        .subscribe({
-          next: () => {
-            this.toastr.success('Reservation cancelled', 'Success');
-            this.onModalClose();
-          },
-          error: (error) => this.toastr.error('Error cancelling reservation'),
-        });
-    }
-  }
+  // cancelReservation() {
+  //   if (this.currentReservationId) {
+  //     this.reservationService
+  //       .deleteReservation(this.currentReservationId)
+  //       .subscribe({
+  //         next: () => {
+  //           this.toastr.success('Reservation cancelled', 'Success');
+  //           this.onModalClose();
+  //         },
+  //         error: (error) => this.toastr.error('Error cancelling reservation'),
+  //       });
+  //   }
+  // }
 
   resetForm() {
     this.reservation = {

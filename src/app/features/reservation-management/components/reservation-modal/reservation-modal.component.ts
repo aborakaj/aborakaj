@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Reservation } from '../../../../core/models/IReservation';
+import { Reservation } from '../../../../core/models/reservation.interface';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -13,7 +13,7 @@ export class ReservationModalComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() submitReservation = new EventEmitter<Reservation>();
 
-  reservationForm!: FormGroup;
+  reservationForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder) {}
 
@@ -37,5 +37,6 @@ export class ReservationModalComponent implements OnInit {
 
   onClose() {
     this.close.emit();
+    this.reservationForm.reset();
   }
 }

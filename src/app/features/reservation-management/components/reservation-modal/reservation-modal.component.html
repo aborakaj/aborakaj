@@ -1,4 +1,4 @@
-<p-dialog header="Reservation" [(visible)]="isDisplayModal" [responsive]="true" [modal]="true" [draggable]="false"
+<p-dialog header="Reservation" [(visible)]="isDisplayModal" (onHide)="onClose()" [responsive]="true" [modal]="true" [draggable]="false"
   [maximizable]="true" [resizable]="false" [breakpoints]="{ '960px': '100vw' }" styleClass="w-25rem">
   <form [formGroup]="reservationForm" >
     <div class="grid p-fluid mt-3 flex">
