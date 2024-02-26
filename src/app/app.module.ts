@@ -36,6 +36,8 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +74,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
+    SharedModule
   ],
   providers: [
     {

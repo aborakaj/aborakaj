@@ -10,6 +10,8 @@ export interface User {
   lastName: string;
   username: string;
   email: string;
+  updatedAt: string;
+  updatedBy: string;
   reservation?: Reservation[];
 }
 
