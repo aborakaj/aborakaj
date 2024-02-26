@@ -28,6 +28,9 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
+import { ModalComponent } from './shared/components/modal-form/modal.component';
+import { TableModule } from 'primeng/table';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { ReservationModalComponent } from './features/reservation-management/com
     DashboardComponent,
     LayoutComponent,
     FooterComponent,
-    ReservationModalComponent
+    ReservationModalComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { ReservationModalComponent } from './features/reservation-management/com
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
+    TableModule
   ],
   providers: [
     {

@@ -1,23 +1,18 @@
-<p-dialog header="Reservation" [(visible)]="isDisplayModal" (onHide)="onClose()" [responsive]="true" [modal]="true" [draggable]="false"
-  [maximizable]="true" [resizable]="false" [breakpoints]="{ '960px': '100vw' }" styleClass="w-25rem">
-  <form [formGroup]="reservationForm" >
-    <div class="grid p-fluid mt-3 flex">
-      <div class="col-12 h-4rem">
-        <label for="startTime">Start Time</label>
-        <p-calendar formControlName="startTime" [showTime]="true" inputId="startTime" dateFormat="yy-mm-dd" appendTo="body"></p-calendar>
+<app-modal [title]="'New Reservation'" [actionLabel]="'Add Reservation'" (action)="onSubmitReservation()" [display]="isDisplayModal">
+  <form [formGroup]="reservationForm" class="p-fluid form-spacing">
+      <div class="grid mt-3">
+      <div class="col-12 h-4rem field">
+        <label for="startTime" class="font-weight-modal">Start Time*</label>
+        <p-calendar formControlName="startTime" [showTime]="true" inputId="startTime" dateFormat="yy-mm-dd" placeholder="e.g. Time of your reservation" appendTo="body"></p-calendar>
       </div>
-      <div class="col-12 h-4rem">
-        <label for="endTime">End Time</label>
-        <p-calendar formControlName="endTime" [showTime]="true" inputId="endTime" dateFormat="yy-mm-dd" appendTo="body"></p-calendar>
+      <div class="col-12 h-4rem field">
+        <label for="endTime" class="font-weight-modal">End Time*</label>
+        <p-calendar formControlName="endTime" [showTime]="true" inputId="endTime" dateFormat="yy-mm-dd" placeholder="e.g. End Time of your reservation" appendTo="body"></p-calendar>
       </div>
-      <div class="col-12 h-4rem">
+      <div class="col-12 h-4rem field">
         <label for="status">Status</label>
         <input type="text" id="status" pInputText formControlName="action" />
       </div>
-      <div class="col-12 flex justify-content-center column-gap-6">
-        <p-button type="button" (click)="onSubmitReservation()" class="p-button-success" [disabled]="!reservationForm.valid">Reserve</p-button>
-        <p-button type="button" (click)="onClose()" class="p-button-secondary">Cancel</p-button>
-      </div>
     </div>
   </form>
-</p-dialog>
+</app-modal>

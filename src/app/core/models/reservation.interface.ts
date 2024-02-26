@@ -9,6 +9,6 @@ export interface Reservation {
     deskId: string;
     action: string;
     createdBy: string;
-    user: User[];
-    desk: Desk[];
+    user: User;
+    desk: Desk;
   }

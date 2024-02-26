@@ -10,7 +10,6 @@ import { Reservation } from '../../../../core/models/reservation.interface';
 export class ReservationModalComponent implements OnInit {
   @Input() isDisplayModal: boolean = false;
   @Input() isDeskReserved: boolean = false;
-  @Output() close = new EventEmitter<void>();
   @Output() submitReservation = new EventEmitter<Reservation>();
 
   reservationForm: FormGroup = new FormGroup({});
@@ -30,13 +29,7 @@ export class ReservationModalComponent implements OnInit {
   }
 
   onSubmitReservation() {
-    if (this.reservationForm.valid) {
-      this.submitReservation.emit(this.reservationForm.value);
-    }
+    this.submitReservation.emit(this.reservationForm.value);
   }
 
-  onClose() {
-    this.close.emit();
-    this.reservationForm.reset();
-  }
 }
