@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,49 +12,31 @@ import { ToastrService } from 'ngx-toastr';
 
 
 export class AddUserComponent implements OnInit {
-  userForm: FormGroup = new FormGroup({});
-  user = {
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-   
-  };
+  userForm!: FormGroup
+
 
   displayDialog: boolean = false;
+
   
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService,) {
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      firstName:['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      username: ['', [Validators.required, Validators.minLength(5)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
      
-    }, {
-      validator: this.passwordMatchValidator 
-    });
+    },
+    { updateOn: "blur" }
+    
+    );
 
   }
 
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-  
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      return { 'passwordMismatch': true };
-    }
-  
-    return null;
-  }
 
   showDialog() {
     this.displayDialog = true;
@@ -66,13 +48,10 @@ export class AddUserComponent implements OnInit {
     
   }
 
-  saveUser() {
+  onSubmit() {
     if (this.userForm.valid) {
       const userData = { ...this.userForm.value };
     
-  
-      delete userData.confirmPassword;
-
       
       this.userService.submitUser(userData).subscribe({
         next: () => {
@@ -86,4 +65,33 @@ export class AddUserComponent implements OnInit {
       });
     }
   }
+
+  checkForErrorsIn(control: AbstractControl | null): string {
+    if (!control) return ''; 
+    if (control.hasError('required')) {
+      return 'Field is required';
+    } else if (control.hasError('pattern')) {
+      return 'Invalid format';
+    } else if (control.hasError('minlength')) {
+      return `Minimum length ${control.errors?.['minlength'].requiredLength}`;
+    }
+    return '';
+  }
+
+  allFieldsFilled(): boolean {
+    
+    for (const controlName in this.userForm.controls) {
+      if (this.userForm.controls.hasOwnProperty(controlName)) {
+        const control = this.userForm.get(controlName);
+   
+        if (control && (control.value === null || control.value === '')) {
+          return false;
+        }
+      }
+    }
+   
+    return true;
+  }
+  
+  
 }
