@@ -2,14 +2,49 @@
 @import "../node_modules/primeng/resources/themes/saga-blue/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
 @import "primeflex/primeflex.css";
 
 @import '../node_modules/ngx-toastr/toastr.css';
 
 
-body, html {
+body,
+html {
   background-color: #F8F9FA;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+p-sorticon {
+  .p-icon-wrapper {
+    font-family: 'primeicons', Arial, sans-serif, 'Font Awesome 5 Free';
+    justify-content: center;
+    font-size: 12px;
+
+    &:before {
+      content: '\f0dc';
+      /* modify as per your requirement  */
+      font-weight: 501;
+
+    }
+
+    svg {
+      display: none;
+    }
   }
+
+  sortamountupalticon.p-icon-wrapper:before {
+    content: '\f0de';
+    /* modify as per your requirement */
+    font-weight: 501;
+  }
+
+  sortamountdownicon.p-icon-wrapper:before {
+    content: '\f0dd';
+    /* modify as per your requirement */
+    font-weight: 501;
+  }
+}

@@ -1,36 +1,33 @@
-<p-table #dt1  dataKey="id" [columns]="cols" [value]="users" [tableStyle]="{ 'min-width': '50rem' }" responsiveLayout="stack"
-    [breakpoint]="'960px'"     
-    [paginator]="true"
-    [rows]="5"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-    [rowsPerPageOptions]="[5, 10, 25, 50]"
-    [globalFilterFields]="globalFilterFields"
-    editMode="row"
-    [scrollable]="true" scrollHeight="600px">
+<p-table #dt1 dataKey="id" [columns]="cols" [value]="users" [tableStyle]="{ 'min-width': '50rem' }"
+    responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Rows per page: {rows}  ....  {first} - {last} of {totalRecords}"
+    paginatorStyleClass="bg-blue-50 flex justify-content-end" [showFirstLastIcon]="false"
+    [showPageLinks]="false" [globalFilterFields]="globalFilterFields">
     <ng-template pTemplate="caption">
         <div class="flex">
-            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
             <span class="p-input-icon-left ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt1.filterGlobal(($any($event.target).value), 'contains')" placeholder="Search keyword" />
+                <input pInputText type="text" (input)="dt1.filterGlobal(($any($event.target).value), 'contains')"
+                    placeholder="Search..." />
             </span>
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                {{ col.header }}
-                <p-sortIcon  styleClass="pi pi-search" [field]="col.field"></p-sortIcon>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" class="bg-blue-50 w-3">
+                <div class="flex justify-content-between">
+                    <span>{{ col.header }}</span>
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns" let-editing="editing" let-ri="rowIndex" >
-        
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-editing="editing" let-ri="rowIndex">
+
         <tr [pEditableRow]="rowData">
-           
+
             <td *ngFor="let col of columns">
-                <ng-container *ngIf="editing; else viewMode">
+                <ng-container>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input type="text" [(ngModel)]="rowData[col.field]" />
@@ -40,18 +37,10 @@
                         </ng-template>
                     </p-cellEditor>
                 </ng-container>
-                <ng-template #viewMode>
+                <ng-template>
                     {{ rowData[col.field] }}
                 </ng-template>
             </td>
-       
-        <td>
-            <div class="flex align-items-center justify-content-center gap-2">
-                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(rowData)" class="p-button-rounded p-button-text"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(rowData)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(rowData, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-            </div>
-        </td>
         </tr>
     </ng-template>
 </p-table>
