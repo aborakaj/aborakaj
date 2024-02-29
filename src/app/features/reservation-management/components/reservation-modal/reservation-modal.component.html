@@ -1,13 +1,37 @@
-<app-modal [title]="'New Reservation'" [actionLabel]="'Add Reservation'" (action)="onSubmitReservation()" [display]="isDisplayModal">
+<app-modal
+  [actionButtonLabel]="'Add Reservation'"
+  (onActionButtonClick)="onSubmitReservation()"
+  [isDisplayModal]="isDisplayModal"
+>
+  <app-custom-modal-header
+    [title]="title"
+    [icon]="icon"
+    [subtitle]="subtitle"
+  ></app-custom-modal-header>
+  
   <form [formGroup]="reservationForm" class="p-fluid form-spacing">
-      <div class="grid mt-3">
+    <div class="grid mt-2">
       <div class="col-12 h-4rem field">
-        <label for="startTime" class="font-weight-modal">Start Time*</label>
-        <p-calendar formControlName="startTime" [showTime]="true" inputId="startTime" dateFormat="yy-mm-dd" placeholder="e.g. Time of your reservation" appendTo="body"></p-calendar>
+        <label for="startTime" class="font-normal">Start Time*</label>
+        <p-calendar
+          formControlName="startTime"
+          [showTime]="true"
+          inputId="startTime"
+          dateFormat="yy-mm-dd"
+          placeholder="e.g. Time of your reservation"
+          appendTo="body"
+        ></p-calendar>
       </div>
       <div class="col-12 h-4rem field">
-        <label for="endTime" class="font-weight-modal">End Time*</label>
-        <p-calendar formControlName="endTime" [showTime]="true" inputId="endTime" dateFormat="yy-mm-dd" placeholder="e.g. End Time of your reservation" appendTo="body"></p-calendar>
+        <label for="endTime" class="font-normal">End Time*</label>
+        <p-calendar
+          formControlName="endTime"
+          [showTime]="true"
+          inputId="endTime"
+          dateFormat="yy-mm-dd"
+          placeholder="e.g. End Time of your reservation"
+          appendTo="body"
+        ></p-calendar>
       </div>
       <div class="col-12 h-4rem field">
         <label for="status">Status</label>

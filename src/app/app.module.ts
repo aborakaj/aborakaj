@@ -28,8 +28,9 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
-import { ModalComponent } from './shared/components/modal-form/modal.component';
+import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
+import { CustomModalHeaderComponent } from './shared/components/custom-modal-header/custom-modal-header.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TableModule } from 'primeng/table';
     LayoutComponent,
     FooterComponent,
     ReservationModalComponent,
-    ModalComponent
+    ModalComponent,
+    CustomModalHeaderComponent
   ],
   imports: [
     BrowserModule,

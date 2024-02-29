@@ -1,8 +1,0 @@
-<p-dialog styleClass="custom-header" header="{{ title }}" [(visible)]="display" [modal]="true" [responsive]="true" [modal]="true" [draggable]="false" [resizable]="false" [breakpoints]="{ '960px': '100vw' }">
-    <ng-content></ng-content>
-    <p-footer class="p-d-flex p-jc-center p-ai-center gap-2">
-        <button type="button" pButton pRipple label="{{ actionLabel }}" class="p-3" (click)="action.emit()"></button>
-        <button type="button" pButton pRipple label="Cancel" class="p-button-text p-3" (click)="onClose()"></button>
-      </p-footer>
-  </p-dialog>
-  

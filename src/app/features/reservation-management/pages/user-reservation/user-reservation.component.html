@@ -15,7 +15,9 @@
 
 <app-reservation-modal
   [isDisplayModal]="isDisplayModal"
-  [isDeskReserved]="isDeskReserved"
+  [title]="'Xhulio Gazidede'"
+  [subtitle]="'xhgazidede@ritech.co'"
   (submitReservation)="submitReservation($event)"
+  (close)="onReservationModalClose()"
 >
 </app-reservation-modal>

@@ -7,6 +7,7 @@ import { RoomService } from '../../../../core/services/room.service';
 import { Reservation } from '../../../../core/models/reservation.interface';
 import { Desk } from '../../../../core/models/desk.interface';
 import { Room } from '../../../../core/models/room.interface';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-reservation',
@@ -34,7 +35,7 @@ export class UserReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private deskService: DeskService,
     private roomService: RoomService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -135,7 +136,7 @@ export class UserReservationComponent implements OnInit {
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
         this.toastr.success('Reservation made', 'Success');
-        this.onModalClose();
+        this.onReservationModalClose();
         this.resetForm();
       },
       error: (errorResponse) => {
@@ -167,8 +168,7 @@ export class UserReservationComponent implements OnInit {
     this.currentReservationId = null;
   }
 
-  onModalClose() {
-    this.resetForm();
+  onReservationModalClose() {
     this.isDisplayModal = false;
   }
 }
