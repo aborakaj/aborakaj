@@ -1,6 +1,7 @@
 <app-modal
   [actionButtonLabel]="'Add Reservation'"
   (onActionButtonClick)="onSubmitReservation()"
+  (close)="onReservationModalClose()"
   [isDisplayModal]="isDisplayModal"
 >
   <app-custom-modal-header

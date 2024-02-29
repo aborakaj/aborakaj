@@ -13,9 +13,7 @@ export class ModalComponent {
   @Output() close = new EventEmitter<void>();
 
   onCancelButtonClick() {
-    this.isDisplayModal = false;
-    console.log(this.isDisplayModal)
-    // this.close.emit();
+    this.close.emit();
   }
 
 }

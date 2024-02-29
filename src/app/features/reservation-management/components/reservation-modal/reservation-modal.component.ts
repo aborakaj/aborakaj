@@ -14,6 +14,7 @@ export class ReservationModalComponent implements OnInit {
   @Input() icon?: string;
   @Input() subtitle?: string;
   @Output() submitReservation = new EventEmitter<Reservation>();
+  @Output() close = new EventEmitter<void>();
 
   reservationForm: FormGroup = new FormGroup({});
 
@@ -36,7 +37,6 @@ export class ReservationModalComponent implements OnInit {
   }
 
   onReservationModalClose() {
-    this.isDisplayModal = false;
+    this.close.emit();
   }
-
 }
