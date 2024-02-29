@@ -6,6 +6,7 @@
   [draggable]="false"
   [resizable]="false"
   [breakpoints]="{ '960px': '100vw' }"
+  (onHide)="onCancelButtonClick()"
 >
   <ng-template pTemplate="header">
     <ng-content select="app-custom-modal-header"></ng-content>
