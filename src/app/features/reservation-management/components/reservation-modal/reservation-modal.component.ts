@@ -16,21 +16,15 @@ export class ReservationModalComponent implements OnInit {
   @Output() submitReservation = new EventEmitter<Reservation>();
   @Output() close = new EventEmitter<void>();
 
-  reservationForm: FormGroup = new FormGroup({});
-
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+  reservationForm: FormGroup = this.fb.group({
+    startTime: ['', Validators.required],
+    endTime: ['', Validators.required],
+    action: [{ value: 'BOOKED', disabled: true }],
+  });
 
-  initForm(): void {
-    this.reservationForm = this.fb.group({
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
-      action: [{ value: 'BOOKED', disabled: true }],
-    });
-  }
+  ngOnInit(): void {}
 
   onSubmitReservation() {
     this.submitReservation.emit(this.reservationForm.value);

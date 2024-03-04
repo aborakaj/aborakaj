@@ -4,12 +4,11 @@
   (close)="onReservationModalClose()"
   [isDisplayModal]="isDisplayModal"
 >
-  <app-custom-modal-header
-    [title]="title"
-    [icon]="icon"
-    [subtitle]="subtitle"
-  ></app-custom-modal-header>
-  
+  <div modal-header-content>
+    <div class="text-4xl font-normal">{{ title }}</div>
+    <div class="text-sm pt-2 font-normal">{{ subtitle }}</div>
+  </div>
+
   <form [formGroup]="reservationForm" class="p-fluid form-spacing">
     <div class="grid mt-2">
       <div class="col-12 h-4rem field">

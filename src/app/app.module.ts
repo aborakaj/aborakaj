@@ -30,7 +30,6 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
-import { CustomModalHeaderComponent } from './shared/components/custom-modal-header/custom-modal-header.component';
 
 
 @NgModule({
@@ -46,7 +45,6 @@ import { CustomModalHeaderComponent } from './shared/components/custom-modal-hea
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
-    CustomModalHeaderComponent
   ],
   imports: [
     BrowserModule,

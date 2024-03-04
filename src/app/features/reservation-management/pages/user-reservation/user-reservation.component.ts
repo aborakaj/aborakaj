@@ -35,7 +35,7 @@ export class UserReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private deskService: DeskService,
     private roomService: RoomService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
