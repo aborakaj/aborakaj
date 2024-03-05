@@ -8,12 +8,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalComponent {
   @Input() title: string = '';
   @Input() actionButtonLabel: string = '';
-  @Input() isDisplayModal: boolean = false; 
+  @Input() isDisplayModal: boolean = false;
   @Output() onActionButtonClick = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
+
+  handleActionButtonClick() {
+    this.onActionButtonClick.emit();
+  }
 
   onCancelButtonClick() {
     this.close.emit();
   }
-
 }

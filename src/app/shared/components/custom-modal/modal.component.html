@@ -12,12 +12,12 @@
     <ng-content select="[modal-header-content]"></ng-content>
   </ng-template>
   
-  <ng-content></ng-content>
+  <ng-content select="[modal-body-content]"></ng-content>
   <p-footer class="p-d-flex p-jc-center p-ai-center gap-2">
     <p-button
       label="{{ actionButtonLabel }}"
       styleClass="p-3"
-      (click)="onActionButtonClick.emit()"
+      (click)="handleActionButtonClick()"
     ></p-button>
     <p-button
       label="Cancel"
