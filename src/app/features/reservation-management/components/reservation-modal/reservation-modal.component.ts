@@ -18,6 +18,7 @@ export class ReservationModalComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
+
   reservationForm: FormGroup = this.fb.group({
     startTime: ['', Validators.required],
     endTime: ['', Validators.required],

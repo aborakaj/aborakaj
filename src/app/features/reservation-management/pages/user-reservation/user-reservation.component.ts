@@ -26,6 +26,7 @@ export class UserReservationComponent implements OnInit {
     action: 'BOOKED',
   };
 
+
   desks: Desk[] = [];
   rooms: Room[] = [];
   reservations: Reservation[] = [];
