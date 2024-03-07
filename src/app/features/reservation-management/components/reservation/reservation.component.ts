@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Desk, Room, RoomService } from '../../../../core/services/room.service';
-import { User, UserService } from '../../../../core/services/user.service';
-import { Reservation, ReservationService } from '../../../../core/services/reservation.service';
+import { RoomService } from '../../../../core/services/room.service';
+import { UserService } from '../../../../core/services/user.service';
 import { DeskService } from '../../../../core/services/desk.service';
+import { Reservation } from '../../../../core/models/reservation.interface';
+import { ReservationService } from '../../../../core/services/reservation.service';
+import { Desk } from '../../../../core/models/desk.interface';
+import { Room } from '../../../../core/models/room.interface';
+import { User } from '../../../../core/models/user.interface';
 
 @Component({
   selector: 'app-reservation',

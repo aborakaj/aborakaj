@@ -2,16 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { USER_URL } from '../../shared/constants/url';
-import { Reservation } from './reservation.service';
+import { User } from '../models/user.interface';
 
-export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  reservation: Reservation[];
-}
 
 @Injectable({
   providedIn: 'root'
