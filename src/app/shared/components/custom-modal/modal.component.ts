@@ -6,7 +6,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  @Input() title: string = '';
   @Input() actionButtonLabel: string = '';
   @Input() isDisplayModal: boolean = false;
   @Output() onActionButtonClick = new EventEmitter<void>();
