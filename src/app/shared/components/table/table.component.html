@@ -1,46 +1,50 @@
-<p-table #dt1 dataKey="id" [columns]="cols" [value]="users" [tableStyle]="{ 'min-width': '50rem' }"
-    responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Rows per page: {rows}  ....  {first} - {last} of {totalRecords}"
-    paginatorStyleClass="bg-blue-50 flex justify-content-end" [showFirstLastIcon]="false"
-    [showPageLinks]="false" [globalFilterFields]="globalFilterFields">
-    <ng-template pTemplate="caption">
-        <div class="flex">
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt1.filterGlobal(($any($event.target).value), 'contains')"
-                    placeholder="Search..." />
-            </span>
-        </div>
-    </ng-template>
+<p-table 
+#dt 
+dataKey="id" 
+[columns]="cols" 
+[value]="data" 
+[tableStyle]="{ 'min-width': '50rem' }"
+responsiveLayout="stack" 
+[breakpoint]="'960px'" 
+[paginator]="true" 
+[rows]="rows" 
+[showCurrentPageReport]="true"
+[currentPageReportTemplate]="currentPageReportTemplate" 
+paginatorStyleClass="bg-blue-50 flex justify-content-end"
+[showFirstLastIcon]="false" 
+[showPageLinks]="false" 
+selectionMode="single" 
+(onRowSelect)="onRowSelect($event)"
+[globalFilterFields]="globalFilterFields" 
+sortMode="single">
+
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" class="bg-blue-50 w-3">
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" class="bg-blue-50 w-3">
                 <div class="flex justify-content-between">
-                    <span>{{ col.header }}</span>
+                    {{ col.header }}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                 </div>
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns" let-editing="editing" let-ri="rowIndex">
 
-        <tr [pEditableRow]="rowData">
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
 
+        <tr [pSelectableRow]="rowData">
             <td *ngFor="let col of columns">
+                <span class="p-column-title">{{col.header}}</span>
                 <ng-container>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input type="text" [(ngModel)]="rowData[col.field]" />
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{ rowData[col.field] }}
-                        </ng-template>
-                    </p-cellEditor>
-                </ng-container>
-                <ng-template>
                     {{ rowData[col.field] }}
-                </ng-template>
+                </ng-container>
             </td>
         </tr>
     </ng-template>
+
+    <ng-template pTemplate="sorticon" field="col.field" let-sortOrder>
+        <fa-icon *ngIf="sortOrder === 0" [icon]="sortIcon"></fa-icon>
+        <fa-icon *ngIf="sortOrder === 1" [icon]="sortUpIcon"></fa-icon>
+        <fa-icon *ngIf="sortOrder === -1" [icon]="sortDownIcon"></fa-icon>
+    </ng-template>
+
 </p-table>

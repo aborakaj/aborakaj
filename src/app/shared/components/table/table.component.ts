@@ -1,89 +1,30 @@
-import { Component } from '@angular/core';
-import { User, UserService } from '../../../core/services/user.service';
-import { ToastrService } from 'ngx-toastr';
-import { Table } from 'primeng/table';
-import { AuthService } from '../../../core/services/auth.service';
-interface Column {
-  field: string;
-  header: string;
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+  styleUrl: './table.component.scss',
 })
+
 export class TableComponent {
 
-  users!: User[];
-  cols!: Column[];
-  clonedUsers: { [s: string]: User } = {};
-  globalFilterFields: string[] = [];
+  @Input() cols!: any[];
+  @Input() rows!: number;
+  @Input() data!: any[];
+  @Input() globalFilterFields!: string[];
+  @Input() currentPageReportTemplate!: string;
+  @Output() rowSelect: EventEmitter<any> = new EventEmitter<any>();
+
+  sortIcon = faSort;
+  sortUpIcon=faSortUp;
+  sortDownIcon=faSortDown;
 
 
-  constructor(private userService: UserService,
-    private toastr: ToastrService,
-    private authService: AuthService) { }
+  constructor() { }
 
-  ngOnInit() {
- 
-    this.fetchUsers();
-
-
-    this.cols = [
-
-      { field: 'firstName', header: 'First name' },
-      { field: 'lastName', header: 'Last name' },
-      { field: 'email', header: 'Email' },
-      { field: 'username', header: 'Phone number' },
-
-    ];
-    this.globalFilterFields = this.cols.map(col => col.field);
+  onRowSelect(event: any) {
+    this.rowSelect.emit(event.data);
   }
 
-  fetchUsers() {
-
-    this.userService.getUsers().subscribe({
-      next: (users) => {
-        this.users = users;
-      },
-      error: (error) => {
-        this.toastr.error('Error fetching users');
-      },
-    });
-  }
-
-  clear(table: Table) {
-
-    table.clear();
-  }
-
-  onRowEditInit(user: User) {
-
-    this.clonedUsers[user.id as string] = { ...user };
-  }
-
-  onRowEditSave(user: User) {
-
-    user.updatedAt = new Date().toISOString();
-    user.updatedBy = this.authService.getUserIdFromToken()!
-    this.userService.updateUser(user.id, user)
-      .subscribe({
-        next: () => {
-          delete this.clonedUsers[user.id as string];
-          this.toastr.success('User is updated', 'Success');
-        },
-        error: (error) => {
-          console.error('Error updating user:', error);
-          this.toastr.error('Failed to update user', 'Failed');
-        }
-      });
-  }
-
-
-  onRowEditCancel(user: User, index: number) {
-
-    this.users[index] = this.clonedUsers[user.id as string];
-    delete this.clonedUsers[user.id as string];
-  }
 }

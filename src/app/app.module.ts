@@ -36,7 +36,10 @@ import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 
-import { SharedModule } from './shared/shared.module';
+
+import { TableComponent } from './shared/components/table/table.component';
+import { TableModule } from 'primeng/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,11 @@ import { SharedModule } from './shared/shared.module';
     UserReservationComponent,
     DashboardComponent,
     LayoutComponent,
-    FooterComponent
+    FooterComponent,
+    TableComponent
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([]),
@@ -74,7 +79,8 @@ import { SharedModule } from './shared/shared.module';
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
-    SharedModule
+    TableModule,
+
   ],
   providers: [
     {
