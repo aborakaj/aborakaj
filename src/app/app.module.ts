@@ -35,10 +35,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
+import { ModalComponent } from './shared/components/custom-modal/modal.component';
+import { TableModule } from 'primeng/table';
+
 
 
 import { TableComponent } from './shared/components/table/table.component';
-import { TableModule } from 'primeng/table';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -52,8 +56,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UserReservationComponent,
     DashboardComponent,
     LayoutComponent,
-    FooterComponent,
-    TableComponent
+    FooterComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -79,8 +82,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
-    TableModule,
-
   ],
   providers: [
     {

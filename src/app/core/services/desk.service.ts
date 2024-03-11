@@ -2,13 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DESKS_URL } from '../../shared/constants/url';
-import { AuthService } from './auth.service';
+import { Desk } from '../models/desk.interface';
 
-export interface Desk {
-  id: string;
-  name: string;
-  status: string;
-}
 
 @Injectable({
   providedIn: 'root'

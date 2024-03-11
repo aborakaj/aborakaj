@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Desk, DeskService } from '../../../../core/services/desk.service';
-import {
-  Reservation,
-  ReservationService,
-} from '../../../../core/services/reservation.service';
+import { DeskService } from '../../../../core/services/desk.service';
+import { ReservationService } from '../../../../core/services/reservation.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { Room, RoomService } from '../../../../core/services/room.service';
+import { RoomService } from '../../../../core/services/room.service';
+import { Reservation } from '../../../../core/models/reservation.interface';
+import { Desk } from '../../../../core/models/desk.interface';
+import { Room } from '../../../../core/models/room.interface';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-reservation',
@@ -14,9 +15,9 @@ import { Room, RoomService } from '../../../../core/services/room.service';
   styleUrls: ['./user-reservation.component.scss'],
 })
 export class UserReservationComponent implements OnInit {
-  displayModal: boolean = false;
+  isDisplayModal: boolean = false;
   selectedDesk: Desk | null = null;
-  isDeskReserved: boolean = false; 
+  isDeskReserved: boolean = false;
   currentReservationId: string | null = null;
 
   reservation = {
@@ -24,6 +25,7 @@ export class UserReservationComponent implements OnInit {
     endTime: '',
     action: 'BOOKED',
   };
+
 
   desks: Desk[] = [];
   rooms: Room[] = [];
@@ -64,21 +66,31 @@ export class UserReservationComponent implements OnInit {
     });
   }
 
-  // fetchReservations() {
-  //   this.reservationService.getReservation().subscribe({
-  //     next: (reservationsData) => {
-  //       this.reservations = reservationsData;
-  //     },
-  //     error: (error) => {
-  //       this.toastr.error('Error fetching reservations');
-  //     },
-  //   });
-  // }
+  fetchReservations() {
+    const userId = this.authService.getUserIdFromToken();
+    this.reservationService.getReservation().subscribe({
+      next: (reservationsData) => {
+        this.reservations = reservationsData.filter(
+          (res: Reservation) => res.userId === userId
+        );
+      },
+      error: (error) => {
+        this.toastr.error('Error fetching reservations');
+      },
+    });
+  }
 
-  showReservationModal(desk: Desk) {
+  onDeskClicked(desk: Desk) {
+    this.showModal();
     this.selectedDesk = desk;
-    this.displayModal = true;
+    this.getCurrentReservation(desk);
+  }
 
+  showModal() {
+    this.isDisplayModal = true;
+  }
+
+  getCurrentReservation(desk: Desk) {
     const reservation = this.reservations.find(
       (res) =>
         res.deskId === desk.id &&
@@ -87,23 +99,14 @@ export class UserReservationComponent implements OnInit {
     this.isDeskReserved = !!reservation;
 
     if (this.isDeskReserved && reservation) {
-      this.reservation = {
-        startTime: reservation.startTime,
-        endTime: reservation.endTime,
-        action: 'BOOKED',
-      };
-      this.currentReservationId = reservation.id; 
+      this.currentReservationId = reservation.id;
     } else {
-      this.reservation = {
-        startTime: '',
-        endTime: '',
-        action: 'BOOKED',
-      };
       this.currentReservationId = null;
+      this.resetForm();
     }
   }
 
-  submitReservation() {
+  submitReservation(receivedReservationData: Partial<Reservation>) {
     const userId = this.authService.getUserIdFromToken();
     if (!userId) {
       this.toastr.error('User not authenticated');
@@ -115,8 +118,12 @@ export class UserReservationComponent implements OnInit {
       return;
     }
 
-    const startTimeISO = new Date(this.reservation.startTime).toISOString();
-    const endTimeISO = new Date(this.reservation.endTime).toISOString();
+    const startTimeISO = new Date(
+      receivedReservationData.startTime || this.reservation.startTime
+    ).toISOString();
+    const endTimeISO = new Date(
+      receivedReservationData.endTime || this.reservation.endTime
+    ).toISOString();
 
     const reservationData = {
       startTime: startTimeISO,
@@ -130,35 +137,39 @@ export class UserReservationComponent implements OnInit {
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
         this.toastr.success('Reservation made', 'Success');
+        this.onReservationModalClose();
         this.resetForm();
       },
       error: (errorResponse) => {
         this.toastr.error('Error making reservation');
-        if (errorResponse.error && errorResponse.error.message) {
-        }
       },
     });
   }
 
-  cancelReservation() {
-    if (this.currentReservationId) {
-      this.reservationService.deleteReservation(this.currentReservationId).subscribe({
-        next: () => {
-          this.toastr.success('Reservation cancelled', 'Success');
-          this.displayModal = false; 
-        },
-        error: (error) => this.toastr.error('Error cancelling reservation'),
-      });
-    }
-  }
+  // cancelReservation() {
+  //   if (this.currentReservationId) {
+  //     this.reservationService
+  //       .deleteReservation(this.currentReservationId)
+  //       .subscribe({
+  //         next: () => {
+  //           this.toastr.success('Reservation cancelled', 'Success');
+  //           this.onModalClose();
+  //         },
+  //         error: (error) => this.toastr.error('Error cancelling reservation'),
+  //       });
+  //   }
+  // }
 
   resetForm() {
     this.reservation = {
       startTime: '',
       endTime: '',
-      action: '',
+      action: 'BOOKED',
     };
-    this.displayModal = false;
     this.currentReservationId = null;
+  }
+
+  onReservationModalClose() {
+    this.isDisplayModal = false;
   }
 }
