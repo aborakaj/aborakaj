@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddUserComponent } from './features/add-user/add-user.component';
+
 import { LoginComponent } from './shared/components/login/login.component';
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
@@ -10,7 +10,7 @@ import { TableComponent } from './shared/components/table/table.component';
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
   {path: 'home', component: LandingPageComponent},
-  {path: 'user', component: AddUserComponent},
+  
   {path: 'reservation', component: UserReservationComponent},
   {path: 'table', component: TableComponent},
   // {path: 'new-reservation', component: ReservationComponent}, //commented until dashboard is ready
