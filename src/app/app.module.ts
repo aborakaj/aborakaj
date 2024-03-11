@@ -56,7 +56,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UserReservationComponent,
     DashboardComponent,
     LayoutComponent,
-    FooterComponent
+    FooterComponent,
+    ReservationModalComponent,
+    ModalComponent,
+    TableComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -82,6 +85,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
+    TableModule,
+
   ],
   providers: [
     {

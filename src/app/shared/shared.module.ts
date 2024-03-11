@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableComponent } from './components/table/table.component';
 
 @NgModule({
-  declarations: [TableComponent],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
