@@ -6,5 +6,7 @@ export interface User {
   lastName: string;
   username: string;
   email: string;
-  reservation: Reservation[];
+  updatedAt: string;
+  updatedBy: string;
+  reservation?: Reservation[];
 }
