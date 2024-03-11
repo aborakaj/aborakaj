@@ -21,7 +21,7 @@ export class TableComponent {
   sortDownIcon=faSortDown;
 
 
-  constructor() { }
+  
 
   onRowSelect(event: any) {
     this.rowSelect.emit(event.data);
