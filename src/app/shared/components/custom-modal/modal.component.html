@@ -1,14 +1,15 @@
 <p-dialog
-  headerClass="text-6xl"
+  [header]="header"
   [(visible)]="isDisplayModal"
   [modal]="true"
   [responsive]="true"
   [draggable]="false"
   [resizable]="false"
   [breakpoints]="{ '960px': '100vw' }"
+  [style]="style ? style : {width : '640px'}"
   (onHide)="onCancelButtonClick()"
 >
-  <ng-template pTemplate="header">
+  <ng-template *ngIf="!header" pTemplate="header">
     <ng-content select="[modal-header-content]"></ng-content>
   </ng-template>
 
@@ -18,6 +19,7 @@
 
   <ng-template pTemplate="footer">
       <p-button
+        [disabled]="isActionButtonDisabled"
         label="{{ actionButtonLabel }}"
         size="large"
         styleClass="text-lg"
