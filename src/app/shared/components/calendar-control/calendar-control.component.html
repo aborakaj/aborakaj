@@ -1,0 +1,50 @@
+<div class="flex mb-4 mt-6 justify-content-between px-6">
+  <div class="flex gap-6">
+    <div class="flex gap-0">
+      <button
+        class="bg-white text-bluegray-800  border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+        [routerLink]="['./']"
+        [queryParams]="{ view: 'timeGridDay' }"
+        [routerLinkActive]="'active-button'"
+        (click)="onDayClick()"
+      >
+        Day
+      </button>
+      <button
+        class="bg-white text-bluegray-800 border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+        [routerLink]="['./']"
+        [queryParams]="{ view: 'dayGridMonth' }"
+        [routerLinkActive]="'active-button'"
+        (click)="onMonthClick()"
+      >
+        Month
+      </button>
+      <button
+        label="Map"
+        class="bg-white text-bluegray-800 border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+      >
+        Map
+      </button>
+    </div>
+    <p class="text-xl ml-0 text-bluegray-800 font-medium">{{ currentDate }}</p>
+  </div>
+  <div class="flex gap-3">
+    <button
+      class="active-button text-center border-bluegray-100  border-round-sm h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+    >
+      <i class="pi pi-plus" style="color: white"></i> Book meeting
+    </button>
+    <p-dropdown
+      [options]="rooms"
+      styleClass="active-button border-bluegray-100 col 
+    border-1 cursor-pointer"
+      optionLabel="name"
+    >
+      <ng-template let-room pTemplate="item">
+        <div (click)="onRoomSelected(room.name)">
+          <div>{{ room.name }}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+</div>

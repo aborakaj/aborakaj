@@ -1,0 +1,11 @@
+<app-calendar-control
+  [fullcalendar]="fullCalendar"
+  (selectRoom)="changeSelectedRoom($event)"
+></app-calendar-control>
+<full-calendar
+  #fullCalendar
+  [options]="calendarOptions"
+  [deepChangeDetection]="true"
+>
+  <ng-template #dayHeaderContent> {{ selectedRoom }} </ng-template>
+</full-calendar>

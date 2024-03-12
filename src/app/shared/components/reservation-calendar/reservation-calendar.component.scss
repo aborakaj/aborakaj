@@ -1,0 +1,33 @@
+:root {
+  --fc-border-color: #dbeafe;
+  --fc-today-bg-color: #f8f9fa;
+  --fc-event-text-color: #1f2937;
+}
+
+.fc {
+  font-family: "Inter";
+}
+
+.fc .fc-daygrid-day-number {
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.fc .fc-timegrid-slot-minor {
+  border-top-style: solid;
+}
+
+.timeDayEvent {
+  border-left-width: 1rem !important;
+  border-left-color: #2563eb !important;
+  box-sizing: content-box;
+}
+
+.fc .fc-daygrid-event-harness {
+  background-color: #c0e1ff;
+  border-radius: 50px;
+  font-size: 1vw;
+  margin: 0.3vh 0.2vw;
+  color: "#202020";
+}

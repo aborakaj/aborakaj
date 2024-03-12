@@ -30,7 +30,9 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { TableModule } from 'primeng/table';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
+    ReservationCalendarComponent,
+    CalendarControlComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,8 @@ import { TableModule } from 'primeng/table';
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
-    TableModule
+    TableModule,
+    FullCalendarModule,
   ],
   providers: [
     {
