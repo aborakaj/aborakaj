@@ -6,7 +6,8 @@
   [draggable]="false"
   [resizable]="false"
   [breakpoints]="{ '960px': '100vw' }"
-  [style]="style ? style : {width : '640px'}"
+  [style]="style"
+  
   (onHide)="onCancelButtonClick()"
 >
   <ng-template *ngIf="!header" pTemplate="header">
