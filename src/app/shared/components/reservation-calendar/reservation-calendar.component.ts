@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -21,20 +26,24 @@ export class ReservationCalendarComponent {
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
     events: EVENTS,
     weekends: false,
-    initialView: 'timeGridDay',
-    dayCellClassNames: [''],
+    initialView: 'dayGridMonth',
     dayMaxEvents: 3,
     slotEventOverlap: false,
     slotLabelClassNames: 'font-semibold',
     allDaySlot: false,
-    contentHeight: 700,
     headerToolbar: false,
     dayHeaderClassNames: [
+      'flex',
+      'align-items-center',
+      'gap-4',
+      'justify-content-center',
+      'p-3',
+      'flex-1',
       'bg-blue-100',
-      'text-m',
-      'font-medium',
+      'font-semibold',
+      'line-height-3',
       'text-bluegray-800',
-      'p-2',
+      'h-3rem',
     ],
     views: {
       timeGridDay: {
@@ -49,24 +58,24 @@ export class ReservationCalendarComponent {
         },
         expandRows: true,
         eventClassNames: [
-          'bg-white',
-          'border-bluegray-300',
-          'border-round-md',
-          'timeDayEvent',
-          'font-semibold',
-          'text-xs',
           'flex',
-          'p-2',
-          'flex-column',
+          'p-3',
+          'align-items-start',
+          'gap-2',
+          'timeDayEvent',
+          'align-items-stretch',
+          'border-round-right-sm',
+          'border-solid',
+          'border-bluegray-300',
+          'bg-white',
         ],
       },
       dayGridMonth: {
         dayHeaders: false,
-        eventBackgroundColor: '#C0E1FF',
         eventTimeFormat: {
           hour: '2-digit',
           minute: '2-digit',
-          meridiem: true,
+          meridiem: false,
         },
       },
     },

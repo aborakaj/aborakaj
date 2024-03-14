@@ -9,12 +9,41 @@
 >
   <ng-template #dayHeaderContent> {{ selectedRoom }} </ng-template>
   <ng-template #eventContent let-arg>
-    <span class="text-gray-900 text-xs	font-semibold">{{ arg.timeText }}</span>
-    <span>{{ arg.event.title }}</span>
-    <ng-container *ngIf="fullCalendar.getApi().view.type === 'timeGridDay'">
-      <p class="font-light">
-        {{ arg.event.extendedProps.comment }}
-      </p></ng-container
+    <ng-container
+      *ngIf="fullCalendar.getApi().view.type === 'timeGridDay'; else gridMonth"
     >
+      <span class="text-gray-800 text-xs font-semibold line-height-1">{{
+        arg.event.title
+      }}</span>
+      <p class="font-light text-xs">
+        {{ arg.event.extendedProps.comment }}
+      </p>
+    </ng-container>
+    <ng-template #gridMonth>
+      <div
+        class="flex justify-content-center align-items-center gap-1.5rem border-round-xl border-solid"
+        style="
+          padding: 12px 20px;
+          height: 28px;
+          background-color: #f0f8ff;
+          border-color: #c0e1ff;
+        "
+      >
+        <div
+          class="flex justify-content-center align-items-center gap-2 text-gray-900 font-semibold"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+          >
+            <circle cx="5" cy="5" r="5" fill="#006FD5" />
+          </svg>
+          {{ arg.timeText }} - {{ arg.event.title }}
+        </div>
+      </div>
+    </ng-template>
   </ng-template>
 </full-calendar>

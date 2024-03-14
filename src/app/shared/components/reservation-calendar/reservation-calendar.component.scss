@@ -8,10 +8,14 @@
   font-family: "Inter";
 }
 
-.fc .fc-daygrid-day-number {
-  color: #2563eb;
-  font-size: 16px;
-  font-weight: 400;
+.fc .fc-daygrid-day-frame {
+  align-self: stretch;
+
+  a {
+    color: #2563eb;
+    font-weight: 600;
+    line-height: 24px;
+  }
 }
 
 .fc .fc-timegrid-slot-minor {
@@ -19,16 +23,8 @@
 }
 
 .timeDayEvent {
-  border-left-width: 1rem !important;
+  border-left-width: 8px !important;
   border-left-color: #2563eb !important;
-  box-sizing: content-box;
-}
-
-.fc .fc-daygrid-event-harness {
-  background-color: #c0e1ff;
-  border-radius: 12px;
-  font-size: 1vw;
-  margin: 0.3vh 0.2vw;
-  color: "#202020";
-  padding: 12px 20px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
