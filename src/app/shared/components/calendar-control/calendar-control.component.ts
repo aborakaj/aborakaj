@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { format } from 'date-fns';
 
@@ -14,6 +14,7 @@ export class CalendarControlComponent {
   currentDate: string = format(new Date(), 'EEEE MMMM do yyyy');
 
   rooms: { name: string }[] = [
+    {name: 'All Rooms'},
     { name: 'HR Office' },
     { name: 'Design Office' },
   ];

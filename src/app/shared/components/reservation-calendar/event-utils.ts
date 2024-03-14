@@ -21,7 +21,6 @@ export const EVENTS: Reservation[] = [
     title: 'Romeo Llangozi',
     start: TODAY_STR + 'T15:00:00',
     end: TODAY_STR + 'T17:00:00',
-    eventDisplay: 'block',
     extendedProps: {
       comment: 'Additional info ',
       roomName: 'HR Office',

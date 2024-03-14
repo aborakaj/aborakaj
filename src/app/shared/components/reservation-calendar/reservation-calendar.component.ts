@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -24,6 +24,7 @@ export class ReservationCalendarComponent {
     initialView: 'timeGridDay',
     dayCellClassNames: [''],
     dayMaxEvents: 3,
+    slotEventOverlap: false,
     slotLabelClassNames: 'font-semibold',
     allDaySlot: false,
     contentHeight: 700,
@@ -52,7 +53,11 @@ export class ReservationCalendarComponent {
           'border-bluegray-300',
           'border-round-md',
           'timeDayEvent',
-          'py-5',
+          'font-semibold',
+          'text-xs',
+          'flex',
+          'p-2',
+          'flex-column',
         ],
       },
       dayGridMonth: {
@@ -69,6 +74,14 @@ export class ReservationCalendarComponent {
 
   changeSelectedRoom(newRoom: string) {
     this.selectedRoom = newRoom;
+    if (newRoom.toLowerCase() === 'All Rooms'.toLowerCase()) {
+      this.calendarOptions = {
+        ...this.calendarOptions,
+        events: EVENTS,
+      };
+      return;
+    }
+
     const selectedRoomEvents = EVENTS.filter((event: Reservation) => {
       return (
         event.extendedProps?.roomName.toLowerCase() === newRoom.toLowerCase()

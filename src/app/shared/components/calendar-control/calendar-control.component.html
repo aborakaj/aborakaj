@@ -1,8 +1,9 @@
-<div class="flex mb-4 mt-6 justify-content-between px-6">
-  <div class="flex gap-6">
-    <div class="flex gap-0">
+<div class="flex px-4 py-0 justify-content-between align-items-center">
+  <div class="flex gap-4 align-items-center">
+    <div class="flex align-items-start" style="width: 531px">
       <button
-        class="bg-white text-bluegray-800  border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+        class="p-3 h-auto w-full align-items-center cursor-pointer text-bluegray-800 gap-2 border-bluegray-200 border-round-left-sm bg-white border-solid box-shadow-none"
+        style="flex: 1 0 0"
         [routerLink]="['./']"
         [queryParams]="{ view: 'timeGridDay' }"
         [routerLinkActive]="'active-button'"
@@ -11,8 +12,9 @@
         Day
       </button>
       <button
-        class="bg-white text-bluegray-800 border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+        class="p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-x-none border-bluegray-200 bg-white border-solid box-shadow-none"
         [routerLink]="['./']"
+        style="flex: 1 0 0"
         [queryParams]="{ view: 'dayGridMonth' }"
         [routerLinkActive]="'active-button'"
         (click)="onMonthClick()"
@@ -21,24 +23,26 @@
       </button>
       <button
         label="Map"
-        class="bg-white text-bluegray-800 border-bluegray-100 h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+        style="flex: 1 0 0"
+        class="p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-bluegray-200 border-round-right-sm bg-white border-solid box-shadow-none"
       >
         Map
       </button>
     </div>
-    <p class="text-xl ml-0 text-bluegray-800 font-medium">{{ currentDate }}</p>
+    <h6 class="text-lg text-bluegray-800 font-medium">{{ currentDate }}</h6>
   </div>
-  <div class="flex gap-3">
+  <div class="flex gap-4 align-items-center">
     <button
-      class="active-button text-center border-bluegray-100  border-round-sm h-4rem w-10rem border-noround shadow-none border-1 cursor-pointer"
+      class="flex p-3 justify-content-center cursor-pointer align-items-center gap-2 border-round-lg border-none text-white box-shadow-none"
+      style="background-color: #3b82f6"
     >
       <i class="pi pi-plus" style="color: white"></i> Book meeting
     </button>
     <p-dropdown
       [options]="rooms"
-      styleClass="active-button border-bluegray-100 col 
-    border-1 cursor-pointer"
+      styleClass="flex p-2 align-self-stretch cursor-pointer align-items-center gap-2 border-round-lg text-white box-shadow-none"
       optionLabel="name"
+      [placeholder]="'All rooms'"
     >
       <ng-template let-room pTemplate="item">
         <div (click)="onRoomSelected(room.name)">

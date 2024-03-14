@@ -8,4 +8,13 @@
   [deepChangeDetection]="true"
 >
   <ng-template #dayHeaderContent> {{ selectedRoom }} </ng-template>
+  <ng-template #eventContent let-arg>
+    <span class="text-gray-900 text-xs	font-semibold">{{ arg.timeText }}</span>
+    <span>{{ arg.event.title }}</span>
+    <ng-container *ngIf="fullCalendar.getApi().view.type === 'timeGridDay'">
+      <p class="font-light">
+        {{ arg.event.extendedProps.comment }}
+      </p></ng-container
+    >
+  </ng-template>
 </full-calendar>
