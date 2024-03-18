@@ -1,0 +1,14 @@
+<p-card [header]="title" [subheader]="subtitle" styleClass="shadow-none">
+
+    <ng-template pTemplate="content">
+        <div class="flex justify-content-start column-gap-4">
+            <p-button [label]="actionButtonLabel" [icon]="actionButtonIcon" (click)="onActionButtonClick()"></p-button>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Search..."
+                    (input)="dt.filterGlobal(($any($event.target).value), 'contains')" />
+            </span>
+        </div>
+    </ng-template>
+</p-card>
+

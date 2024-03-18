@@ -6,6 +6,7 @@ import { LandingPageComponent } from './shared/components/landing-page/landing-p
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
 import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
 import { TableComponent } from './shared/components/table/table.component';
+import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
@@ -13,9 +14,11 @@ const routes: Routes = [
   
   {path: 'reservation', component: UserReservationComponent},
   {path: 'table', component: TableComponent},
+  {path: 'header', component: PageHeaderComponent},
   // {path: 'new-reservation', component: ReservationComponent}, //commented until dashboard is ready
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },
+  
   
 ];
 export {routes};
