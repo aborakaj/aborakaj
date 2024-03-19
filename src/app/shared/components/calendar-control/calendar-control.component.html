@@ -31,21 +31,22 @@
     </div>
     <h6 class="text-lg text-bluegray-800 font-medium">{{ currentDate }}</h6>
   </div>
-  <div class="flex gap-4 align-items-center">
+  <div class="flex gap-4 align-items-center justify-content-stretch">
     <button
       class="flex p-3 justify-content-center cursor-pointer align-items-center gap-2 border-round-lg border-none text-white box-shadow-none"
       style="background-color: #3b82f6"
     >
       <i class="pi pi-plus" style="color: white"></i> Book meeting
+      
     </button>
     <p-dropdown
       [options]="rooms"
-      styleClass="flex p-2 align-self-stretch cursor-pointer align-items-center gap-2 border-round-lg text-white box-shadow-none"
       optionLabel="name"
+      styleClass="flex p-2 align-self-stretch cursor-pointer align-items-center gap-2 border-round-lg text-white box-shadow-none"
       [placeholder]="'All rooms'"
     >
       <ng-template let-room pTemplate="item">
-        <div (click)="onRoomSelected(room.name)">
+        <div (click)="onRoomSelected(room)">
           <div>{{ room.name }}</div>
         </div>
       </ng-template>

@@ -1,13 +1,13 @@
 <app-calendar-control
-  [fullcalendar]="fullCalendar"
   (selectRoom)="changeSelectedRoom($event)"
+  [fullcalendar]="fullCalendar"
 ></app-calendar-control>
 <full-calendar
   #fullCalendar
   [options]="calendarOptions"
   [deepChangeDetection]="true"
 >
-  <ng-template #dayHeaderContent> {{ selectedRoom }} </ng-template>
+  <ng-template #dayHeaderContent> {{ selectedRoom.name }} </ng-template>
   <ng-template #eventContent let-arg>
     <ng-container
       *ngIf="fullCalendar.getApi().view.type === 'timeGridDay'; else gridMonth"
@@ -21,16 +21,17 @@
     </ng-container>
     <ng-template #gridMonth>
       <div
-        class="flex justify-content-center align-items-center gap-1.5rem border-round-xl border-solid"
+        class="flex justify-content-start gap-1.5rem border-round-xl border-solid"
         style="
           padding: 12px 20px;
           height: 28px;
+          width: 100%;
           background-color: #f0f8ff;
           border-color: #c0e1ff;
         "
       >
         <div
-          class="flex justify-content-center align-items-center gap-2 text-gray-900 font-semibold"
+          class="flex justify-content-center align-items-center text-xs md:text-base gap-2 text-gray-900 font-semibold"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

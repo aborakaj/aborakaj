@@ -6,10 +6,10 @@ import { Room } from '../models/room.interface';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoomService {
-  
+
 
   constructor(private http: HttpClient) {}
 

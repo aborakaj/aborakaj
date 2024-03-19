@@ -5,3 +5,5 @@ export interface Room {
   name: string;
   desks: Desk[];
 }
+
+export interface RoomSelected extends Omit<Room, 'desks'> {}

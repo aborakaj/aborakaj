@@ -8,14 +8,10 @@
   font-family: "Inter";
 }
 
-.fc .fc-daygrid-day-frame {
-  align-self: stretch;
-
-  a {
-    color: #2563eb;
-    font-weight: 600;
-    line-height: 24px;
-  }
+.fc .fc-daygrid-day-number {
+  color: #2563eb;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .fc .fc-timegrid-slot-minor {
