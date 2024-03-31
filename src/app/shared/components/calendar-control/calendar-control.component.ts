@@ -20,15 +20,18 @@ import { Subscription } from 'rxjs';
 export class CalendarControlComponent implements OnInit, OnDestroy {
   @Input('fullcalendar') fullcalendar: FullCalendarComponent | undefined;
   @Output() selectRoom = new EventEmitter<RoomSelected>();
-  
+
   roomServiceSub!: Subscription;
   rooms: RoomSelected[] = [{ name: 'All Rooms', id: '' }];
   currentDate: string = format(new Date(), 'EEEE MMMM do yyyy');
 
-  constructor(
-    private roomService: RoomService  ) {}
+  constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
+    this.getRooms();
+  }
+
+  getRooms() {
     this.roomService.getRooms().subscribe({
       next: (rooms: Room[]) => {
         rooms.map((room: Room) =>
