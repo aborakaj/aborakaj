@@ -19,13 +19,13 @@ export class UserReservationComponent implements OnInit {
   selectedDesk: Desk | null = null;
   isDeskReserved: boolean = false;
   currentReservationId: string | null = null;
+  selectedDate!: string;
 
   reservation = {
     startTime: '',
     endTime: '',
     action: 'BOOKED',
   };
-
 
   desks: Desk[] = [];
   rooms: Room[] = [];
@@ -86,6 +86,11 @@ export class UserReservationComponent implements OnInit {
     this.getCurrentReservation(desk);
   }
 
+  onDateSelect(date: any) {
+    this.selectedDate =
+      date instanceof Date ? date.toISOString().split('T')[0] : date;
+  }
+
   showModal() {
     this.isDisplayModal = true;
   }
@@ -118,21 +123,30 @@ export class UserReservationComponent implements OnInit {
       return;
     }
 
-    const startTimeISO = new Date(
-      receivedReservationData.startTime || this.reservation.startTime
-    ).toISOString();
-    const endTimeISO = new Date(
-      receivedReservationData.endTime || this.reservation.endTime
-    ).toISOString();
+    if (
+      !receivedReservationData.startTime ||
+      !receivedReservationData.endTime
+    ) {
+      this.toastr.error('Start time and end time are required');
+      return;
+    }
+
+    const combinedStartTime = `${this.selectedDate}T${receivedReservationData.startTime}`;
+    const combinedEndTime = `${this.selectedDate}T${receivedReservationData.endTime}`;
+
+    const formattedStartTime = new Date(combinedStartTime).toISOString();
+    const formattedEndTime = new Date(combinedEndTime).toISOString();
 
     const reservationData = {
-      startTime: startTimeISO,
-      endTime: endTimeISO,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
       userId: userId,
       deskId: this.selectedDesk.id,
       action: this.reservation.action,
       createdBy: userId,
     };
+    console.log('Start Time:', formattedStartTime);
+    console.log('End Time:', formattedEndTime);
 
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {

@@ -1,5 +1,5 @@
 <app-modal
-  [actionButtonLabel]="'Add Reservation'"
+  [actionButtonLabel]="'Save changes'"
   (onActionButtonClick)="onSubmitReservation()"
   (close)="onReservationModalClose()"
   [isDisplayModal]="isDisplayModal"
@@ -10,35 +10,90 @@
   </div>
 
   <ng-container modal-body-content>
-    <form [formGroup]="reservationForm" class="p-fluid form-spacing">
-      <div class="grid mt-2">
-        <div class="col-12 h-4rem field">
-          <label for="startTime" class="font-normal">Start Time*</label>
-          <p-calendar
-            formControlName="startTime"
-            [showTime]="true"
-            inputId="startTime"
-            dateFormat="yy-mm-dd"
-            placeholder="e.g. Time of your reservation"
-            appendTo="body"
-          ></p-calendar>
+    <div class="modal-body-content p-fluid">
+      <form [formGroup]="reservationForm">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label for="date" class="font-light">Date*</label>
+            <p-calendar
+              formControlName="startTime"
+              dataType="string"
+              inputId="startTime"
+              dateFormat="DD d MM"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              appendTo="body"
+              [showButtonBar]="true"
+            >
+              <ng-template pTemplate="inputicon">
+                <i class="pi pi-angle-down pointer-events-none"></i>
+              </ng-template>
+            </p-calendar>
+          </div>
+
+          <div class="field col-12 md:col-3">
+            <label for="startTime" class="font-light col-offset-3">Time*</label>
+            <div class="field grid">
+              <label for="firstname3" class="col-fixed">From</label>
+              <div class="col">
+                <p-dropdown
+                  id="times"
+                  [options]="times"
+                  optionLabel="clock"
+                  filterBy="clock"
+                  formControlName="space"
+                  class="wide-dropdown"
+                  appendTo="body"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="field col-12 md:col-3 mt-auto">
+            <div class="field grid">
+              <label for="firstname3" class="col-fixed">To</label>
+              <div class="col">
+                <p-dropdown
+                  id="times"
+                  [options]="times"
+                  optionLabel="clock"
+                  filterBy="clock"
+                  formControlName="space"
+                  class="wide-dropdown"
+                  appendTo="body"
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-12 h-4rem field">
-          <label for="endTime" class="font-normal">End Time*</label>
-          <p-calendar
-            formControlName="endTime"
-            [showTime]="true"
-            inputId="endTime"
-            dateFormat="yy-mm-dd"
-            placeholder="e.g. End Time of your reservation"
-            appendTo="body"
-          ></p-calendar>
+
+        <div class="grid">
+          <div class="field col-12">
+            <label for="space" class="font-light">Space*</label>
+            <p-dropdown
+              id="space"
+              [options]="spaces"
+              optionLabel="name"
+              filterBy="name"
+              formControlName="space"
+              dataKey="floorId"
+              placeholder="Select Space"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
         </div>
-        <div class="col-12 h-4rem field">
-          <label for="status">Status</label>
-          <input type="text" id="status" pInputText formControlName="action" />
+        <div class="grid">
+          <div class="field col-12">
+            <label for="bookingTitle" class="font-light">Booking Title</label>
+            <input
+              type="text"
+              id="bookingTitle"
+              pInputText
+              formControlName="bookingTitle"
+              placeholder="e.g Daily Standup"
+            />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </ng-container>
 </app-modal>
