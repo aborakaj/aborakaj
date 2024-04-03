@@ -4,6 +4,7 @@
 ></app-calendar-control>
 <full-calendar
   #fullCalendar
+  [events]="reservationsEvents$ | async"
   [options]="calendarOptions"
   [deepChangeDetection]="true"
 >

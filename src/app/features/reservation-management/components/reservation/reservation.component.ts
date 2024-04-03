@@ -4,7 +4,7 @@ import { RoomService } from '../../../../core/services/room.service';
 import { UserService } from '../../../../core/services/user.service';
 import { DeskService } from '../../../../core/services/desk.service';
 import { Reservation } from '../../../../core/models/reservation.interface';
-import { ReservationService } from '../../../../core/services/reservation.service';
+import { ReservationService } from '../../../../core/services/reservation/reservation.service';
 import { Desk } from '../../../../core/models/desk.interface';
 import { Room } from '../../../../core/models/room.interface';
 import { User } from '../../../../core/models/user.interface';
@@ -150,20 +150,21 @@ export class ReservationComponent {
     const updatedReservationData = {
       startTime: new Date(this.editingReservation.startTime).toISOString(),
       endTime: new Date(this.editingReservation.endTime).toISOString(),
-
     };
-    this.reservationService.updateReservation(this.editingReservation.id, updatedReservationData).subscribe({
-      next: (response) => {
-        this.toastr.success('Reservation updated', 'Success');
-        this.fetchReservations();
-        this.editingReservation = null;
-      },
-      error: (errorResponse) => {
-        this.toastr.error('Error updating reservation');
-        if (errorResponse.error && errorResponse.error.message) {
-        }
-      },
-    });
+    this.reservationService
+      .updateReservation(this.editingReservation.id, updatedReservationData)
+      .subscribe({
+        next: (response) => {
+          this.toastr.success('Reservation updated', 'Success');
+          this.fetchReservations();
+          this.editingReservation = null;
+        },
+        error: (errorResponse) => {
+          this.toastr.error('Error updating reservation');
+          if (errorResponse.error && errorResponse.error.message) {
+          }
+        },
+      });
   }
 
   deleteReservation(reservationId: string) {

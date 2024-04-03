@@ -1,6 +1,5 @@
 import {
   Component,
-  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -11,9 +10,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { ReservationEvent } from './event-utils';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { ReservationService } from '../../../core/services/reservation.service';
 import { RoomSelected } from '../../../core/models/room.interface';
-import { Subscription } from 'rxjs';
+import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-calendar',
@@ -21,24 +20,15 @@ import { Subscription } from 'rxjs';
   styleUrl: './reservation-calendar.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class ReservationCalendarComponent implements OnInit, OnDestroy {
+export class ReservationCalendarComponent implements OnInit {
   @ViewChild('fullcalendar') calendar: FullCalendarComponent | undefined;
 
-  reservationEventsSub!: Subscription;
-  reservationsEvents!: ReservationEvent[];
+  reservationsEvents$!: Observable<ReservationEvent[]>
   selectedRoom: RoomSelected = { name: 'All Rooms', id: '' };
-  constructor(private reservationService: ReservationService) {}
+  constructor(private reservationStore: ReservationStoreService) {}
 
   ngOnInit(): void {
-    this.reservationEventsSub = this.reservationService
-      .getReservationsAsEvents()
-      .subscribe((events) => {
-        this.reservationsEvents = events;
-        this.calendarOptions = {
-          ...this.calendarOptions,
-          events: this.reservationsEvents,
-        };
-      });
+    this.reservationsEvents$ = this.reservationStore.reservationsAsEvents$
   }
 
   calendarOptions: CalendarOptions = {
@@ -51,7 +41,6 @@ export class ReservationCalendarComponent implements OnInit, OnDestroy {
     allDaySlot: false,
     timeZone: 'UTC',
     headerToolbar: false,
-    events: this.reservationsEvents,
     dayHeaderClassNames: [
       'flex',
       'align-items-center',
@@ -102,29 +91,29 @@ export class ReservationCalendarComponent implements OnInit, OnDestroy {
   };
 
   changeSelectedRoom(newRoom: RoomSelected) {
-    console.log('Event emmitted');
-    this.selectedRoom = newRoom;
+    // console.log('Event emmitted');
+    // this.selectedRoom = newRoom;
 
-    if (newRoom.name.toLowerCase() === 'All Rooms'.toLowerCase()) {
-      this.calendarOptions = {
-        ...this.calendarOptions,
-        events: this.reservationsEvents,
-      };
-      return;
-    }
+    // if (newRoom.name.toLowerCase() === 'All Rooms'.toLowerCase()) {
+    //   this.calendarOptions = {
+    //     ...this.calendarOptions,
+    //     events: this.reservationsEvents,
+    //   };
+    //   return;
+    // }
 
-    const selectedRoomEvents = this.reservationsEvents.filter(
-      (event: ReservationEvent) => {
-        return event.extendedProps?.roomId === newRoom.id;
-      }
-    );
-    this.calendarOptions = {
-      ...this.calendarOptions,
-      events: selectedRoomEvents,
-    };
+    // const selectedRoomEvents = this.reservationsEvents.filter(
+    //   (event: ReservationEvent) => {
+    //     return event.extendedProps?.roomId === newRoom.id;
+    //   }
+    // );
+    // this.calendarOptions = {
+    //   ...this.calendarOptions,
+    //   events: selectedRoomEvents,
+    // };
   }
 
-  ngOnDestroy(): void {
-    this.reservationEventsSub.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.reservationEventsSub.unsubscribe();
+  // }
 }
