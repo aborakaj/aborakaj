@@ -4,7 +4,7 @@
 ></app-calendar-control>
 <full-calendar
   #fullCalendar
-  [events]="reservationsEvents$ | async"
+  [events]="reservationsEvents$ | async | filterEvents:selectedRoom.id"
   [options]="calendarOptions"
   [deepChangeDetection]="true"
 >

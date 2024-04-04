@@ -33,6 +33,7 @@ import { TableModule } from 'primeng/table';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
+import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CalendarControlComponent } from './shared/components/calendar-control/c
     DropdownModule,
     TableModule,
     FullCalendarModule,
+    FilterEventsPipe
   ],
   providers: [
     {

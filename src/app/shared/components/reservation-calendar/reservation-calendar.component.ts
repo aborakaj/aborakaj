@@ -23,7 +23,7 @@ import { Observable } from 'rxjs';
 export class ReservationCalendarComponent implements OnInit {
   @ViewChild('fullcalendar') calendar: FullCalendarComponent | undefined;
 
-  reservationsEvents$!: Observable<ReservationEvent[]>
+  reservationsEvents$!: Observable<ReservationEvent[]>;
   selectedRoom: RoomSelected = { name: 'All Rooms', id: '' };
   constructor(private reservationStore: ReservationStoreService) {}
 
@@ -92,7 +92,7 @@ export class ReservationCalendarComponent implements OnInit {
 
   changeSelectedRoom(newRoom: RoomSelected) {
     // console.log('Event emmitted');
-    // this.selectedRoom = newRoom;
+    this.selectedRoom = newRoom;
 
     // if (newRoom.name.toLowerCase() === 'All Rooms'.toLowerCase()) {
     //   this.calendarOptions = {
