@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { RoomService } from '../../../core/services/room.service';
 import { Room, RoomSelected } from '../../../core/models/room.interface';
 import { Subscription } from 'rxjs';
+import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
 
 @Component({
   selector: 'app-calendar-control',
@@ -18,14 +19,14 @@ import { Subscription } from 'rxjs';
   styleUrl: './calendar-control.component.scss',
 })
 export class CalendarControlComponent implements OnInit, OnDestroy {
-  @Input('fullcalendar') fullcalendar: FullCalendarComponent | undefined;
+  @Input({ required: true }) fullcalendar!: FullCalendarComponent;
   @Output() selectRoom = new EventEmitter<RoomSelected>();
 
   roomServiceSub!: Subscription;
   rooms: RoomSelected[] = [{ name: 'All Rooms', id: '' }];
   currentDate: string = format(new Date(), 'EEEE MMMM do yyyy');
 
-  constructor(private roomService: RoomService) {}
+  constructor(private roomService: RoomService, private reservationStore: ReservationStoreService) {}
 
   ngOnInit(): void {
     this.getRooms();
@@ -42,11 +43,11 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   }
 
   onDayClick() {
-    this.fullcalendar?.getApi().changeView('timeGridDay');
+    this.fullcalendar.getApi().changeView('timeGridDay');
   }
 
   onMonthClick() {
-    this.fullcalendar?.getApi().changeView('dayGridMonth');
+    this.fullcalendar.getApi().changeView('dayGridMonth');
   }
 
   onRoomSelected(room: RoomSelected) {

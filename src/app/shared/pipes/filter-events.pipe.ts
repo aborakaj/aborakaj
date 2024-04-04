@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ReservationEvent } from '../components/reservation-calendar/event-utils';
+import { ReservationEvent } from '../../core/models/reservation.interface';
 
 @Pipe({
   name: 'filterEvents',

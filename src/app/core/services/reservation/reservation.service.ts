@@ -18,8 +18,8 @@ export class ReservationService {
     return this.http.get<Reservation>(`${RESERVATION_URL}/${id}`);
   }
 
-  submitReservation(reservationData: Reservation): Observable<any> {
-    return this.http.post(RESERVATION_URL, reservationData);
+  submitReservation(reservationData: any): Observable<any> {
+    return this.http.post<Reservation>(RESERVATION_URL, reservationData);
   }
 
   updateReservation(id: string, reservationData: any): Observable<any> {
