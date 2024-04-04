@@ -1,14 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { ReservationEvent } from './event-utils';
+import { ReservationEvent } from '../../../core/models/reservation.interface';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { RoomSelected } from '../../../core/models/room.interface';
 import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
@@ -28,7 +23,7 @@ export class ReservationCalendarComponent implements OnInit {
   constructor(private reservationStore: ReservationStoreService) {}
 
   ngOnInit(): void {
-    this.reservationsEvents$ = this.reservationStore.reservationsAsEvents$
+    this.reservationsEvents$ = this.reservationStore.reservationsAsEvents$;
   }
 
   calendarOptions: CalendarOptions = {
@@ -91,29 +86,6 @@ export class ReservationCalendarComponent implements OnInit {
   };
 
   changeSelectedRoom(newRoom: RoomSelected) {
-    // console.log('Event emmitted');
     this.selectedRoom = newRoom;
-
-    // if (newRoom.name.toLowerCase() === 'All Rooms'.toLowerCase()) {
-    //   this.calendarOptions = {
-    //     ...this.calendarOptions,
-    //     events: this.reservationsEvents,
-    //   };
-    //   return;
-    // }
-
-    // const selectedRoomEvents = this.reservationsEvents.filter(
-    //   (event: ReservationEvent) => {
-    //     return event.extendedProps?.roomId === newRoom.id;
-    //   }
-    // );
-    // this.calendarOptions = {
-    //   ...this.calendarOptions,
-    //   events: selectedRoomEvents,
-    // };
   }
-
-  // ngOnDestroy(): void {
-  //   this.reservationEventsSub.unsubscribe();
-  // }
 }

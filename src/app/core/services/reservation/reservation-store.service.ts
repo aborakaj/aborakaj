@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ReservationService } from './reservation.service';
 import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { Reservation } from '../../models/reservation.interface';
-import { ReservationEvent } from '../../../shared/components/reservation-calendar/event-utils';
+import { ReservationEvent } from '../../models/reservation.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +39,9 @@ export class ReservationStoreService {
           });
         });
         return eventReservations;
+  }
+
+  addReservation(reservation: Reservation){
+    this.reservationService.submitReservation(reservation)
   }
 }

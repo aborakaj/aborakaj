@@ -12,3 +12,18 @@ export interface Reservation {
   user: User;
   desk: Desk;
 }
+
+
+export interface ReservationEvent {
+  id: string;
+  title?: string;
+  start: string;
+  end?: string;
+  display?: string;
+  isEditable?: boolean;
+  eventDisplay?: string;
+  extendedProps?: {
+    comment?: string;
+    roomId: string;
+  };
+}

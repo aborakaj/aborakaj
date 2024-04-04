@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RESERVATION_URL } from '../../../shared/constants/url';
 import { Reservation } from '../../models/reservation.interface';
 
@@ -18,7 +18,7 @@ export class ReservationService {
     return this.http.get<Reservation>(`${RESERVATION_URL}/${id}`);
   }
 
-  submitReservation(reservationData: any): Observable<any> {
+  submitReservation(reservationData: Reservation): Observable<any> {
     return this.http.post(RESERVATION_URL, reservationData);
   }
 
