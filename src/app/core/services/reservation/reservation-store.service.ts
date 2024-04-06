@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReservationService } from './reservation.service';
-import { BehaviorSubject, Observable, catchError, concatMap, map, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, concat, map, take } from 'rxjs';
 import { Reservation } from '../../models/reservation.interface';
 import { ReservationEvent } from '../../models/reservation.interface';
 
@@ -9,18 +9,17 @@ import { ReservationEvent } from '../../models/reservation.interface';
 })
 export class ReservationStoreService {
   private reservationsSubject = new BehaviorSubject<Reservation[]>([]);
-  public reservations$: Observable<Reservation[]> = this.reservationsSubject
-    .asObservable()
+  public reservations$: Observable<Reservation[]> =
+    this.reservationsSubject.asObservable();
   public reservationsAsEvents$: Observable<ReservationEvent[]> =
     this.reservationsSubject
       .asObservable()
       .pipe(map<Reservation[], ReservationEvent[]>(this.reservationsToEvents));
 
   constructor(private readonly reservationService: ReservationService) {
-    this.getReservations()
-      .subscribe({
-        next: (reservations) => this.reservationsSubject.next(reservations),
-      });
+    this.getReservations().subscribe({
+      next: (reservations) => this.reservationsSubject.next(reservations),
+    });
   }
 
   private reservationsToEvents(
@@ -42,15 +41,17 @@ export class ReservationStoreService {
   }
 
   addReservation(reservation: any) {
-    this.reservationService.submitReservation(reservation).pipe(
-      take(1),
-      concatMap((_value: Reservation) => this.getReservations())
-    ).subscribe((reservations: Reservation[]) => {
+    concat(
+      this.reservationService.submitReservation(reservation),
+      this.getReservations()
+    )
+      .pipe(take(1))
+      .subscribe((reservations: Reservation[]) => {
         this.reservationsSubject.next(reservations);
       });
   }
 
-  private getReservations(): Observable<Reservation[]>{
+  private getReservations(): Observable<Reservation[]> {
     return this.reservationService.getReservation().pipe(take(1));
   }
 }
