@@ -51,6 +51,36 @@ export class ReservationStoreService {
       });
   }
 
+  deleteReservation(reservationId: string) {
+    concat(
+      this.reservationService.deleteReservation(reservationId),
+      this.getReservations()
+    )
+      .pipe(take(1))
+      .subscribe((reservations: Reservation[]) =>
+        this.reservationsSubject.next(reservations)
+      );
+  }
+
+  getReservationById(reservationId: string): Reservation | undefined {
+    return this.reservationsSubject
+      .getValue()
+      .filter(
+        (reservation: Reservation) => reservation.id === reservationId
+      )[0];
+  }
+
+  updateReservation(reservationId: string, reservationData: any) {
+    concat(
+      this.reservationService.updateReservation(reservationId, reservationData),
+      this.getReservations()
+    )
+      .pipe(take(1))
+      .subscribe((reservations: Reservation[]) => {
+        this.reservationsSubject.next(reservations);
+      });
+  }
+
   private getReservations(): Observable<Reservation[]> {
     return this.reservationService.getReservation().pipe(take(1));
   }
