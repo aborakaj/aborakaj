@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ReservationService } from './reservation.service';
-import { BehaviorSubject, Observable, concat, map, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  concat,
+  map,
+  take,
+  throwError,
+} from 'rxjs';
 import { Reservation } from '../../models/reservation.interface';
 import { ReservationEvent } from '../../models/reservation.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationStoreService {
   private reservationsSubject = new BehaviorSubject<Reservation[]>([]);
+  private reservationErrors = new BehaviorSubject<string | null>(null);
+
+  public reservationErrors$ = this.reservationErrors.asObservable();
   public reservations$: Observable<Reservation[]> =
     this.reservationsSubject.asObservable();
   public reservationsAsEvents$: Observable<ReservationEvent[]> =
@@ -16,7 +28,10 @@ export class ReservationStoreService {
       .asObservable()
       .pipe(map<Reservation[], ReservationEvent[]>(this.reservationsToEvents));
 
-  constructor(private readonly reservationService: ReservationService) {
+  constructor(
+    private readonly reservationService: ReservationService,
+    private readonly router: Router
+  ) {
     this.getReservations().subscribe({
       next: (reservations) => this.reservationsSubject.next(reservations),
     });
@@ -46,8 +61,11 @@ export class ReservationStoreService {
       this.getReservations()
     )
       .pipe(take(1))
-      .subscribe((reservations: Reservation[]) => {
-        this.reservationsSubject.next(reservations);
+      .subscribe({
+        next: (reservations: Reservation[]) => {
+          this.reservationsSubject.next(reservations);
+        },
+        error: (err) => this.reservationErrors.next(err),
       });
   }
 
@@ -57,9 +75,11 @@ export class ReservationStoreService {
       this.getReservations()
     )
       .pipe(take(1))
-      .subscribe((reservations: Reservation[]) =>
-        this.reservationsSubject.next(reservations)
-      );
+      .subscribe({
+        next: (reservations: Reservation[]) =>
+          this.reservationsSubject.next(reservations),
+        error: (err) => this.reservationErrors.next(err),
+      });
   }
 
   getReservationById(reservationId: string): Reservation | undefined {
@@ -76,12 +96,21 @@ export class ReservationStoreService {
       this.getReservations()
     )
       .pipe(take(1))
-      .subscribe((reservations: Reservation[]) => {
-        this.reservationsSubject.next(reservations);
+      .subscribe({
+        next: (reservations: Reservation[]) => {
+          this.reservationsSubject.next(reservations);
+        },
+        error: (err: Error) => this.reservationErrors.next(err.message),
       });
   }
 
   private getReservations(): Observable<Reservation[]> {
-    return this.reservationService.getReservation().pipe(take(1));
+    return this.reservationService.getReservation().pipe(
+      catchError((err) => {
+        this.reservationErrors.next(err.message);
+        return throwError(() => new Error(err));
+      }),
+      take(1)
+    );
   }
 }

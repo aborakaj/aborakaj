@@ -72,7 +72,7 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe
+    FilterEventsPipe,
   ],
   providers: [
     {

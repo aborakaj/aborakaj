@@ -7,7 +7,8 @@ import { ReservationEvent } from '../../../core/models/reservation.interface';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { RoomSelected } from '../../../core/models/room.interface';
 import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation-calendar',
@@ -19,11 +20,22 @@ export class ReservationCalendarComponent implements OnInit {
   @ViewChild('fullcalendar') calendar: FullCalendarComponent | undefined;
 
   reservationsEvents$!: Observable<ReservationEvent[]>;
+  reservationErrors$!: Subscription;
   selectedRoom: RoomSelected = { name: 'All Rooms', id: '' };
-  constructor(private reservationStore: ReservationStoreService) {}
+
+  constructor(
+    private reservationStore: ReservationStoreService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.reservationsEvents$ = this.reservationStore.reservationsAsEvents$;
+    this.reservationErrors$ =
+      this.reservationStore.reservationErrors$.subscribe(
+        (errMessage: string | null) => {
+          if (errMessage) this.toastr.error(errMessage, 'Alert');
+        }
+      );
   }
 
   calendarOptions: CalendarOptions = {
