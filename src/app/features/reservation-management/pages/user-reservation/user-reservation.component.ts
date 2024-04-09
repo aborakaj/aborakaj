@@ -7,7 +7,6 @@ import { RoomService } from '../../../../core/services/room.service';
 import { Reservation } from '../../../../core/models/reservation.interface';
 import { Desk } from '../../../../core/models/desk.interface';
 import { Room } from '../../../../core/models/room.interface';
-import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-reservation',
@@ -15,6 +14,9 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrls: ['./user-reservation.component.scss'],
 })
 export class UserReservationComponent implements OnInit {
+  userName = 'Xhulio Gazidede';
+  userEmail = 'xhgazidede@ritech.co';
+
   isDisplayModal: boolean = false;
   selectedDesk: Desk | null = null;
   isDeskReserved: boolean = false;
@@ -36,7 +38,7 @@ export class UserReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private deskService: DeskService,
     private roomService: RoomService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -93,6 +95,7 @@ export class UserReservationComponent implements OnInit {
 
   showModal() {
     this.isDisplayModal = true;
+    console.log('Attempting to open modal');
   }
 
   getCurrentReservation(desk: Desk) {
@@ -184,6 +187,8 @@ export class UserReservationComponent implements OnInit {
   }
 
   onReservationModalClose() {
+    console.log('Handling modal close in parent component');
     this.isDisplayModal = false;
   }
+  
 }

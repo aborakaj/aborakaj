@@ -1,12 +1,13 @@
 <p-dialog
   headerClass="text-6xl"
   [(visible)]="isDisplayModal"
+  (onHide)="onModalHide()"
+  [dismissableMask]="true"
   [modal]="true"
   [responsive]="true"
   [draggable]="false"
   [resizable]="false"
   [breakpoints]="{ '960px': '100vw' }"
-  (onHide)="onCancelButtonClick()"
 >
   <ng-template pTemplate="header">
     <ng-content select="[modal-header-content]"></ng-content>
@@ -25,9 +26,9 @@
       ></p-button>
       <p-button
         label="Cancel"
-        styleClass="p-button-text text-lg font-light"
+        styleClass="p-button-text text-lg"
         size="large"
-        (click)="onCancelButtonClick()"
+        (click)="onModalHide()"
       ></p-button>
   </ng-template>
 </p-dialog>

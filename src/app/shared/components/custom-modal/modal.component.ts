@@ -9,7 +9,7 @@ export class ModalComponent {
   private defaultStyles: object = { width: '640px' }
 
   @Input() actionButtonLabel: string = '';
-  @Input() isDisplayModal: boolean = false;
+  @Input() isDisplayModal!: boolean;
   @Input() isActionButtonDisabled?: boolean = false;
   @Input() header?: string;
   @Input() set style(incomingStyles: object) {
@@ -27,7 +27,8 @@ export class ModalComponent {
     this.onActionButtonClick.emit();
   }
 
-  onCancelButtonClick() {
+  onModalHide() {
+    console.log('Modal hide event triggered');
     this.close.emit();
   }
 }

@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '../../../../core/models/reservation.interface';
-import { isWithinInterval, parseISO, set, setHours, setMinutes } from 'date-fns';
+import { getYear, parse, setYear, setHours, setMinutes } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
 @Component({
   selector: 'app-reservation-modal',
   templateUrl: './reservation-modal.component.html',
-  styleUrls: ['./reservation-modal.component.scss'],
+  styleUrl: './reservation-modal.component.scss',
 })
 export class ReservationModalComponent implements OnInit {
-  @Input() isDisplayModal: boolean = false;
+  @Input() isDisplayModal!: boolean;
   @Input() isDeskReserved: boolean = false;
   @Input() title!: string;
   @Input() icon?: string;
@@ -33,16 +34,21 @@ export class ReservationModalComponent implements OnInit {
   reservationMock: any[] = [
     {
       id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
-      startTime: '2024-03-20T08:00:00.857Z',
-      endTime: '2024-03-20T16:00:00.857Z',
+      startTime: '2024-04-09T09:00:00.000Z',
+      endTime: '2024-04-09T15:00:00.000Z',
       spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
       bookingTitle: 'Daily Standup',
-    }
+    },
+    {
+      id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
+      startTime: '2024-04-10T13:00:00.000Z',
+      endTime: '2024-04-10T14:00:00.000Z',
+      spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
+      bookingTitle: 'Daily Standup',
+    },
   ];
 
-  // Mock Data for spaces to test reservation form
   ngOnInit(): void {
-    
     this.spaces = [
       {
         id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
@@ -88,7 +94,7 @@ export class ReservationModalComponent implements OnInit {
 
     this.times = [
       {
-        clock: '08:00', 
+        clock: '08:00',
       },
       {
         clock: '08:30',
@@ -155,21 +161,37 @@ export class ReservationModalComponent implements OnInit {
     this.updateTimeAvailability();
   }
 
+  // onSelectDate(): void {
+  //   const selectedDateString = this.reservationForm.get('startTime')?.value;
+  //   if (!selectedDateString) {
+  //     this.times.forEach((timeSlot) => (timeSlot.disabled = false));
+  //     return;
+  //   }
+  // }
+
   updateTimeAvailability(): void {
-    this.reservationMock.forEach(reservation => {
-      const startTime = parseISO(reservation.startTime);
-      const endTime = parseISO(reservation.endTime);
-  
-      this.times.forEach(timeSlot => {
-        const [hours, minutes] = timeSlot.clock.split(':').map(Number);
-        const timeSlotDateTime = set(startTime, { hours: hours, minutes: minutes, seconds: 0 });
-  
-        if (isWithinInterval(timeSlotDateTime, { start: startTime, end: endTime })) {
-          timeSlot.disabled = true;
-        } else {
-          timeSlot.disabled = false;
-        }
+    const selectedDateString = this.reservationForm.get('startTime')?.value;
+    if (!selectedDateString) {
+      this.times.forEach((timeSlot) => (timeSlot.disabled = false));
+    }
+
+    const [week, day, month] = selectedDateString.split(' ');
+    const parsedDate = parse(`${day} ${month}`, 'd MMMM', new Date());
+
+    this.times.forEach((timeSlot) => {
+      const [hour, minute] = timeSlot.clock.split(':').map(Number);
+      let timeSlotDate = setHours(
+        setMinutes(parsedDate, minute),
+        hour
+      );
+
+      const isReserved = this.reservationMock.some((reservation) => {
+        const start = new Date(reservation.startTime);
+        const end = new Date(reservation.endTime);
+        return timeSlotDate >= start && timeSlotDate < end;
       });
+
+      timeSlot.disabled = isReserved;
     });
   }
 
@@ -178,6 +200,10 @@ export class ReservationModalComponent implements OnInit {
   }
 
   onReservationModalClose() {
+    this.isDisplayModal = false;
+    console.log('Closing reservation modal');
     this.close.emit();
+    this.reservationForm.reset();
+    console.log('Reservation');
   }
 }

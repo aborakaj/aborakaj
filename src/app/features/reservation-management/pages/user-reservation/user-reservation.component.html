@@ -18,8 +18,8 @@
 
 <app-reservation-modal
   [isDisplayModal]="isDisplayModal"
-  [title]="'Xhulio Gazidede'"
-  [subtitle]="'xhgazidede@ritech.co'"
+  [title]= "userName"
+  [subtitle]="userEmail"
   (submitReservation)="submitReservation($event)"
   (close)="onReservationModalClose()"
 >
