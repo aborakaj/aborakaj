@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReservationService } from './reservation.service';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  concat,
-  map,
-  take,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { Reservation } from '../../models/reservation.interface';
 import { ReservationEvent } from '../../models/reservation.interface';
 import { Router } from '@angular/router';
@@ -32,9 +24,7 @@ export class ReservationStoreService {
     private readonly reservationService: ReservationService,
     private readonly router: Router
   ) {
-    this.getReservations().subscribe({
-      next: (reservations) => this.reservationsSubject.next(reservations),
-    });
+    this.getReservations();
   }
 
   private reservationsToEvents(
@@ -56,28 +46,23 @@ export class ReservationStoreService {
   }
 
   addReservation(reservation: any) {
-    concat(
-      this.reservationService.submitReservation(reservation),
-      this.getReservations()
-    )
+    this.reservationService
+      .submitReservation(reservation)
       .pipe(take(1))
       .subscribe({
-        next: (reservations: Reservation[]) => {
-          this.reservationsSubject.next(reservations);
+        next: (_reservations: Reservation[]) => {
+          this.getReservations();
         },
         error: (err) => this.reservationErrors.next(err),
       });
   }
 
   deleteReservation(reservationId: string) {
-    concat(
-      this.reservationService.deleteReservation(reservationId),
-      this.getReservations()
-    )
+    this.reservationService
+      .deleteReservation(reservationId)
       .pipe(take(1))
       .subscribe({
-        next: (reservations: Reservation[]) =>
-          this.reservationsSubject.next(reservations),
+        next: (_reservation: Reservation) => this.getReservations(),
         error: (err) => this.reservationErrors.next(err),
       });
   }
@@ -91,26 +76,25 @@ export class ReservationStoreService {
   }
 
   updateReservation(reservationId: string, reservationData: any) {
-    concat(
-      this.reservationService.updateReservation(reservationId, reservationData),
-      this.getReservations()
-    )
+    this.reservationService
+      .updateReservation(reservationId, reservationData)
       .pipe(take(1))
       .subscribe({
-        next: (reservations: Reservation[]) => {
-          this.reservationsSubject.next(reservations);
+        next: (_reservations: Reservation[]) => {
+          this.getReservations();
         },
         error: (err: Error) => this.reservationErrors.next(err.message),
       });
   }
 
-  private getReservations(): Observable<Reservation[]> {
-    return this.reservationService.getReservation().pipe(
-      catchError((err) => {
-        this.reservationErrors.next(err.message);
-        return throwError(() => new Error(err));
-      }),
-      take(1)
-    );
+  private getReservations() {
+    this.reservationService
+      .getReservation()
+      .pipe(take(1))
+      .subscribe({
+        next: (reservations: Reservation[]) =>
+          this.reservationsSubject.next(reservations),
+        error: (err) => this.reservationErrors.next(err.message),
+      });
   }
 }

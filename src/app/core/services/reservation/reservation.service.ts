@@ -1,48 +1,41 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable} from 'rxjs';
 import { RESERVATION_URL } from '../../../shared/constants/url';
 import { Reservation } from '../../models/reservation.interface';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
-  constructor(private http: HttpClient, private router: Router) {}
+  url = RESERVATION_URL;
+  constructor(private apiService: ApiService, private router: Router) {}
 
   getReservation(): Observable<Reservation[]> {
-    return this.http
-      .get<Reservation[]>(RESERVATION_URL)
-      .pipe(catchError(this.handleErrors));
+    return this.apiService.getAll<Reservation[]>(this.url);
   }
 
   getReservationById(id: string): Observable<Reservation> {
-    return this.http
-      .get<Reservation>(`${RESERVATION_URL}/${id}`)
-      .pipe(catchError(this.handleErrors));
+    return this.apiService.getOne<Reservation>(this.url, id);
   }
 
   submitReservation(reservationData: any): Observable<any> {
-    return this.http
-      .post<Reservation>(RESERVATION_URL, reservationData)
-      .pipe(catchError(this.handleErrors));
+    return this.apiService.add<Reservation, any>(
+      RESERVATION_URL,
+      reservationData
+    );
   }
 
   updateReservation(id: string, reservationData: any): Observable<any> {
-    return this.http
-      .put(`${RESERVATION_URL}/${id}`, reservationData)
-      .pipe(catchError(this.handleErrors));
+    return this.apiService.update<Reservation, any>(
+      this.url,
+      id,
+      reservationData
+    );
   }
 
-  deleteReservation(id: string): Observable<any> {
-    return this.http
-      .delete(`${RESERVATION_URL}/${id}`)
-      .pipe(catchError(this.handleErrors));
-  }
-
-  private handleErrors(err: HttpErrorResponse) {
-    console.log(err);
-    return throwError(() => new Error('Something went wrong'));
+  deleteReservation(id: string): Observable<Reservation> {
+    return this.apiService.delete<Reservation>(this.url, id);
   }
 }

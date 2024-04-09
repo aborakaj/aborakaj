@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -16,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './reservation-calendar.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class ReservationCalendarComponent implements OnInit {
+export class ReservationCalendarComponent implements OnInit, OnDestroy {
   @ViewChild('fullcalendar') calendar: FullCalendarComponent | undefined;
 
   reservationsEvents$!: Observable<ReservationEvent[]>;
@@ -99,5 +105,9 @@ export class ReservationCalendarComponent implements OnInit {
 
   changeSelectedRoom(newRoom: RoomSelected) {
     this.selectedRoom = newRoom;
+  }
+
+  ngOnDestroy() {
+    this.reservationErrors$.unsubscribe();
   }
 }
