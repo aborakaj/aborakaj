@@ -13,6 +13,14 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+
+
+import { CommonModule } from '@angular/common';
+
+import { PasswordModule } from 'primeng/password';
+
+import { DividerModule } from 'primeng/divider';
+
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -35,12 +43,18 @@ import { ReservationCalendarComponent } from './shared/components/reservation-ca
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
+
+import { TableComponent } from './shared/components/table/table.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
+    
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -50,8 +64,10 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
     ModalComponent,
     ReservationCalendarComponent,
     CalendarControlComponent,
+    TableComponent
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([]),
@@ -65,7 +81,11 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
     ToastModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    DialogModule,
+    CommonModule,
     CalendarModule,
+    PasswordModule,
+    DividerModule,
     DialogModule,
     ToolbarModule,
     SplitButtonModule,
