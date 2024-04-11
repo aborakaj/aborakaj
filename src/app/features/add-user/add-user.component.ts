@@ -54,7 +54,6 @@ export class AddUserComponent implements OnInit {
   onSubmitUser() {
     if (this.userForm.valid) {
       const userData = { ...this.userForm.value };
-      console.log(userData)
     }
   }
 

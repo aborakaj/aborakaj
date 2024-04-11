@@ -59,7 +59,6 @@ export class UserPageComponent {
 
   onRowSelect() {
     this.visible = true
-    console.log('row clicked')
   }
 
   onSearch(query: string) {
