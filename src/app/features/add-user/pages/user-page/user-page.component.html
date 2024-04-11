@@ -1,0 +1,25 @@
+<app-page-header
+[title] = "title"
+[subtitle] = "subtitle"
+[actionButtonLabel] = "actionButtonLabel"
+[actionButtonIcon] = "actionButtonIcon"
+[tableReference]="tableReference"
+(searchValue)="onSearch($event)"
+(actionButtonClick)="showModal()"
+></app-page-header>
+
+<app-table
+[dataKey]="dataKey"
+[cols]="cols"
+[rows]="rows"
+[data]="filteredData"
+[globalFilterFields]="globalFilterFields"
+[currentPageReportTemplate]="currentPageReportTemplate"
+
+(rowSelect)="onRowSelect()"></app-table>
+
+<app-add-user [(visible)]="visible"
+[actionButtonLabel] = "actionButtonLabel"
+[header] ="header"
+(visibleChange)="onClose()"
+></app-add-user>

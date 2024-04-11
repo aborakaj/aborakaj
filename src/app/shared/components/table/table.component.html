@@ -1,6 +1,6 @@
 <p-table 
 #dt 
-dataKey="id" 
+[dataKey]="dataKey" 
 [columns]="cols" 
 [value]="data" 
 [tableStyle]="{ 'min-width': '50rem' }"
@@ -13,6 +13,7 @@ responsiveLayout="stack"
 paginatorStyleClass="bg-blue-50 flex justify-content-end"
 [showFirstLastIcon]="false" 
 [showPageLinks]="false" 
+
 selectionMode="single" 
 (onRowSelect)="onRowSelect($event)"
 [globalFilterFields]="globalFilterFields" 

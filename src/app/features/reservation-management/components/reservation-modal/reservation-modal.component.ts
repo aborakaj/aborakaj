@@ -8,7 +8,7 @@ import { Reservation } from '../../../../core/models/reservation.interface';
   styleUrls: ['./reservation-modal.component.scss'],
 })
 export class ReservationModalComponent implements OnInit {
-  @Input() isDisplayModal: boolean = false;
+  @Input() visible: boolean = false;
   @Input() isDeskReserved: boolean = false;
   @Input() title!: string;
   @Input() icon?: string;

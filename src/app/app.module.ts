@@ -44,6 +44,10 @@ import { TableModule } from 'primeng/table';
 import { TableComponent } from './shared/components/table/table.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Card, CardModule } from 'primeng/card';
+import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
+import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
+import { AddUserComponent } from './features/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
-    TableComponent
+    TableComponent,
+    PageHeaderComponent,
+    AddUserComponent,
+    UserPageComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -86,6 +93,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SplitButtonModule,
     DropdownModule,
     TableModule,
+    CardModule
 
   ],
   providers: [
