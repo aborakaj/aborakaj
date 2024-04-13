@@ -68,9 +68,7 @@ export class ReservationStoreService {
   getReservationById(reservationId: string): Reservation | undefined {
     return this.reservationsSubject
       .getValue()
-      .filter(
-        (reservation: Reservation) => reservation.id === reservationId
-      )[0];
+      .find((reservation: Reservation) => reservation.id === reservationId);
   }
 
   updateReservation(reservationId: string, reservationData: any) {
