@@ -3,13 +3,16 @@ import { ReservationEvent } from '../../core/models/reservation.interface';
 
 @Pipe({
   name: 'filterEvents',
-  standalone: true
+  standalone: true,
 })
 export class FilterEventsPipe implements PipeTransform {
-
-  transform(value: ReservationEvent[] | null, roomId: string | null): ReservationEvent[] {
-    if (!roomId || !value) return value ? value : [];
-    return value.filter(event => event.extendedProps?.roomId === roomId)
+  transform(
+    reservations: ReservationEvent[] | null,
+    roomId: string
+  ): ReservationEvent[] {
+    if (!reservations) return [];
+    return reservations.filter(
+      (reservation) => reservation.extendedProps?.roomId === roomId
+    );
   }
-
 }

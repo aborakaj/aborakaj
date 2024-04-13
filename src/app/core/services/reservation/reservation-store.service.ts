@@ -30,9 +30,8 @@ export class ReservationStoreService {
   private reservationsToEvents(
     reservations: Reservation[]
   ): ReservationEvent[] {
-    const eventReservations: ReservationEvent[] = [];
-    reservations.map((reservation: Reservation) => {
-      eventReservations.push({
+    return reservations.map((reservation: Reservation) => {
+      return {
         id: reservation.id,
         title: `${reservation.user.firstName} ${reservation.user.lastName}`,
         start: reservation.startTime,
@@ -40,9 +39,8 @@ export class ReservationStoreService {
         extendedProps: {
           roomId: reservation.desk.roomId,
         },
-      });
+      };
     });
-    return eventReservations;
   }
 
   addReservation(reservation: any) {

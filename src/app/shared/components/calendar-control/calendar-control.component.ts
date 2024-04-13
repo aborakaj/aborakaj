@@ -20,13 +20,16 @@ import { ReservationStoreService } from '../../../core/services/reservation/rese
 })
 export class CalendarControlComponent implements OnInit, OnDestroy {
   @Input({ required: true }) fullcalendar!: FullCalendarComponent;
-  @Output() selectRoom = new EventEmitter<RoomSelected>();
+  @Output() roomSelected = new EventEmitter<RoomSelected>();
 
   roomServiceSub!: Subscription;
-  rooms: RoomSelected[] = [{ name: 'All Rooms', id: '' }];
+  rooms: RoomSelected[] = [];
   currentDate: string = format(new Date(), 'EEEE MMMM do yyyy');
-
-  constructor(private roomService: RoomService, private reservationStore: ReservationStoreService) {}
+  selectedRoom: RoomSelected = { id: '', name: '' };
+  constructor(
+    private roomService: RoomService,
+    private reservationStore: ReservationStoreService
+  ) {}
 
   ngOnInit(): void {
     this.getRooms();
@@ -38,6 +41,8 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
         rooms.map((room: Room) =>
           this.rooms.push({ name: room.name, id: room.id })
         );
+        this.selectedRoom = this.rooms[0];
+        this.roomSelected.emit(this.rooms[0]);
       },
     });
   }
@@ -50,15 +55,16 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
     this.fullcalendar.getApi().changeView('dayGridMonth');
   }
 
-  onRoomSelected(room: RoomSelected) {
-    this.selectRoom.emit(room);
+  onRoomSelected() {
+    this.roomSelected.emit(this.selectedRoom);
   }
 
   ngOnDestroy(): void {
     this.roomServiceSub?.unsubscribe();
   }
- 
-  addReservations(){ // added for testing functionallity of the reservationData service, will be removed later
+
+  addReservations() {
+    // added for testing functionallity of the reservationData service, will be removed later
     this.reservationStore.addReservation({
       startTime: '2024-04-09T10:00:57.000Z',
       endTime: '2024-04-09T13:00:57.000Z',

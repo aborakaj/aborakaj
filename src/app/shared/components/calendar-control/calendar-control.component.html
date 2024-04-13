@@ -40,12 +40,11 @@
       [options]="rooms"
       optionLabel="name"
       styleClass="flex p-2 align-self-stretch cursor-pointer align-items-center gap-2 border-round-lg text-white box-shadow-none"
-      [placeholder]="'All rooms'"
+      [(ngModel)]="selectedRoom"
+      (onChange)="onRoomSelected()"
     >
       <ng-template let-room pTemplate="item">
-        <div (click)="onRoomSelected(room)">
-          <div>{{ room.name }}</div>
-        </div>
+        <div>{{ room.name }}</div>
       </ng-template>
     </p-dropdown>
   </div>

@@ -27,7 +27,7 @@ export class ReservationCalendarComponent implements OnInit, OnDestroy {
 
   reservationsEvents$!: Observable<ReservationEvent[]>;
   reservationErrors$!: Subscription;
-  selectedRoom: RoomSelected = { name: 'All Rooms', id: '' };
+  selectedRoom: RoomSelected = { id: '', name: '' };
 
   constructor(
     private reservationStore: ReservationStoreService,
