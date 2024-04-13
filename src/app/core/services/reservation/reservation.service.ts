@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RESERVATION_URL } from '../../../shared/constants/url';
-import { Reservation } from '../../models/reservation.interface';
+import {
+  Reservation,
+  ReservationDTO,
+} from '../../models/reservation.interface';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
@@ -19,15 +22,20 @@ export class ReservationService {
     return this.apiService.getOne<Reservation>(RESERVATION_URL, id);
   }
 
-  submitReservation(reservationData: any): Observable<any> {
-    return this.apiService.add<Reservation, any>(
+  submitReservation(
+    reservationData: ReservationDTO
+  ): Observable<ReservationDTO> {
+    return this.apiService.add<ReservationDTO>(
       RESERVATION_URL,
       reservationData
     );
   }
 
-  updateReservation(id: string, reservationData: any): Observable<any> {
-    return this.apiService.update<Reservation, any>(
+  updateReservation(
+    id: string,
+    reservationData: { startTime: string; endTime: string }
+  ): Observable<ReservationDTO> {
+    return this.apiService.update<ReservationDTO>(
       RESERVATION_URL,
       id,
       reservationData

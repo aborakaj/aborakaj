@@ -13,6 +13,7 @@ export interface Reservation {
   desk: Desk;
 }
 
+export type ReservationDTO = Omit<Reservation, 'desk' | 'id' | 'user'>;
 
 export interface ReservationEvent {
   id: string;

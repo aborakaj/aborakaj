@@ -16,7 +16,7 @@ export class ApiService {
     return this.http.get<T>(`${url}/${id}`).pipe(catchError(this.handleErrors));
   }
 
-  public add<T, U>(url: string, payload: U) {
+  public add<T>(url: string, payload: T) {
     return this.http.post<T>(url, payload).pipe(catchError(this.handleErrors));
   }
 
@@ -26,7 +26,7 @@ export class ApiService {
       .pipe(catchError(this.handleErrors));
   }
 
-  public update<T, U>(url: string, id: string, payload: U) {
+  public update<T, U = {}>(url: string, id: string, payload: U) {
     return this.http
       .put<T>(`${url}/${id}`, payload)
       .pipe(catchError(this.handleErrors));
