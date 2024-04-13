@@ -2,7 +2,7 @@
   <div class="flex gap-4 align-items-center">
     <div class="flex align-items-start" style="width: 531px">
       <button
-        class="p-3 h-auto w-full align-items-center cursor-pointer text-bluegray-800 gap-2 border-bluegray-200 border-round-left-sm bg-white border-solid box-shadow-none"
+        class="text-base p-3 h-auto w-full align-items-center cursor-pointer text-bluegray-800 gap-2 border-bluegray-200 border-round-left-sm bg-white border-solid box-shadow-none"
         style="flex: 1 0 0"
         [routerLink]="['./']"
         [queryParams]="{ view: 'timeGridDay' }"
@@ -12,7 +12,7 @@
         Day
       </button>
       <button
-        class="p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-x-none border-bluegray-200 bg-white border-solid box-shadow-none"
+        class="text-base p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-x-none border-bluegray-200 bg-white border-solid box-shadow-none"
         [routerLink]="['./']"
         style="flex: 1 0 0"
         [queryParams]="{ view: 'dayGridMonth' }"
@@ -24,7 +24,7 @@
       <button
         label="Map"
         style="flex: 1 0 0"
-        class="p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-bluegray-200 border-round-right-sm bg-white border-solid box-shadow-none"
+        class="text-base p-3 align-items-center h-auto w-full cursor-pointer justify-content-center text-bluegray-800 gap-2 border-bluegray-200 border-round-right-sm bg-white border-solid box-shadow-none"
       >
         Map
       </button>
@@ -33,12 +33,11 @@
   </div>
   <div class="flex gap-4 align-items-center justify-content-stretch">
     <button
-      class="flex p-3 justify-content-center cursor-pointer align-items-center gap-2 border-round-lg border-none text-white box-shadow-none"
+      class="text-base flex p-3 justify-content-center cursor-pointer align-items-center gap-2 border-round-lg border-none text-white box-shadow-none"
       style="background-color: #3b82f6"
       (click)="addReservations()"
     >
       <i class="pi pi-plus" style="color: white"></i> Book meeting
-      
     </button>
     <p-dropdown
       [options]="rooms"
