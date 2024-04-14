@@ -162,9 +162,6 @@ export class ReservationModalComponent implements OnInit {
 
   updateTimeAvailability(): void {
     const selectedDate = this.reservationForm.get('startTime')?.value;
-    if (!selectedDate) {
-      this.times.forEach((timeSlot) => (timeSlot.disabled = false));
-    }
 
     this.times.forEach((timeSlot) => {
       const [hour, minute] = timeSlot.clock.split(':').map(Number);
