@@ -28,7 +28,6 @@ export class ModalComponent {
   }
 
   onModalHide() {
-    console.log('Modal hide event triggered');
     this.close.emit();
   }
 }

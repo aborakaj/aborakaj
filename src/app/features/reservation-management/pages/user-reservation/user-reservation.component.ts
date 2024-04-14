@@ -95,7 +95,6 @@ export class UserReservationComponent implements OnInit {
 
   showModal() {
     this.isDisplayModal = true;
-    console.log('Attempting to open modal');
   }
 
   getCurrentReservation(desk: Desk) {
@@ -148,8 +147,6 @@ export class UserReservationComponent implements OnInit {
       action: this.reservation.action,
       createdBy: userId,
     };
-    console.log('Start Time:', formattedStartTime);
-    console.log('End Time:', formattedEndTime);
 
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
@@ -187,7 +184,6 @@ export class UserReservationComponent implements OnInit {
   }
 
   onReservationModalClose() {
-    console.log('Handling modal close in parent component');
     this.isDisplayModal = false;
   }
   

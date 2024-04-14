@@ -1,7 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '../../../../core/models/reservation.interface';
-import { getYear, parse, setYear, setHours, setMinutes } from 'date-fns';
+import {
+  getYear,
+  parse,
+  setYear,
+  setHours,
+  setMinutes,
+  parseISO,
+  isWithinInterval,
+  set,
+  getMonth,
+  getHours,
+  addMinutes,
+} from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 
 @Component({
@@ -161,29 +173,16 @@ export class ReservationModalComponent implements OnInit {
     this.updateTimeAvailability();
   }
 
-  // onSelectDate(): void {
-  //   const selectedDateString = this.reservationForm.get('startTime')?.value;
-  //   if (!selectedDateString) {
-  //     this.times.forEach((timeSlot) => (timeSlot.disabled = false));
-  //     return;
-  //   }
-  // }
-
   updateTimeAvailability(): void {
-    const selectedDateString = this.reservationForm.get('startTime')?.value;
-    if (!selectedDateString) {
+    const selectedDate = this.reservationForm.get('startTime')?.value;
+    if (!selectedDate) {
       this.times.forEach((timeSlot) => (timeSlot.disabled = false));
     }
 
-    const [week, day, month] = selectedDateString.split(' ');
-    const parsedDate = parse(`${day} ${month}`, 'd MMMM', new Date());
-
     this.times.forEach((timeSlot) => {
       const [hour, minute] = timeSlot.clock.split(':').map(Number);
-      let timeSlotDate = setHours(
-        setMinutes(parsedDate, minute),
-        hour
-      );
+      const timeSlotDate = new Date(selectedDate);
+      timeSlotDate.setHours(hour, minute, 0, 0);
 
       const isReserved = this.reservationMock.some((reservation) => {
         const start = new Date(reservation.startTime);
@@ -201,9 +200,7 @@ export class ReservationModalComponent implements OnInit {
 
   onReservationModalClose() {
     this.isDisplayModal = false;
-    console.log('Closing reservation modal');
     this.close.emit();
     this.reservationForm.reset();
-    console.log('Reservation');
   }
 }
