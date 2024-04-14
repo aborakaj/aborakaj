@@ -1,20 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '../../../../core/models/reservation.interface';
-import {
-  getYear,
-  parse,
-  setYear,
-  setHours,
-  setMinutes,
-  parseISO,
-  isWithinInterval,
-  set,
-  getMonth,
-  getHours,
-  addMinutes,
-} from 'date-fns';
-import { toZonedTime } from 'date-fns-tz';
+import { setHours, setMinutes } from 'date-fns';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -181,8 +168,7 @@ export class ReservationModalComponent implements OnInit {
 
     this.times.forEach((timeSlot) => {
       const [hour, minute] = timeSlot.clock.split(':').map(Number);
-      const timeSlotDate = new Date(selectedDate);
-      timeSlotDate.setHours(hour, minute, 0, 0);
+      const timeSlotDate = setMinutes(setHours(selectedDate, hour), minute);
 
       const isReserved = this.reservationMock.some((reservation) => {
         const start = new Date(reservation.startTime);
