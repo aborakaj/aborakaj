@@ -1,9 +1,9 @@
 <app-modal
   [actionButtonLabel]="'Save changes'"
-  (onActionButtonClick)="onSubmitReservation()"
-  (close)="onReservationModalClose()"
   [visible]="visible"
   [style]="{ width: '670px' }"
+  (onActionButtonClick)="onSubmitReservation()"
+  (visibleChange)="onVisibleChange($event)"
 >
   <div modal-header-content>
     <div class="text-4xl font-normal">{{ title }}</div>
@@ -71,8 +71,8 @@
               <p-dropdown
                 id="times"
                 [options]="times"
-                optionLabel="clock"
-                filterBy="clock"
+                optionLabel="time"
+                filterBy="time"
                 formControlName="space"
                 class="wide-dropdown"
                 appendTo="body"

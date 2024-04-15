@@ -1,9 +1,6 @@
 <app-header></app-header>
 
 <div class="desk-container">
-  <!-- <p-button type="button" label="New Reservation" (click)="onNewReservationClick()">
-
-  </p-button> -->
   <div *ngFor="let room of rooms; let roomIndex = index">
     <div *ngFor="let desk of desks; let deskIndex = index" class="desk-button">
       <p-button
@@ -17,10 +14,9 @@
 </div>
 
 <app-reservation-modal
-  [visible]="isDisplayModal"
   [title]="'Xhulio Gazidede'"
   [subtitle]="'xhgazidede@ritech.co'"
+  [(visible)]="visible"
   (submitReservation)="submitReservation($event)"
-  (close)="onReservationModalClose()"
 >
 </app-reservation-modal>

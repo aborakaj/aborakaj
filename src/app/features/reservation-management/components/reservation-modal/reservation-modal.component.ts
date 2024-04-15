@@ -10,13 +10,13 @@ import { reservationMock, spacesMock, timesMock } from '../reservation.mock';
   styleUrl: './reservation-modal.component.scss',
 })
 export class ReservationModalComponent implements OnInit {
-  @Input() visible: boolean = false;
+  @Input() visible!: boolean;
   @Input() isDeskReserved: boolean = false;
   @Input() title!: string;
   @Input() icon?: string;
   @Input() subtitle?: string;
   @Output() submitReservation = new EventEmitter<Reservation>();
-  @Output() close = new EventEmitter<void>();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -60,7 +60,8 @@ export class ReservationModalComponent implements OnInit {
     this.submitReservation.emit(this.reservationForm.value);
   }
 
-  onReservationModalClose() {
-    this.close.emit();
+  onVisibleChange(event: boolean) {
+    this.visibleChange.emit(event);
+    this.reservationForm.reset();
   }
 }

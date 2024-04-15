@@ -17,7 +17,7 @@ export class UserReservationComponent implements OnInit {
   userName = 'Xhulio Gazidede';
   userEmail = 'xhgazidede@ritech.co';
 
-  isDisplayModal: boolean = false;
+  visible: boolean = false;
   selectedDesk: Desk | null = null;
   isDeskReserved: boolean = false;
   currentReservationId: string | null = null;
@@ -83,7 +83,7 @@ export class UserReservationComponent implements OnInit {
   }
 
   onDeskClicked(desk: Desk) {
-    this.showModal();
+    this.changeVisibility(true);
     this.selectedDesk = desk;
     this.getCurrentReservation(desk);
   }
@@ -93,9 +93,6 @@ export class UserReservationComponent implements OnInit {
       date instanceof Date ? date.toISOString().split('T')[0] : date;
   }
 
-  showModal() {
-    this.isDisplayModal = true;
-  }
 
   getCurrentReservation(desk: Desk) {
     const reservation = this.reservations.find(
@@ -151,7 +148,7 @@ export class UserReservationComponent implements OnInit {
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
         this.toastr.success('Reservation made', 'Success');
-        this.onReservationModalClose();
+        this.changeVisibility(false);
         this.resetForm();
       },
       error: (errorResponse) => {
@@ -159,20 +156,6 @@ export class UserReservationComponent implements OnInit {
       },
     });
   }
-
-  // cancelReservation() {
-  //   if (this.currentReservationId) {
-  //     this.reservationService
-  //       .deleteReservation(this.currentReservationId)
-  //       .subscribe({
-  //         next: () => {
-  //           this.toastr.success('Reservation cancelled', 'Success');
-  //           this.onModalClose();
-  //         },
-  //         error: (error) => this.toastr.error('Error cancelling reservation'),
-  //       });
-  //   }
-  // }
 
   resetForm() {
     this.reservation = {
@@ -183,8 +166,8 @@ export class UserReservationComponent implements OnInit {
     this.currentReservationId = null;
   }
 
-  onReservationModalClose() {
-    this.isDisplayModal = false;
+  changeVisibility(value: boolean) {
+    this.visible = value;
   }
   
 }
