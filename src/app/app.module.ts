@@ -38,7 +38,10 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
+import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
 
 import { TableComponent } from './shared/components/table/table.component';
@@ -59,6 +62,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
+    ReservationCalendarComponent,
+    CalendarControlComponent,
     TableComponent
   ],
   imports: [
@@ -86,7 +91,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SplitButtonModule,
     DropdownModule,
     TableModule,
-
+    FullCalendarModule,
+    FilterEventsPipe,
   ],
   providers: [
     {
