@@ -1,1 +1,27 @@
-<p>sidebar works!</p>
+<p-sidebar [visible]="true" position="left" [style]="{width: '70px'}">
+    <ng-template pTemplate="headless">
+
+        <div class="flex flex-column flex-wrap justify-content-between align-items-center h-full bg-blue-400">
+
+            <div class="pt-4">
+                <div class="h-2rem text-white">
+                    <i class="pi pi-calendar" style="font-size: 1em;" (click)="navigateToRoute('reservation')"></i>
+                </div>
+                <div class="h-2rem text-white">
+                    <i class="pi pi-users" style="font-size: 1em;" (click)="navigateToRoute('users')"></i>
+                </div>
+            </div>
+
+
+            <div class="pb-4">
+                <div class="h-2rem text-white">
+                    <i class="pi pi-cog" style="font-size: 1em;" (click)="navigateToRoute('settings')"></i>
+                </div>
+                <div class="h-2rem text-white">
+                    <i class="pi pi-user" style="font-size: 1em;" (click)="navigateToRoute('user')"></i>
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
+</p-sidebar>

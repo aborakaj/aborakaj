@@ -51,6 +51,10 @@ import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { AddUserComponent } from './features/add-user/add-user.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+
+
 
 @NgModule({
   declarations: [
@@ -71,7 +75,8 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     TableComponent,
     PageHeaderComponent,
     AddUserComponent,
-    UserPageComponent
+    UserPageComponent,
+    SidebarComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -100,7 +105,9 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     TableModule,
     FullCalendarModule,
     FilterEventsPipe,    
-    CardModule
+    CardModule,
+    SidebarModule,
+
 
   ],
   providers: [
