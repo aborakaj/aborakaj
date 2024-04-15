@@ -1,6 +1,6 @@
 <p-dialog
   [header]="header"
-  [(visible)]="isDisplayModal"
+  [visible]="visible"
   [dismissableMask]="true"
   [modal]="true"
   [responsive]="true"
@@ -8,8 +8,8 @@
   [resizable]="false"
   [breakpoints]="{ '960px': '100vw' }"
   [style]="style"
-  
-  (onHide)="onCancelButtonClick()"
+  (visibleChange)="onChangeVisibility($event)"
+ 
 >
   <ng-template *ngIf="!header" pTemplate="header">
     <ng-content select="[modal-header-content]"></ng-content>
@@ -31,7 +31,7 @@
         label="Cancel"
         styleClass="p-button-text text-lg"
         size="large"
-        (click)="onCancelButtonClick()"
+        (click)="onChangeVisibility(false)"  
       ></p-button>
   </ng-template>
 </p-dialog>

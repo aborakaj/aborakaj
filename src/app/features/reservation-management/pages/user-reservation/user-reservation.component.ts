@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DeskService } from '../../../../core/services/desk.service';
-import { ReservationService } from '../../../../core/services/reservation.service';
+import { ReservationService } from '../../../../core/services/reservation/reservation.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { RoomService } from '../../../../core/services/room.service';
 import { Reservation } from '../../../../core/models/reservation.interface';

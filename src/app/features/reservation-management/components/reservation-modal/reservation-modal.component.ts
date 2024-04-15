@@ -10,7 +10,7 @@ import { reservationMock, spacesMock, timesMock } from '../reservation.mock';
   styleUrl: './reservation-modal.component.scss',
 })
 export class ReservationModalComponent implements OnInit {
-  @Input() isDisplayModal!: boolean;
+  @Input() visible: boolean = false;
   @Input() isDeskReserved: boolean = false;
   @Input() title!: string;
   @Input() icon?: string;
@@ -61,8 +61,6 @@ export class ReservationModalComponent implements OnInit {
   }
 
   onReservationModalClose() {
-    this.isDisplayModal = false;
     this.close.emit();
-    this.reservationForm.reset();
   }
 }

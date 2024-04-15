@@ -37,9 +37,18 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
+import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
+
 
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CardModule } from 'primeng/card';
+import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
+import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
+import { AddUserComponent } from './features/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +64,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
+    ReservationCalendarComponent,
+    CalendarControlComponent,
     TableComponent,
+    PageHeaderComponent,
+    AddUserComponent,
+    UserPageComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -82,6 +96,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SplitButtonModule,
     DropdownModule,
     TableModule,
+    FullCalendarModule,
+    FilterEventsPipe,    
+    CardModule
+
   ],
   providers: [
     {

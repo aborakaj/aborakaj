@@ -1,0 +1,8 @@
+.active-button {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+*:not(i) {
+  font-family: "Inter"; // for some reasons icons don't show if we change font-family so we exlude it
+}
