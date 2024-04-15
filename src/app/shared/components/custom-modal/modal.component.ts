@@ -6,18 +6,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
+
   private defaultStyles: object = { width: '640px' }
 
-  @Input() actionButtonLabel: string = '';
-  @Input() isDisplayModal: boolean = false;
-  @Input() isActionButtonDisabled?: boolean = false;
+  @Input() actionButtonLabel!: string;
+  @Input() visible!: boolean;
+  @Input() isActionButtonDisabled?: boolean;
   @Input() header?: string;
   @Input() set style(incomingStyles: object) {
     this.defaultStyles = { ...this.defaultStyles, ...incomingStyles };
   }
-
   @Output() onActionButtonClick = new EventEmitter<void>();
-  @Output() close = new EventEmitter<void>();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   get style(): object {
     return this.defaultStyles;
@@ -27,7 +27,7 @@ export class ModalComponent {
     this.onActionButtonClick.emit();
   }
 
-  onCancelButtonClick() {
-    this.close.emit();
+  onChangeVisibility(value:boolean) {
+    this.visibleChange.emit(value);
   }
 }

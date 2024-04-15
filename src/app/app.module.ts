@@ -47,6 +47,10 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 import { TableComponent } from './shared/components/table/table.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CardModule } from 'primeng/card';
+import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
+import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
+import { AddUserComponent } from './features/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ModalComponent,
     ReservationCalendarComponent,
     CalendarControlComponent,
-    TableComponent
+    TableComponent,
+    PageHeaderComponent,
+    AddUserComponent,
+    UserPageComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -92,7 +99,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,
+    FilterEventsPipe,    
+    CardModule
+
   ],
   providers: [
     {
