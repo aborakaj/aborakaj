@@ -1,25 +1,22 @@
 <app-page-header
-[title] = "title"
-[subtitle] = "subtitle"
-[actionButtonLabel] = "actionButtonLabel"
-[actionButtonIcon] = "actionButtonIcon"
-[tableReference]="tableReference"
+title = "Users"
+subtitle = "Add, edit or remove users from your spaces"
+actionButtonLabel = "Add User"
+actionButtonIcon = "pi pi-user-plus"
+tableReference="dt"
 (searchValue)="onSearch($event)"
-(actionButtonClick)="showModal()"
-></app-page-header>
+(actionButtonClick)="changeVisibility(true)"></app-page-header>
 
 <app-table
-[dataKey]="dataKey"
+dataKey="firstName"
 [cols]="cols"
-[rows]="rows"
+[rows]="10"
 [data]="filteredData"
-[globalFilterFields]="globalFilterFields"
-[currentPageReportTemplate]="currentPageReportTemplate"
-
-(rowSelect)="onRowSelect()"></app-table>
+currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
+(rowSelect)="changeVisibility(true)">
+</app-table>
 
 <app-add-user [(visible)]="visible"
-[actionButtonLabel] = "actionButtonLabel"
-[header] ="header"
-(visibleChange)="onClose()"
-></app-add-user>
+actionButtonLabel = "Add User"
+header ="Add user">
+</app-add-user>

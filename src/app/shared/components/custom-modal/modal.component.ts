@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -17,10 +16,8 @@ export class ModalComponent {
   @Input() set style(incomingStyles: object) {
     this.defaultStyles = { ...this.defaultStyles, ...incomingStyles };
   }
-
   @Output() onActionButtonClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
 
   get style(): object {
     return this.defaultStyles;
@@ -30,7 +27,7 @@ export class ModalComponent {
     this.onActionButtonClick.emit();
   }
 
-  onCancelButtonClick(event:any) {
-    this.visibleChange.emit(event);
+  onChangeVisibility(value:boolean) {
+    this.visibleChange.emit(value);
   }
 }

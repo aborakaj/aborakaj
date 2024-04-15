@@ -12,11 +12,9 @@ responsiveLayout="stack"
 [currentPageReportTemplate]="currentPageReportTemplate" 
 paginatorStyleClass="bg-blue-50 flex justify-content-end"
 [showFirstLastIcon]="false" 
-[showPageLinks]="false" 
-
+[showPageLinks]="false"
 selectionMode="single" 
 (onRowSelect)="onRowSelect($event)"
-[globalFilterFields]="globalFilterFields" 
 sortMode="single">
 
     <ng-template pTemplate="header" let-columns>

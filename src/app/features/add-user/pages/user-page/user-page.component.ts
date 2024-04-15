@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { FilterService } from 'primeng/api';
 
 @Component({
@@ -11,60 +11,144 @@ export class UserPageComponent {
   constructor(private filterService: FilterService) { }
 
   visible: boolean = false;
-  header = "Add user"
-  title = "Users"
-  subtitle = "Add, edit or remove users from your spaces"
-  actionButtonLabel = "Add User";
-  actionButtonIcon = "pi pi-user-plus";
-  tableReference = "dt"
-  dataKey = "firstName"
   cols = [
-
     { field: 'firstName', header: 'First name' },
     { field: 'lastName', header: 'Last name' },
     { field: 'email', header: 'Email' },
     { field: 'phoneNumber', header: 'Phone number' },
-
   ];
-
-  rows = 10
   data = [
-
-    { firstName: '1', lastName: 'a', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '2', lastName: 'b', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '3', lastName: 'c', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '4', lastName: 'd', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '5', lastName: 'e', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '6', lastName: 'f', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '7', lastName: 'g', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '8', lastName: 'h', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '9', lastName: 'i', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '10', lastName: 'j', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '11', lastName: 'k', email: 'firstName', phoneNumber: 'First name' },
-    { firstName: '12', lastName: 'l', email: 'firstName', phoneNumber: 'First name' },
-
-
-  ]
+    {
+      firstName: "Dorothy",
+      lastName: "Mercer",
+      email: "nunc.interdum@outlook.edu",
+      phoneNumber: "076 3872 3440"
+    },
+    {
+      firstName: "Heather",
+      lastName: "Anderson",
+      email: "risus.varius.orci@google.ca",
+      phoneNumber: "055 3227 2687"
+    },
+    {
+      firstName: "Tate",
+      lastName: "Rowland",
+      email: "purus.in@google.ca",
+      phoneNumber: "055 5393 3950"
+    },
+    {
+      firstName: "Tatum",
+      lastName: "Cohen",
+      email: "ante@outlook.ca",
+      phoneNumber: "(0119) 665 7774"
+    },
+    {
+      firstName: "Cadman",
+      lastName: "Pierce",
+      email: "amet.ante@google.org",
+      phoneNumber: "0800 180437"
+    },
+    {
+      firstName: "Shad",
+      lastName: "Hopper",
+      email: "molestie@google.org",
+      phoneNumber: "055 5157 0528"
+    },
+    {
+      firstName: "Flavia",
+      lastName: "Guerrero",
+      email: "id.mollis.nec@google.com",
+      phoneNumber: "070 5406 6375"
+    },
+    {
+      firstName: "Cullen",
+      lastName: "Bell",
+      email: "lorem.vitae@hotmail.com",
+      phoneNumber: "(016977) 3728"
+    },
+    {
+      firstName: "Serena",
+      lastName: "Orr",
+      email: "eu.tellus@google.couk",
+      phoneNumber: "(01406) 826550"
+    },
+    {
+      firstName: "Dexter",
+      lastName: "Osborn",
+      email: "elit.elit.fermentum@aol.com",
+      phoneNumber: "0800 631578"
+    },
+    {
+      firstName: "Destiny",
+      lastName: "Cox",
+      email: "rutrum.justo@hotmail.edu",
+      phoneNumber: "(024) 3448 0272"
+    },
+    {
+      firstName: "Asher",
+      lastName: "Calderon",
+      email: "quam.curabitur@icloud.net",
+      phoneNumber: "07020 828385"
+    },
+    {
+      firstName: "Chloe",
+      lastName: "Bean",
+      email: "tristique.senectus@yahoo.com",
+      phoneNumber: "0800 402 1774"
+    },
+    {
+      firstName: "Vivien",
+      lastName: "Avila",
+      email: "non@aol.couk",
+      phoneNumber: "0800 1111"
+    },
+    {
+      firstName: "Galena",
+      lastName: "Morse",
+      email: "parturient@protonmail.com",
+      phoneNumber: "0800 1111"
+    },
+    {
+      firstName: "Mira",
+      lastName: "Callahan",
+      email: "euismod.et@google.net",
+      phoneNumber: "(01751) 64262"
+    },
+    {
+      firstName: "Chanda",
+      lastName: "Carson",
+      email: "accumsan.neque.et@yahoo.edu",
+      phoneNumber: "0800 414 7501"
+    },
+    {
+      firstName: "Celeste",
+      lastName: "Sharpe",
+      email: "cursus.et@protonmail.com",
+      phoneNumber: "(013336) 32234"
+    },
+    {
+      firstName: "Yeo",
+      lastName: "Battle",
+      email: "euismod.mauris.eu@hotmail.net",
+      phoneNumber: "0500 542880"
+    },
+    {
+      firstName: "Mari",
+      lastName: "Hurst",
+      email: "nascetur.ridiculus.mus@outlook.org",
+      phoneNumber: "0800 1111"
+    }
+  ];
   filteredData = this.data;
   globalFilterFields = this.cols.map(col => col.field);
-  currentPageReportTemplate = "Rows per page: {rows}  \u0010\u0010  {first} - {last} of {totalRecords}"
 
-  onClose() {
-    this.visible = false;
+  changeVisibility(value: boolean) {
+    this.visible = value;
   }
-
-  showModal() {
-    this.visible = true
-  }
-
-  onRowSelect() {
-    this.visible = true
-  }
-
+  
   onSearch(query: string) {
     this.filteredData = this.filterService.filter(this.data, this.globalFilterFields, query, 'contains');
   }
-
 }
 
 

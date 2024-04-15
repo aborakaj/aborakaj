@@ -1,10 +1,8 @@
 <app-modal [actionButtonLabel]="actionButtonLabel" (onActionButtonClick)="onSubmitUser()" 
-    [(visible)]="visible"
+    [visible]="visible"
     [header]="header"
     [isActionButtonDisabled]="!allFieldsFilled()"
-    (visibleChange)="onCancel($event)"
-    >
-
+    (visibleChange)="onVisibleChange($event)">
     <ng-container modal-body-content>
         <form [formGroup]="userForm">
             <div class="grid grid-nogutter p-fluid row-gap-1">

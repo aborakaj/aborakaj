@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { UserService } from '../../core/services/user.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-user',
@@ -9,46 +7,33 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-user.component.scss']
 })
 
-
-
 export class AddUserComponent implements OnInit {
-
-
   userForm!: FormGroup
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;
-
   @Output() addUserClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
 
   onAddUserClick() {
     this.addUserClick.emit();
   }
 
-  onCancel(event:any) {
+  onVisibleChange(event: boolean) {
     this.visibleChange.emit(event);
     this.userForm.reset();
   }
 
-  constructor(private fb: FormBuilder,
-    private userService: UserService,
-    private toastr: ToastrService,) {
-  }
+  constructor(private fb: FormBuilder) { }
   ngOnInit() {
     this.userForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-
     },
       { updateOn: "blur" }
-
     );
-
   }
 
   onSubmitUser() {
@@ -80,9 +65,6 @@ export class AddUserComponent implements OnInit {
         }
       }
     }
-
     return true;
   }
-
-
 }
