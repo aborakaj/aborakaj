@@ -51,6 +51,7 @@ import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { AddUserComponent } from './features/add-user/add-user.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     TableComponent,
     PageHeaderComponent,
     AddUserComponent,
-    UserPageComponent
+    UserPageComponent,
+    LayoutComponent
   ],
   imports: [
     FontAwesomeModule,
