@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-page-header',
