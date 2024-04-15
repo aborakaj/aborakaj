@@ -6,10 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  private defaultStyles: object = { width: '640px' }
+  private defaultStyles: object = { width: '640px' };
 
   @Input() actionButtonLabel: string = '';
-  @Input() isDisplayModal!: boolean;
+  @Input() isDisplayModal: boolean = false;
   @Input() isActionButtonDisabled?: boolean = false;
   @Input() header?: string;
   @Input() set style(incomingStyles: object) {
@@ -27,7 +27,7 @@ export class ModalComponent {
     this.onActionButtonClick.emit();
   }
 
-  onModalHide() {
+  onCancelButtonClick() {
     this.close.emit();
   }
 }

@@ -1,0 +1,50 @@
+<p-table 
+#dt 
+dataKey="id" 
+[columns]="cols" 
+[value]="data" 
+[tableStyle]="{ 'min-width': '50rem' }"
+responsiveLayout="stack" 
+[breakpoint]="'960px'" 
+[paginator]="true" 
+[rows]="rows" 
+[showCurrentPageReport]="true"
+[currentPageReportTemplate]="currentPageReportTemplate" 
+paginatorStyleClass="bg-blue-50 flex justify-content-end"
+[showFirstLastIcon]="false" 
+[showPageLinks]="false" 
+selectionMode="single" 
+(onRowSelect)="onRowSelect($event)"
+[globalFilterFields]="globalFilterFields" 
+sortMode="single">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" class="bg-blue-50 w-3">
+                <div class="flex justify-content-between">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                <span class="p-column-title">{{col.header}}</span>
+                <ng-container>
+                    {{ rowData[col.field] }}
+                </ng-container>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="sorticon" field="col.field" let-sortOrder>
+        <fa-icon *ngIf="sortOrder === 0" [icon]="sortIcon"></fa-icon>
+        <fa-icon *ngIf="sortOrder === 1" [icon]="sortUpIcon"></fa-icon>
+        <fa-icon *ngIf="sortOrder === -1" [icon]="sortDownIcon"></fa-icon>
+    </ng-template>
+
+</p-table>

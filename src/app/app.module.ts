@@ -13,6 +13,14 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+
+
+import { CommonModule } from '@angular/common';
+
+import { PasswordModule } from 'primeng/password';
+
+import { DividerModule } from 'primeng/divider';
+
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -32,12 +40,18 @@ import { ModalComponent } from './shared/components/custom-modal/modal.component
 import { TableModule } from 'primeng/table';
 
 
+
+import { TableComponent } from './shared/components/table/table.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
+    
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -45,8 +59,10 @@ import { TableModule } from 'primeng/table';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
+    TableComponent
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([]),
@@ -60,12 +76,17 @@ import { TableModule } from 'primeng/table';
     ToastModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    DialogModule,
+    CommonModule,
     CalendarModule,
+    PasswordModule,
+    DividerModule,
     DialogModule,
     ToolbarModule,
     SplitButtonModule,
     DropdownModule,
-    TableModule
+    TableModule,
+
   ],
   providers: [
     {
