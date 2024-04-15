@@ -8,6 +8,7 @@ import { UserReservationComponent } from './features/reservation-management/page
 import { TableComponent } from './shared/components/table/table.component';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
+import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'user', component: UserPageComponent},
   {path: 'reservation', component: UserReservationComponent},
   {path: 'table', component: TableComponent},
+  {path: 'calendar', component: ReservationCalendarComponent},
   // {path: 'new-reservation', component: ReservationComponent}, //commented until dashboard is ready
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },

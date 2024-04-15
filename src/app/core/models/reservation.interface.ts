@@ -12,3 +12,19 @@ export interface Reservation {
   user: User;
   desk: Desk;
 }
+
+export type ReservationDTO = Omit<Reservation, 'desk' | 'id' | 'user'>;
+
+export interface ReservationEvent {
+  id: string;
+  title?: string;
+  start: string;
+  end?: string;
+  display?: string;
+  isEditable?: boolean;
+  eventDisplay?: string;
+  extendedProps?: {
+    comment?: string;
+    roomId: string;
+  };
+}
