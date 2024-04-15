@@ -14,7 +14,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { CommonModule } from '@angular/common';
 
 import { PasswordModule } from 'primeng/password';
@@ -39,10 +38,7 @@ import { ReservationModalComponent } from './features/reservation-management/com
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
 
-
-
 import { TableComponent } from './shared/components/table/table.component';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -51,7 +47,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-    
+
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -59,7 +55,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     ReservationModalComponent,
     ModalComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -86,7 +82,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SplitButtonModule,
     DropdownModule,
     TableModule,
-
   ],
   providers: [
     {
