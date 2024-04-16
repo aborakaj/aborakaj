@@ -13,7 +13,7 @@ export interface Space {
   name: string;
   capacity: number;
   location: string;
-  type: string;
+  action: string;
   floorId: string;
 }
 
@@ -49,7 +49,7 @@ export const spacesMock: Space[] = [
     name: 'Intern Room',
     capacity: 5,
     location: 'Next to play area',
-    type: 'AVAILABLE',
+    action: 'AVAILABLE',
     floorId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
   },
   {
@@ -57,7 +57,7 @@ export const spacesMock: Space[] = [
     name: 'Executive Boardroom',
     capacity: 12,
     location: 'Top Floor',
-    type: 'BOOKED',
+    action: 'BOOKED',
     floorId: '8fb2cde4-8bfc-41f8-ac6e-4b985d9e2a9b',
   },
   {
@@ -65,7 +65,7 @@ export const spacesMock: Space[] = [
     name: 'Small Meeting Room',
     capacity: 4,
     location: 'Second Floor - North Wing',
-    type: 'AVAILABLE',
+    action: 'AVAILABLE',
     floorId: 'a3cddf11-e8b4-4d7e-a918-e14b3f6a4f03',
   },
   {
@@ -73,7 +73,7 @@ export const spacesMock: Space[] = [
     name: 'Meeting Room -2',
     capacity: 8,
     location: 'Third Floor',
-    type: 'AVAILABLE',
+    action: 'AVAILABLE',
     floorId: 'bbcb1c76-45ab-4e93-bc88-af9f89f50a3f',
   },
   {
@@ -81,7 +81,7 @@ export const spacesMock: Space[] = [
     name: 'Creative Lounge',
     capacity: 10,
     location: 'Fourth Floor - South Wing',
-    type: 'BOOKED',
+    action: 'BOOKED',
     floorId: 'f1c4f024-ef3b-4b53-9d8b-422d3f690c18',
   },
 ];
