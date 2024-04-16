@@ -1,6 +1,7 @@
 <p-dialog
   [header]="header"
   [visible]="visible"
+  [dismissableMask]="true"
   [modal]="true"
   [responsive]="true"
   [draggable]="false"
@@ -23,7 +24,7 @@
         [disabled]="isActionButtonDisabled"
         label="{{ actionButtonLabel }}"
         size="large"
-        styleClass="text-lg"
+        styleClass="text-lg font-light"
         (click)="handleActionButtonClick()"
       ></p-button>
       <p-button

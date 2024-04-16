@@ -7,7 +7,6 @@ import { RoomService } from '../../../../core/services/room.service';
 import { Reservation } from '../../../../core/models/reservation.interface';
 import { Desk } from '../../../../core/models/desk.interface';
 import { Room } from '../../../../core/models/room.interface';
-import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-reservation',
@@ -15,10 +14,14 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrls: ['./user-reservation.component.scss'],
 })
 export class UserReservationComponent implements OnInit {
-  isDisplayModal: boolean = false;
+  userName = 'Xhulio Gazidede';
+  userEmail = 'xhgazidede@ritech.co';
+
+  visible: boolean = false;
   selectedDesk: Desk | null = null;
   isDeskReserved: boolean = false;
   currentReservationId: string | null = null;
+  selectedDate!: string;
 
   reservation = {
     startTime: '',
@@ -35,7 +38,7 @@ export class UserReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private deskService: DeskService,
     private roomService: RoomService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -80,14 +83,16 @@ export class UserReservationComponent implements OnInit {
   }
 
   onDeskClicked(desk: Desk) {
-    this.showModal();
+    this.changeVisibility(true);
     this.selectedDesk = desk;
     this.getCurrentReservation(desk);
   }
 
-  showModal() {
-    this.isDisplayModal = true;
+  onDateSelect(date: any) {
+    this.selectedDate =
+      date instanceof Date ? date.toISOString().split('T')[0] : date;
   }
+
 
   getCurrentReservation(desk: Desk) {
     const reservation = this.reservations.find(
@@ -117,16 +122,23 @@ export class UserReservationComponent implements OnInit {
       return;
     }
 
-    const startTimeISO = new Date(
-      receivedReservationData.startTime || this.reservation.startTime
-    ).toISOString();
-    const endTimeISO = new Date(
-      receivedReservationData.endTime || this.reservation.endTime
-    ).toISOString();
+    if (
+      !receivedReservationData.startTime ||
+      !receivedReservationData.endTime
+    ) {
+      this.toastr.error('Start time and end time are required');
+      return;
+    }
+
+    const combinedStartTime = `${this.selectedDate}T${receivedReservationData.startTime}`;
+    const combinedEndTime = `${this.selectedDate}T${receivedReservationData.endTime}`;
+
+    const formattedStartTime = new Date(combinedStartTime).toISOString();
+    const formattedEndTime = new Date(combinedEndTime).toISOString();
 
     const reservationData = {
-      startTime: startTimeISO,
-      endTime: endTimeISO,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
       userId: userId,
       deskId: this.selectedDesk.id,
       action: this.reservation.action,
@@ -136,7 +148,7 @@ export class UserReservationComponent implements OnInit {
     this.reservationService.submitReservation(reservationData).subscribe({
       next: () => {
         this.toastr.success('Reservation made', 'Success');
-        this.onReservationModalClose();
+        this.changeVisibility(false);
         this.resetForm();
       },
       error: (errorResponse) => {
@@ -144,20 +156,6 @@ export class UserReservationComponent implements OnInit {
       },
     });
   }
-
-  // cancelReservation() {
-  //   if (this.currentReservationId) {
-  //     this.reservationService
-  //       .deleteReservation(this.currentReservationId)
-  //       .subscribe({
-  //         next: () => {
-  //           this.toastr.success('Reservation cancelled', 'Success');
-  //           this.onModalClose();
-  //         },
-  //         error: (error) => this.toastr.error('Error cancelling reservation'),
-  //       });
-  //   }
-  // }
 
   resetForm() {
     this.reservation = {
@@ -168,7 +166,8 @@ export class UserReservationComponent implements OnInit {
     this.currentReservationId = null;
   }
 
-  onReservationModalClose() {
-    this.isDisplayModal = false;
+  changeVisibility(value: boolean) {
+    this.visible = value;
   }
+  
 }

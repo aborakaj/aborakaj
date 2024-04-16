@@ -2716,10 +2716,17 @@ custom-event@~1.0.0:
   resolved "https://registry.npmjs.org/custom-event/-/custom-event-1.0.1.tgz"
   integrity sha512-GAj5FOq0Hd+RsCGVJxZuKaIDXDf3h6GQoNEjFgbLLI/trgtavwUbSnZ5pVfg27DVCaWjIohryS0JFwIJyT2cMg==
 
-date-fns@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-3.3.1.tgz"
-  integrity sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==
+date-fns-tz@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/date-fns-tz/-/date-fns-tz-3.0.0.tgz"
+  integrity sha512-YgRowJwvCAAjN1A5F2l1ZjnYKThX7YDq399qo+ThXFpeOqinN1u8SUqfM5IdRQSpai18Iy3EBMb6/CXTSnDstg==
+  dependencies:
+    lodash.clonedeep "^4.5.0"
+
+date-fns@^3.0.0, date-fns@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-3.6.0.tgz"
+  integrity sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==
 
 date-format@^4.0.14:
   version "4.0.14"
@@ -4304,6 +4311,11 @@ locate-path@^7.1.0:
   integrity sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==
   dependencies:
     p-locate "^6.0.0"
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
 
 lodash.debounce@^4.0.8:
   version "4.0.8"

@@ -14,7 +14,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { CommonModule } from '@angular/common';
 
 import { PasswordModule } from 'primeng/password';
@@ -45,7 +44,6 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
 
 import { TableComponent } from './shared/components/table/table.component';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
@@ -58,7 +56,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-    
+
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
