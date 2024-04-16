@@ -1,21 +1,49 @@
-export const reservationMock: any[] = [
+export interface ReservationMock {
+  id: string;
+  startTime: string;
+  endTime: string;
+  userId: string;
+  spaceId: string;
+  bookingTitle: string;
+  createdBy: string;
+}
+
+export interface Space {
+  id: string;
+  name: string;
+  capacity: number;
+  location: string;
+  type: string;
+  floorId: string;
+}
+
+export interface TimeSlot {
+  time: string;
+  disabled: boolean;
+}
+
+export const reservationMock: ReservationMock[] = [
   {
     id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     startTime: '2024-04-16T09:00:00.000Z',
     endTime: '2024-04-16T15:00:00.000Z',
+    userId: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
     spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     bookingTitle: 'Daily Standup',
+    createdBy: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
   },
   {
     id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     startTime: '2024-04-17T13:00:00.000Z',
     endTime: '2024-04-17T14:00:00.000Z',
+    userId: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
     spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     bookingTitle: 'Daily Standup',
+    createdBy: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
   },
 ];
 
-export const spacesMock: any[] = [
+export const spacesMock: Space[] = [
   {
     id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     name: 'Intern Room',
@@ -58,7 +86,7 @@ export const spacesMock: any[] = [
   },
 ];
 
-export const timesMock: any[] = [
+export const timesMock: TimeSlot[] = [
   {
     time: '08:00',
     disabled: false,

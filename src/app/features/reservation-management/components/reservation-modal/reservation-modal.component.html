@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="formgrid grid">
-        <div class="field col-12 md:col-6">
+        <div class="field col-12 md:col-4">
           <label for="date" class="font-light">Date*</label>
           <p-calendar
             (onSelect)="updateTimeAvailability()"
@@ -47,7 +47,7 @@
           </p-calendar>
         </div>
 
-        <div class="field col-12 md:col-3">
+        <div class="field col-12 md:col-4">
           <label for="startTime" class="font-light col-offset-4">Time*</label>
           <div class="field grid">
             <label for="time" class="col-fixed">From</label>
@@ -58,13 +58,12 @@
                 optionLabel="time"
                 filterBy="time"
                 formControlName="space"
-                class="wide-dropdown"
                 appendTo="body"
               ></p-dropdown>
             </div>
           </div>
         </div>
-        <div class="field col-12 md:col-3 mt-auto">
+        <div class="field col-12 md:col-4 mt-auto">
           <div class="field grid">
             <label for="time" class="col-fixed">To</label>
             <div class="col">
@@ -74,7 +73,6 @@
                 optionLabel="time"
                 filterBy="time"
                 formControlName="space"
-                class="wide-dropdown"
                 appendTo="body"
               ></p-dropdown>
             </div>

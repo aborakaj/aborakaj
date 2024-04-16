@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '../../../../core/models/reservation.interface';
 import { setHours, setMinutes } from 'date-fns';
-import { reservationMock, spacesMock, timesMock } from '../reservation.mock';
+import { ReservationMock, Space, TimeSlot, reservationMock, spacesMock, timesMock } from '../reservation.mock';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -20,9 +20,9 @@ export class ReservationModalComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  spaces!: any[];
-  times!: any[];
-  reservationMock!: any[];
+  spaces!: Space[];
+  times!: TimeSlot[];
+  reservationMock!: ReservationMock[];
   formattedDate!: string;
 
   reservationForm: FormGroup = this.fb.group({
