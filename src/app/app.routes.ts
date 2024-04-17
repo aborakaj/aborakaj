@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'reservations', component: ReservationCalendarComponent},
   {path: 'users', component: UserPageComponent},
   {path: 'settings', component: UserReservationComponent},
-  {path: 'profile', component: LayoutComponent}] },
+  {path: 'profile', component: UserReservationComponent}] },
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
