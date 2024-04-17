@@ -14,10 +14,9 @@
 </div>
 
 <app-reservation-modal
-  [visible]="isDisplayModal"
   [title]="'Xhulio Gazidede'"
   [subtitle]="'xhgazidede@ritech.co'"
+  [(visible)]="visible"
   (submitReservation)="submitReservation($event)"
-  (close)="onReservationModalClose()"
 >
 </app-reservation-modal>
