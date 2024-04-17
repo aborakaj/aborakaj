@@ -50,6 +50,7 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     PageHeaderComponent,
     AddUserComponent,
     UserPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    SubmenuComponent
   ],
   imports: [
     FontAwesomeModule,
