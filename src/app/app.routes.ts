@@ -9,6 +9,7 @@ import { TableComponent } from './shared/components/table/table.component';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'reservation', component: UserReservationComponent},
   {path: 'table', component: TableComponent},
   {path: 'calendar', component: ReservationCalendarComponent},
+  {path: 'add-space-modal', component:AddSpaceModalComponent },
   // {path: 'new-reservation', component: ReservationComponent}, //commented until dashboard is ready
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },

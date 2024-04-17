@@ -1,0 +1,20 @@
+<div modal-header-content>
+    <div class="text-4xl font-normal">Add Space</div>
+  </div>
+
+  <div modal-body-content>
+    <form [formGroup]="spaceForm" class="p-fluid form-spacing">
+      <div class="grid mt-2">
+        <div class="col-12 h-4rem field">
+          <label for="spaceName" class="font-normal">Space Name*</label>
+          <input type="text" id="sname" pInputText formControlName="sname" placeholder="e.g. Meeting room"/>
+        </div>
+        <div class="col-12 h-4rem field">
+          <label for="description" class="font-normal">Space Description</label>
+          <textarea id="description" pInputTextarea formControlName="description" placeholder="Any details that users might find helpful."></textarea>
+        </div>
+      </div>
+      <p-button (click)="onSubmitSpace()" label="Add room" ></p-button>
+      <p-button (click)="onSpaceModalClose()" label="Cancel"></p-button>
+    </form>
+</div> 

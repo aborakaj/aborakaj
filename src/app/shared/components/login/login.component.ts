@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
+import { AddSpaceModalComponent } from '../../../features/admin-panel/components/add-space-modal/add-space-modal.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,15 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup; 
   isSubmitted = false;
+  isModalOpen = false;
+  
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -65,4 +70,15 @@ export class LoginComponent implements OnInit {
       this.toastr.error('Login failed', 'Error');
     }
   }
+  openModal(): void {
+    this.isModalOpen = true; 
+  }
+  closeModal(): void {
+    this.isModalOpen = false; 
+  }
+  show() {
+    const ref = this.dialogService.open(AddSpaceModalComponent, {
+        width: '70%'
+    });
+}
 }

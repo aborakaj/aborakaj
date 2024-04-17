@@ -43,7 +43,7 @@ import { ReservationCalendarComponent } from './shared/components/reservation-ca
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
-
+import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -58,7 +58,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-    
+    AddSpaceModalComponent,
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
