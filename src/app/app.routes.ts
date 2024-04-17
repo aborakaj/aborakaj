@@ -8,12 +8,12 @@ import { ReservationCalendarComponent } from './shared/components/reservation-ca
 import { LayoutComponent } from './shared/components/layout/layout.component';
 
 const routes: Routes = [
-  { path: 'auth/login', component: LoginComponent },
-  {path: 'home', component: LandingPageComponent},
+  { path: 'login', component: LoginComponent },
+  {path: 'home', component: LayoutComponent},
+  {path: 'reservations', component: ReservationCalendarComponent},
   {path: 'users', component: UserPageComponent},
-  {path: 'reservation', component: UserReservationComponent},
-  {path: 'calendar', component: ReservationCalendarComponent},
-  {path: 'layout', component: LayoutComponent},
+  {path: 'settings', component: UserReservationComponent},
+  {path: 'profile', component: LayoutComponent},
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },
 ];
