@@ -22,7 +22,6 @@ import { DividerModule } from 'primeng/divider';
 
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
 import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
 import { CalendarModule } from 'primeng/calendar';
@@ -51,6 +50,7 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
 
 
 @NgModule({
@@ -58,8 +58,6 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     AppComponent,
     LoginComponent,
     LandingPageComponent,
-    HeaderComponent,
-
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -73,7 +71,8 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     PageHeaderComponent,
     AddUserComponent,
     UserPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    SubmenuComponent
   ],
   imports: [
     FontAwesomeModule,
