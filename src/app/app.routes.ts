@@ -6,6 +6,7 @@ import { UserReservationComponent } from './features/reservation-management/page
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'users', component: UserPageComponent},
   {path: 'settings', component: UserReservationComponent},
   {path: 'profile', component: LayoutComponent},
+  {path: 'my-spaces', component: MySpacesComponent},
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },
 ];

@@ -1,19 +1,24 @@
-<div class="flex flex-column bg-color text-black h-screen p-3 w-15rem">
-  <div class="text-lg font-semibold px-2 py-2">Settings</div>
+<p-sidebar [(visible)]="sidebarVisible" position="left" [modal]="false" styleClass="w-15rem">
+  <ng-template pTemplate="headless">
+    <div class="flex flex-column bg-color text-black h-screen p-3 w-full">
+      <div class="text-lg font-semibold px-2 py-2">{{ title }}</div>
+      <div *ngIf="subtitle" class="text-base font-medium mt-3 px-2">
+        {{ subtitle }}
+      </div>
 
-  <div class="flex flex-column pt-3 px-2">
-    <span class="text-base font-medium mb-2">Room settings</span>
-    <div class="flex flex-column gap-1">
-      <span
-        class="flex align-items-center pt-3 text-sm cursor-pointer text-black rounded" routerLink="/my-spaces"
-      >
-        <i class="pi pi-building mr-2"></i>My spaces
-      </span>
-      <span
-        class="flex align-items-center pt-3 text-sm cursor-pointer text-900 rounded" routerLink="/availability"
-      >
-        <i class="pi pi-clock mr-2"></i>Availability
-      </span>
+      <div class="flex flex-column mt-3 px-2">
+        <div class="flex flex-column gap-1">
+          <span
+            *ngFor="let item of menuItems"
+            class="flex align-items-center mt-3 text-sm cursor-pointer text-black rounded"
+            [routerLink]="item.routerLink"
+            (click)="onMenuItemClick(item)"
+          >
+            <i *ngIf="item.icon" [ngClass]="item.icon + ' mr-3'"></i
+            >{{ item.name }}
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </ng-template>
+</p-sidebar>

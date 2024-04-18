@@ -1,26 +1,45 @@
-<p-sidebar [visible]="true" position="left" [style]="{width: '70px'}" [modal]="false">
-    <ng-template pTemplate="headless">
-        <div class="flex flex-column flex-wrap justify-content-between align-items-center h-full bg-blue-400">
-            <div class=" grid  pt-4 w-full">
-                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500" routerLink="/reservations"
-                    routerLinkActive="bg-blue-500">
-                    <i class="pi pi-calendar " style="font-size: 1em;"></i>
-                </div>
-                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500" routerLink="/users"
-                    routerLinkActive="bg-blue-500">
-                    <i class="pi pi-users" style="font-size: 1em;"></i>
-                </div>
-            </div>
-            <div class="grid pb-4 w-full">
-                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500" routerLink="/settings"
-                    routerLinkActive="bg-blue-500">
-                    <i class="pi pi-cog" style="font-size: 1em;"></i>
-                </div>
-                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500" routerLink="/profile"
-                    routerLinkActive="bg-blue-500">
-                    <i class="pi pi-user" style="font-size: 1em;"></i>
-                </div>
-            </div>
+<p-sidebar
+  [visible]="true"
+  position="left"
+  [style]="{ width: '70px' }"
+  [modal]="false"
+>
+  <ng-template pTemplate="headless">
+    <div
+      class="flex flex-column flex-wrap justify-content-between align-items-center h-full bg-blue-400"
+    >
+      <div class="grid pt-4 w-full">
+        <div
+          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
+          routerLink="/reservations"
+          routerLinkActive="bg-blue-500"
+        >
+          <i class="pi pi-calendar" style="font-size: 1em"></i>
         </div>
-    </ng-template>
+        <div
+          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
+          routerLink="/users"
+          routerLinkActive="bg-blue-500"
+        >
+          <i class="pi pi-users" style="font-size: 1em"></i>
+        </div>
+      </div>
+      <div class="grid pb-4 w-full">
+        <div
+          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
+          (click)="onSettingsClick()"
+          routerLinkActive="bg-blue-500"
+        >
+          <i class="pi pi-cog" style="font-size: 1em"></i>
+        </div>
+        <div
+          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
+          routerLink="/profile"
+          routerLinkActive="bg-blue-500"
+        >
+          <i class="pi pi-user" style="font-size: 1em"></i>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </p-sidebar>

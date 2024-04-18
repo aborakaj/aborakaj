@@ -51,6 +51,9 @@ import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
+import { SettingsSubmenuComponent } from './features/settings-page/settings-submenu/settings-submenu.component';
+import { SettingsLayoutComponent } from './features/settings-page/layout/layout.component';
+import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 
 
 @NgModule({
@@ -72,7 +75,11 @@ import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.co
     AddUserComponent,
     UserPageComponent,
     SidebarComponent,
-    SubmenuComponent
+    SubmenuComponent,
+    SettingsLayoutComponent,
+    SettingsSubmenuComponent,
+    MySpacesComponent
+
   ],
   imports: [
     FontAwesomeModule,
