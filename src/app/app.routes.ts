@@ -9,19 +9,27 @@ import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {path: 'home', component: LayoutComponent, 
-  children:[ 
-  { path: '', redirectTo: 'reservations', pathMatch: 'full' },
-  {path: 'reservations', component: ReservationCalendarComponent},
-  {path: 'users', component: UserPageComponent},
-  {path: 'settings', component: UserReservationComponent},
-  {path: 'profile', component: UserReservationComponent}] },
+  {
+    path: 'home',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'reservations', pathMatch: 'full' },
+      { path: 'reservations', component: ReservationCalendarComponent },
+      { path: 'users', component: UserPageComponent },
+      {
+        path: 'settings',
+        component: UserReservationComponent,
+        children: [{ path: 'my-spaces', component: MySpacesComponent }],
+      },
+      { path: 'profile', component: UserReservationComponent },
+    ],
+  },
 
-  {path: 'my-spaces', component: MySpacesComponent},
+  { path: 'my-spaces', component: MySpacesComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
 ];
-export {routes};
+export { routes };
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
