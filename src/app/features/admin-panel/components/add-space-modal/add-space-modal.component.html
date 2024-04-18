@@ -1,20 +1,52 @@
-<div modal-header-content>
-    <div class="text-4xl font-normal">Add Space</div>
-  </div>
+<app-modal 
+    [actionButtonLabel]="'Add Room'" 
+    (onActionButtonClick)="onAddRoom()" 
+    [visible]="true"
+    [isActionButtonDisabled]="!allFieldsFilled()"
+    (visibleChange)="onVisibleChange($event)">
 
-  <div modal-body-content>
-    <form [formGroup]="spaceForm" class="p-fluid form-spacing">
-      <div class="grid mt-2">
-        <div class="col-12 h-4rem field">
-          <label for="spaceName" class="font-normal">Space Name*</label>
-          <input type="text" id="sname" pInputText formControlName="sname" placeholder="e.g. Meeting room"/>
+    <div modal-header-content class="add-space-modal">
+        <div class="text-3xl font-bold-600 testfont" >
+          Add space
         </div>
-        <div class="col-12 h-4rem field">
-          <label for="description" class="font-normal">Space Description</label>
-          <textarea id="description" pInputTextarea formControlName="description" placeholder="Any details that users might find helpful."></textarea>
-        </div>
-      </div>
-      <p-button (click)="onSubmitSpace()" label="Add room" ></p-button>
-      <p-button (click)="onSpaceModalClose()" label="Cancel"></p-button>
-    </form>
-</div> 
+    </div>
+
+    <ng-container modal-body-content>
+        <form [formGroup]="spaceForm">
+            <div class="grid grid-nogutter p-fluid row-gap-1">
+                <div class="col-6">
+                    <!-- input text -->
+                    <span class="flex flex-column pr-3">
+                        <label for="spaceName">Space name*</label>
+                        <input pInputText formControlName="spaceName" placeholder="e.g. Meeting room"
+                            [ngClass]="{'is-invalid': spaceForm.get('spaceName')?.touched}" class="mt-2" />
+                        <span [ngStyle]="{'visibility': spaceForm.get('spaceName')?.touched ? 'visible':'hidden'}"
+                            class="p-error h-1rem">
+                            <small *ngIf="spaceForm.get('spaceName')?.touched">
+                                {{checkForErrorsIn('spaceName')}}
+                            </small>   
+                        </span>
+                    </span>
+                </div>
+            </div>
+        
+            <div class="grid grid-nogutter p-fluid row-gap-1">
+                <div class="col-6">
+                    <!-- input textarea -->
+                    <span class="flex flex-column pr-3">
+                        <label for="spaceDescription">Space description</label>
+                        <textarea pInputTextarea formControlName="spaceDescription" placeholder=" Any Details that users might find helpful"
+                            [ngClass]="{'is-invalid': spaceForm.get('spaceDescription')?.touched, 'fixed-size-textarea': true}" class="mt-2"></textarea>
+                        <span [ngStyle]="{'visibility': spaceForm.get('spaceDescription')?.touched ? 'visible':'hidden'}"
+                            class="p-error h-1rem">
+                            <small
+                            *ngIf="spaceForm.get('spaceDescription')?.touched">
+                                {{checkForErrorsIn('spaceDescription')}}
+                            </small>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</app-modal>

@@ -100,7 +100,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     TableModule,
     FullCalendarModule,
     FilterEventsPipe,    
-    CardModule
+    CardModule,
 
   ],
   providers: [
