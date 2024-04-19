@@ -2,20 +2,43 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LOGIN_URL } from '../../shared/constants/url';
+import { jwtDecode } from 'jwt-decode';
+import { tokenPayload } from '../models/tokenPayload.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUserIdFromToken(): string | null {
+  getPayloadPropertyFromToken(property: string): string | undefined {
     const token = this.getToken();
-    if (!token) return null;
-  
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.sub;
+
+    if (!token) {
+      return;
+    }
+    else {
+      const payload: tokenPayload = jwtDecode(token);
+      return payload[property];
+    }
+  }
+
+  dateToUnixEpoch(date: Date): number {
+    return Math.floor(date.getTime() / 1000);
+  }
+
+  checkTokenExp(): boolean {
+    const expirationDate = Number(this.getPayloadPropertyFromToken('exp'))
+    const date = new Date();
+    const currentDate = this.dateToUnixEpoch(date);
+    
+    if (expirationDate > currentDate)
+      return true;
+    else {
+      return false;
+    }
   }
 
   login(identifier: string, password: string): Observable<any> {

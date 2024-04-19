@@ -52,6 +52,8 @@ import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
+import { AuthGuard } from './core/guards/auth-guard.guard';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -101,19 +103,16 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,    
+    FilterEventsPipe,
     CardModule,
     SidebarModule,
 
 
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+  providers: [AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
