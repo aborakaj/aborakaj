@@ -1,8 +1,8 @@
 <div class="grid m-0 h-screen app-layout-wrapper">
   <div class="col-fixed p-0" style="width: 70px">
-    <app-sidebar (onCogIconClicked)="toggleSettingsSidebar()"></app-sidebar>
+    <app-sidebar></app-sidebar>
   </div>
-  <app-settings-submenu [(sidebarVisible)]="sidebarVisible"></app-settings-submenu>
+
   <div class="col p-0">
     <router-outlet></router-outlet>
   </div>

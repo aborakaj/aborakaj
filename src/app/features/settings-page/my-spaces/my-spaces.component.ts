@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './my-spaces.component.scss'
 })
 export class MySpacesComponent {
-
+  ngOnInit() {
+    console.log('MySpacesComponent loaded');
+  }
 }

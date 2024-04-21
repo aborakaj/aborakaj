@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvailabiltyComponent } from './availabilty.component';
+import { ProfileSubmenuComponent } from './profile-submenu.component';
 
-describe('AvailabiltyComponent', () => {
-  let component: AvailabiltyComponent;
-  let fixture: ComponentFixture<AvailabiltyComponent>;
+describe('ProfileSubmenuComponent', () => {
+  let component: ProfileSubmenuComponent;
+  let fixture: ComponentFixture<ProfileSubmenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AvailabiltyComponent]
+      imports: [ProfileSubmenuComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AvailabiltyComponent);
+    fixture = TestBed.createComponent(ProfileSubmenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

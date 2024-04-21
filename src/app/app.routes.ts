@@ -6,6 +6,8 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
+import { SettingsLayoutComponent } from './features/settings-page/layout/layout.component';
+import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,18 +20,47 @@ const routes: Routes = [
       { path: 'users', component: UserPageComponent },
       {
         path: 'settings',
-        component: UserReservationComponent,
-        children: [{ path: 'my-spaces', component: MySpacesComponent }],
+        component: SettingsLayoutComponent,
+        data: { submenu: 'settings' },
+        children: [
+          {
+            path: '',
+            redirectTo: 'my-spaces',
+            pathMatch: 'full'
+          },
+          {
+            path: 'my-spaces',
+            component: MySpacesComponent
+          },
+          {
+            path: 'availability',
+            component: UserReservationComponent
+          }
+        ]
       },
-      { path: 'profile', component: UserReservationComponent },
+      {
+        path: 'profile',
+        component: SettingsLayoutComponent,
+        data: { submenu: 'profile' },
+        children: [
+          {
+            path: '',
+            redirectTo: 'details',
+            pathMatch: 'full'
+          },
+          {
+            path: 'details',
+            component: PersonalDetailsComponent
+          },
+        ],
+      },
     ],
   },
-
-  { path: 'my-spaces', component: MySpacesComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
 ];
 export { routes };
+console.log('Routes', routes);
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

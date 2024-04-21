@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-settings-layout',
@@ -6,7 +8,17 @@ import { Component } from '@angular/core';
   styleUrl: './layout.component.scss',
 })
 export class SettingsLayoutComponent {
-  sidebarVisible = false;
+  @Input() sidebarVisible: boolean = false;
+
+  activeSubmenu: string | null = null;
+
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.data.pipe(
+      map(data => data['submenu'])
+    ).subscribe((submenu: string) => {
+      this.activeSubmenu = submenu;
+    });
+  }
 
   toggleSettingsSidebar() {
     this.sidebarVisible = !this.sidebarVisible;

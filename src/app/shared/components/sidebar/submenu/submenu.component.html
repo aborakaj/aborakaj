@@ -1,22 +1,28 @@
-<p-sidebar [(visible)]="sidebarVisible" position="left" [modal]="false" styleClass="w-15rem">
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  position="left"
+  [modal]="false"
+  styleClass="w-15rem"
+>
   <ng-template pTemplate="headless">
-    <div class="flex flex-column bg-color text-black h-screen p-3 w-full">
-      <div class="text-lg font-semibold px-2 py-2">{{ title }}</div>
-      <div *ngIf="subtitle" class="text-base font-medium mt-3 px-2">
+    <div class="flex flex-column bg-color text-black h-screen">
+      <div class="text-lg font-semibold mt-5 pl-4">{{ title }}</div>
+      <div *ngIf="subtitle" class="text-base font-medium mt-4 pl-4">
         {{ subtitle }}
       </div>
-
-      <div class="flex flex-column mt-3 px-2">
-        <div class="flex flex-column gap-1">
-          <span
-            *ngFor="let item of menuItems"
-            class="flex align-items-center mt-3 text-sm cursor-pointer text-black rounded"
-            [routerLink]="item.routerLink"
-            (click)="onMenuItemClick(item)"
-          >
-            <i *ngIf="item.icon" [ngClass]="item.icon + ' mr-3'"></i
-            >{{ item.name }}
-          </span>
+      <div class="flex flex-column mt-3 w-full">
+        <div *ngFor="let item of menuItems" class="w-full">
+          <div class="hover:bg-blue-100 w-full">
+            <span
+              class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer text-black w-full"
+              [routerLink]="item.routerLink"
+              routerLinkActive="bg-blue-100"
+              (click)="onMenuItemClick(item)"
+            >
+              <i *ngIf="item.icon" [ngClass]="item.icon + ' mr-3'"></i>
+              {{ item.name }}
+            </span>
+          </div>
         </div>
       </div>
     </div>

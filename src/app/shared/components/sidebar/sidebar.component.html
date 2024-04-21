@@ -11,14 +11,14 @@
       <div class="grid pt-4 w-full">
         <div
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="/reservations"
+          routerLink="./reservations"
           routerLinkActive="bg-blue-500"
         >
           <i class="pi pi-calendar" style="font-size: 1em"></i>
         </div>
         <div
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="/users"
+          routerLink="./users"
           routerLinkActive="bg-blue-500"
         >
           <i class="pi pi-users" style="font-size: 1em"></i>
@@ -27,14 +27,15 @@
       <div class="grid pb-4 w-full">
         <div
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          (click)="onSettingsClick()"
+          routerLink="./settings"
+          (click)="onSettingsIconClick()"
           routerLinkActive="bg-blue-500"
         >
           <i class="pi pi-cog" style="font-size: 1em"></i>
         </div>
         <div
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="/profile"
+          routerLink="./profile"
           routerLinkActive="bg-blue-500"
         >
           <i class="pi pi-user" style="font-size: 1em"></i>

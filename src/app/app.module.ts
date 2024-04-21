@@ -54,6 +54,8 @@ import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.co
 import { SettingsSubmenuComponent } from './features/settings-page/settings-submenu/settings-submenu.component';
 import { SettingsLayoutComponent } from './features/settings-page/layout/layout.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
+import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
+import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 
 
 @NgModule({
@@ -78,7 +80,9 @@ import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.
     SubmenuComponent,
     SettingsLayoutComponent,
     SettingsSubmenuComponent,
-    MySpacesComponent
+    MySpacesComponent,
+    ProfileSubmenuComponent,
+    PersonalDetailsComponent
 
   ],
   imports: [

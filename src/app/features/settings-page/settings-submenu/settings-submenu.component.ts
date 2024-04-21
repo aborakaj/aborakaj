@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+interface MenuItem {
+  name: string;
+  icon?: string;
+  routerLink: string;
+}
 @Component({
   selector: 'app-settings-submenu',
   templateUrl: './settings-submenu.component.html',
@@ -7,16 +11,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SettingsSubmenuComponent {
   @Input() sidebarVisible: boolean = false;
-  @Output() sidebarVisibleChange = new EventEmitter<boolean>();
-  @Input() title: string = '';
-  @Input() subtitle?: string;
-  menuItems = [
-    { name: 'My spaces', icon: 'pi pi-building', routerLink: '/my-spaces' },
-    { name: 'Availability', icon: 'pi pi-clock', routerLink: '/availability' },
+  @Input() title!: string;
+  menuItems: MenuItem[] = [
+    {
+      name: 'My spaces',
+      icon: 'pi pi-building',
+      routerLink: '/home/settings/my-spaces',
+    },
+    {
+      name: 'Availability',
+      icon: 'pi pi-clock',
+      routerLink: '/home/settings/availability',
+    },
   ];
-
-  toggleVisibility() {
-    this.sidebarVisible = !this.sidebarVisible;
-    this.sidebarVisibleChange.emit(this.sidebarVisible);
-  }
 }

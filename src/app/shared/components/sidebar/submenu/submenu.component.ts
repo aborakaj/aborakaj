@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 interface MenuItem {
   name: string;
   icon?: string;
-  routerLink: string;
+  routerLink: string | any;
 }
 
 @Component({
