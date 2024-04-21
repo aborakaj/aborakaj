@@ -22,6 +22,8 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   @Input({ required: true }) fullcalendar!: FullCalendarComponent;
   @Output() roomSelected = new EventEmitter<RoomSelected>();
 
+  visible: boolean = false;
+
   roomServiceSub!: Subscription;
   rooms: RoomSelected[] = [];
   currentDate: string = format(new Date(), 'EEEE MMMM do yyyy');
@@ -47,6 +49,12 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
     });
   }
 
+  changeVisibility(value: boolean) {
+    this.visible = value;
+  }
+
+  submitReservation() {}
+
   onDayClick() {
     this.fullcalendar.getApi().changeView('timeGridDay');
   }
@@ -64,14 +72,6 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   }
 
   addReservations() {
-    // added for testing functionallity of the reservationData service, will be removed later
-    this.reservationStore.addReservation({
-      startTime: '2024-04-09T10:00:57.000Z',
-      endTime: '2024-04-09T13:00:57.000Z',
-      userId: '9dfd3fce-6d7f-4dc0-a988-bd27fecfa2d2',
-      deskId: 'efe5f797-2738-436c-8fb8-b384c7577a32',
-      action: 'BOOKED',
-      createdBy: '9dfd3fce-6d7f-4dc0-a988-bd27fecfa2d2',
-    });
+    this.changeVisibility(true)
   }
 }

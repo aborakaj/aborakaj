@@ -55,6 +55,7 @@ import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.
 import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
+import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { SubmenuLayoutComponent } from './shared/components/submenu-layout/subme
     SubmenuLayoutComponent,
     SettingsSubmenuComponent,
     MySpacesComponent,
+    AvailabilityComponent,
     ProfileSubmenuComponent,
     PersonalDetailsComponent,
   ],
