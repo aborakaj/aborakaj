@@ -26,17 +26,17 @@ const routes: Routes = [
           {
             path: '',
             redirectTo: 'my-spaces',
-            pathMatch: 'full'
+            pathMatch: 'full',
           },
           {
             path: 'my-spaces',
-            component: MySpacesComponent
+            component: MySpacesComponent,
           },
           {
             path: 'availability',
-            component: UserReservationComponent
-          }
-        ]
+            component: UserReservationComponent,
+          },
+        ],
       },
       {
         path: 'profile',
@@ -46,11 +46,11 @@ const routes: Routes = [
           {
             path: '',
             redirectTo: 'details',
-            pathMatch: 'full'
+            pathMatch: 'full',
           },
           {
             path: 'details',
-            component: PersonalDetailsComponent
+            component: PersonalDetailsComponent,
           },
         ],
       },

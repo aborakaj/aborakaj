@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-interface MenuItem {
-  name: string;
-  icon?: string;
-  routerLink: string;
-}
+import { SubmenuItem } from '../../../core/models/submenu-items.interface';
+
 @Component({
   selector: 'app-settings-submenu',
   templateUrl: './settings-submenu.component.html',
@@ -12,7 +9,7 @@ interface MenuItem {
 export class SettingsSubmenuComponent {
   @Input() sidebarVisible: boolean = false;
   @Input() title!: string;
-  menuItems: MenuItem[] = [
+  submenuItems: SubmenuItem[] = [
     {
       name: 'My spaces',
       icon: 'pi pi-building',

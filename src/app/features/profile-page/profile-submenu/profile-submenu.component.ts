@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
-interface MenuItem {
-  name: string;
-  icon?: string;
-  routerLink: string;
-}
+import { SubmenuItem } from '../../../core/models/submenu-items.interface';
+
 @Component({
   selector: 'app-profile-submenu',
   templateUrl: './profile-submenu.component.html',
@@ -12,7 +9,7 @@ interface MenuItem {
 export class ProfileSubmenuComponent {
   @Input() sidebarVisible: boolean = false;
   @Input() title!: string;
-  menuItems: MenuItem[] = [
+  submenuItems: SubmenuItem[] = [
     {
       name: 'Personal details',
       routerLink: '/home/profile/details',

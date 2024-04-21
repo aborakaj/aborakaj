@@ -41,7 +41,6 @@ import { ReservationCalendarComponent } from './shared/components/reservation-ca
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
-
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
@@ -56,7 +55,6 @@ import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.
 import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
-
 
 @NgModule({
   declarations: [
@@ -82,8 +80,7 @@ import { SubmenuLayoutComponent } from './shared/components/submenu-layout/subme
     SettingsSubmenuComponent,
     MySpacesComponent,
     ProfileSubmenuComponent,
-    PersonalDetailsComponent
-
+    PersonalDetailsComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -111,11 +108,9 @@ import { SubmenuLayoutComponent } from './shared/components/submenu-layout/subme
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,    
+    FilterEventsPipe,
     CardModule,
     SidebarModule,
-
-
   ],
   providers: [
     {

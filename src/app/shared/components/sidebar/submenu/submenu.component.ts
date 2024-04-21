@@ -17,7 +17,7 @@ export class SubmenuComponent {
   @Output() sidebarVisibleChange = new EventEmitter<boolean>();
   @Input() title: string = '';
   @Input() subtitle?: string;
-  @Input() menuItems: MenuItem[] = [];
+  @Input() submenuItems: MenuItem[] = [];
 
   constructor(private router: Router) {}
 

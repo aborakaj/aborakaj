@@ -13,11 +13,11 @@ export class SubmenuLayoutComponent {
   activeSubmenu: string | null = null;
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.data.pipe(
-      map(data => data['submenu'])
-    ).subscribe((submenu: string) => {
-      this.activeSubmenu = submenu;
-    });
+    this.activatedRoute.data
+      .pipe(map((data) => data['submenu']))
+      .subscribe((submenu: string) => {
+        this.activeSubmenu = submenu;
+      });
   }
 
   toggleSettingsSidebar() {
