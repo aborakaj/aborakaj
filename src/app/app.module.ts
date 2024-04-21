@@ -52,10 +52,10 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
 import { SettingsSubmenuComponent } from './features/settings-page/settings-submenu/settings-submenu.component';
-import { SettingsLayoutComponent } from './features/settings-page/layout/layout.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
+import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
 
 
 @NgModule({
@@ -78,7 +78,7 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
     UserPageComponent,
     SidebarComponent,
     SubmenuComponent,
-    SettingsLayoutComponent,
+    SubmenuLayoutComponent,
     SettingsSubmenuComponent,
     MySpacesComponent,
     ProfileSubmenuComponent,

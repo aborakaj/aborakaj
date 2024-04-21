@@ -14,8 +14,6 @@ interface MenuItem {
 export class LayoutComponent {
   sidebarVisible = false;
 
-  
-
   toggleSettingsSidebar() {
     this.sidebarVisible = !this.sidebarVisible;
   }

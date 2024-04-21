@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-settings-layout',
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  selector: 'app-submenu-layout',
+  templateUrl: './submenu-layout.component.html',
+  styleUrl: './submenu-layout.component.scss',
 })
-export class SettingsLayoutComponent {
+export class SubmenuLayoutComponent {
   @Input() sidebarVisible: boolean = false;
 
   activeSubmenu: string | null = null;
