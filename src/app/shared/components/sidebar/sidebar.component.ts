@@ -6,9 +6,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  @Output() onCogIconClicked: EventEmitter<void> = new EventEmitter();
-
-  onSettingsIconClick() {
-    this.onCogIconClicked.emit();
-  }
+  
 }

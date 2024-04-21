@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 export class SubmenuLayoutComponent {
   @Input() sidebarVisible: boolean = false;
 
-  activeSubmenu: string | null = null;
+  activeSubmenu!: string;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.data

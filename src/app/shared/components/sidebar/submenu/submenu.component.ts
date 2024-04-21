@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface MenuItem {
-  name: string;
-  icon?: string;
-  routerLink: string | any;
-}
+import { SubmenuItem } from '../../../../core/models/submenu-items.interface';
 
 @Component({
   selector: 'app-submenu',
@@ -15,18 +10,13 @@ interface MenuItem {
 export class SubmenuComponent {
   @Input() sidebarVisible: boolean = false;
   @Output() sidebarVisibleChange = new EventEmitter<boolean>();
-  @Input() title: string = '';
+  @Input() title!: string;
   @Input() subtitle?: string;
-  @Input() submenuItems: MenuItem[] = [];
+  @Input() submenuItems: SubmenuItem[] = [];
 
   constructor(private router: Router) {}
 
-  toggleVisibility() {
-    this.sidebarVisible = !this.sidebarVisible;
-    this.sidebarVisibleChange.emit(this.sidebarVisible);
-  }
-
-  onMenuItemClick(item: MenuItem) {
+  onSubmenuItemClick(item: SubmenuItem) {
     this.router.navigate([item.routerLink]);
   }
 }
