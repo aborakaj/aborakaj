@@ -23,7 +23,7 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   @Output() roomSelected = new EventEmitter<RoomSelected>();
 
   visible: boolean = false;
-  // icon: string = 'pi pi-users';
+  actionButtonIcon!: string;
 
   roomServiceSub!: Subscription;
   rooms: RoomSelected[] = [];

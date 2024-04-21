@@ -187,4 +187,3 @@ export class ReservationComponent {
     this.reservationId = null;
   }
 }
-
