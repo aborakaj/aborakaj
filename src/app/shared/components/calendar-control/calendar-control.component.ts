@@ -23,6 +23,7 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   @Output() roomSelected = new EventEmitter<RoomSelected>();
 
   visible: boolean = false;
+  // icon: string = 'pi pi-users';
 
   roomServiceSub!: Subscription;
   rooms: RoomSelected[] = [];
@@ -72,6 +73,6 @@ export class CalendarControlComponent implements OnInit, OnDestroy {
   }
 
   addReservations() {
-    this.changeVisibility(true)
+    this.changeVisibility(true);
   }
 }

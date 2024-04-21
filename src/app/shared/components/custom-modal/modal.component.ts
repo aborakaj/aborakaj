@@ -13,6 +13,7 @@ export class ModalComponent {
   @Input() visible!: boolean;
   @Input() isActionButtonDisabled?: boolean;
   @Input() header?: string;
+  @Input() icon?: string;
   @Input() set style(incomingStyles: object) {
     this.defaultStyles = { ...this.defaultStyles, ...incomingStyles };
   }

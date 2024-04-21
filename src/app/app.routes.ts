@@ -60,7 +60,6 @@ const routes: Routes = [
   { path: '**', redirectTo: 'login' },
 ];
 export { routes };
-console.log('Routes', routes);
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
