@@ -25,8 +25,8 @@ export interface TimeSlot {
 export const reservationMock: ReservationMock[] = [
   {
     id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
-    startTime: '2024-04-16T09:00:00.000Z',
-    endTime: '2024-04-16T15:00:00.000Z',
+    startTime: '2024-04-23T09:00:00.000Z',
+    endTime: '2024-04-23T15:00:00.000Z',
     userId: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
     spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     bookingTitle: 'Daily Standup',
@@ -34,8 +34,8 @@ export const reservationMock: ReservationMock[] = [
   },
   {
     id: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
-    startTime: '2024-04-17T13:00:00.000Z',
-    endTime: '2024-04-17T14:00:00.000Z',
+    startTime: '2024-04-24T13:00:00.000Z',
+    endTime: '2024-04-24T14:00:00.000Z',
     userId: 'ewdd3416-1ca4-42f0-9444-eeff951f2c3e',
     spaceId: 'cdcc9416-1ca4-42f0-9444-eeff951f2c3e',
     bookingTitle: 'Daily Standup',
