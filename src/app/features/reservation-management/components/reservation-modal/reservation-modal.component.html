@@ -33,6 +33,8 @@
           <label for="date" class="text-sm font-normal">Date*</label>
           <p-calendar
             (onSelect)="updateTimeAvailability()"
+            [minDate]="minDateValue"
+            [disabledDays]="[0,6]"
             formControlName="startTime"
             dataType="date"
             inputId="startTime"

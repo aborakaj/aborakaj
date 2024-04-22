@@ -2,7 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '../../../../core/models/reservation.interface';
 import { setHours, setMinutes } from 'date-fns';
-import { ReservationMock, Space, TimeSlot, reservationMock, spacesMock, timesMock } from '../reservation.mock';
+import {
+  ReservationMock,
+  Space,
+  TimeSlot,
+  reservationMock,
+  spacesMock,
+  timesMock,
+} from '../reservation.mock';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -24,6 +31,7 @@ export class ReservationModalComponent implements OnInit {
   times!: TimeSlot[];
   reservationMock!: ReservationMock[];
   formattedDate!: string;
+  minDateValue!: Date;
 
   reservationForm: FormGroup = this.fb.group({
     startTime: ['', Validators.required],
@@ -37,6 +45,7 @@ export class ReservationModalComponent implements OnInit {
     this.times = timesMock;
     this.reservationMock = reservationMock;
     this.updateTimeAvailability();
+    this.disabledDates();
   }
 
   updateTimeAvailability(): void {
@@ -54,6 +63,10 @@ export class ReservationModalComponent implements OnInit {
 
       timesMock.disabled = isReserved;
     });
+  }
+
+  disabledDates() {
+    this.minDateValue = new Date();
   }
 
   onSubmitReservation() {
