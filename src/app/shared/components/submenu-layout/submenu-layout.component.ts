@@ -13,6 +13,7 @@ export class SubmenuLayoutComponent {
   activeSubmenu!: string;
 
   constructor(private activatedRoute: ActivatedRoute) {
+    console.log(activatedRoute)
     this.activatedRoute.data
       .pipe(map((data) => data['submenu']))
       .subscribe((submenu: string) => {
