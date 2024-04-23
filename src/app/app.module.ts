@@ -51,8 +51,6 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-
-import { AuthGuard } from './core/guards/auth-guard.guard';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
 
 @NgModule({
@@ -109,7 +107,7 @@ import { ErrorInterceptor } from './core/interceptors/error-interceptor.intercep
 
 
   ],
-  providers: [AuthGuard,
+  providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

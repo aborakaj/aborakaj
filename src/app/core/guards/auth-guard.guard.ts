@@ -1,24 +1,18 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
-
-  constructor(private router: Router,
-    private authService: AuthService) { }
-
-
-  canActivate(): boolean | UrlTree {
-    const isTokenValid = this.authService.checkTokenExp()
+export const AuthGuard: CanActivateFn = (
   
-    if (isTokenValid) {
-      return true;
-    } else {
-      return this.router.createUrlTree(['/login']);
-    }
-  }
-}
+):
+  Observable<boolean | UrlTree> 
+  | Promise<boolean | UrlTree> 
+  | boolean 
+  | UrlTree=> {
+
+  return inject(AuthService).checkTokenExp()
+    ? true
+    : inject(Router).createUrlTree(['/login']);
+
+};

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.authService.saveToken(response.access_token);
 
-          const userRole = this.authService.getPayloadPropertyFromToken('role')
+          const userRole = this.authService.getUserRole();
 
           if (userRole === 'Admin') {
             this.router.navigate(['/home/users']);

@@ -69,7 +69,7 @@ export class UserReservationComponent implements OnInit {
   }
 
   fetchReservations() {
-    const userId = this.authService.getPayloadPropertyFromToken('sub');
+    const userId = this.authService.getUserId();
     this.reservationService.getReservation().subscribe({
       next: (reservationsData) => {
         this.reservations = reservationsData.filter(
@@ -98,7 +98,7 @@ export class UserReservationComponent implements OnInit {
     const reservation = this.reservations.find(
       (res) =>
         res.deskId === desk.id &&
-        res.userId === this.authService.getPayloadPropertyFromToken('sub')
+        res.userId === this.authService.getUserId()
     );
     this.isDeskReserved = !!reservation;
 
@@ -111,7 +111,7 @@ export class UserReservationComponent implements OnInit {
   }
 
   submitReservation(receivedReservationData: Partial<Reservation>) {
-    const userId = this.authService.getPayloadPropertyFromToken('sub');
+    const userId = this.authService.getUserId();
     if (!userId) {
       this.toastr.error('User not authenticated');
       return;

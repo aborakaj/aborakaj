@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  getPayloadPropertyFromToken(property: string): string | undefined {
+  getUserId(): string | undefined {
     const token = this.getToken();
 
     if (!token) {
@@ -21,7 +21,43 @@ export class AuthService {
     }
     else {
       const payload: tokenPayload = jwtDecode(token);
-      return payload[property];
+      return payload.sub;
+    }
+  }
+
+  getUserRole(): string | undefined {
+    const token = this.getToken();
+
+    if (!token) {
+      return;
+    }
+    else {
+      const payload: tokenPayload = jwtDecode(token);
+      return payload.role;
+    }
+  }
+
+  getUserPermissions(): [] | undefined {
+    const token = this.getToken();
+
+    if (!token) {
+      return;
+    }
+    else {
+      const payload: tokenPayload = jwtDecode(token);
+      return payload.permissions;
+    }
+  }
+
+  getTokenExpiration(): number | undefined {
+    const token = this.getToken();
+
+    if (!token) {
+      return;
+    }
+    else {
+      const payload: tokenPayload = jwtDecode(token);
+      return payload.exp;
     }
   }
 
@@ -30,11 +66,11 @@ export class AuthService {
   }
 
   checkTokenExp(): boolean {
-    const expirationDate = Number(this.getPayloadPropertyFromToken('exp'))
+    const expirationDate = this.getTokenExpiration();
     const date = new Date();
     const currentDate = this.dateToUnixEpoch(date);
-    
-    if (expirationDate > currentDate)
+
+    if (expirationDate! > currentDate)
       return true;
     else {
       return false;
