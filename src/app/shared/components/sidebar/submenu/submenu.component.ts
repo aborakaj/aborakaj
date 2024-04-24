@@ -13,5 +13,4 @@ export class SubmenuComponent {
   @Input() title!: string;
   @Input() subtitle?: string;
   @Input() submenuItems: SubmenuItem[] = [];
-
 }
