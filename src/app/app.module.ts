@@ -50,9 +50,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
-import { SettingsSubmenuComponent } from './features/settings-page/settings-submenu/settings-submenu.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
-import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
@@ -78,10 +76,8 @@ import { AvailabilityComponent } from './features/settings-page/availabilty/avai
     SidebarComponent,
     SubmenuComponent,
     SubmenuLayoutComponent,
-    SettingsSubmenuComponent,
     MySpacesComponent,
     AvailabilityComponent,
-    ProfileSubmenuComponent,
     PersonalDetailsComponent,
   ],
   imports: [

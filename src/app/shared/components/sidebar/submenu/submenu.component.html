@@ -13,17 +13,14 @@
         {{ subtitle }}
       </div>
       <div class="flex flex-column mt-3 w-full">
-        <div *ngFor="let item of submenuItems" class="w-full">
-          <div class="hover:bg-blue-100 w-full">
-            <span
-              class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer text-black w-full"
-              [routerLink]="item.routerLink"
-              routerLinkActive="bg-blue-100"
-              (click)="onSubmenuItemClick(item)"
-            >
-              <i *ngIf="item.icon" [ngClass]="item.icon" class="mr-3"></i>
-              {{ item.name }}
-            </span>
+        <div *ngFor="let item of submenuItems" class="w-full ">
+          <div class="hover:bg-blue-100 w-full ">
+            <a [routerLink]="[item.routerLink]" routerLinkActive="bg-blue-100" class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer w-full decoration">
+              <span >
+                <i *ngIf="item.icon" [ngClass]="item.icon" class="mr-3"></i>
+                {{ item.name }}
+              </span>
+            </a>
           </div>
         </div>
       </div>

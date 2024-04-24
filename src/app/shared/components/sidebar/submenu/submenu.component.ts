@@ -14,9 +14,4 @@ export class SubmenuComponent {
   @Input() subtitle?: string;
   @Input() submenuItems: SubmenuItem[] = [];
 
-  constructor(private router: Router) {}
-
-  onSubmenuItemClick(item: SubmenuItem) {
-    this.router.navigate([item.routerLink]);
-  }
 }
