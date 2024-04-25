@@ -1,0 +1,33 @@
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  position="left"
+  [modal]="false"
+  styleClass="w-15rem"
+  transitionOptions="0ms"
+  [closeOnEscape]="false"
+>
+  <ng-template pTemplate="headless">
+    <div class="flex flex-column bg-color text-black h-screen">
+      <div class="text-lg font-semibold mt-5 pl-4">{{ title }}</div>
+      <div *ngIf="subtitle" class="text-base font-medium mt-4 pl-4">
+        {{ subtitle }}
+      </div>
+      <div class="flex flex-column mt-3 w-full">
+        <div *ngFor="let item of submenuItems" class="w-full">
+          <div class="hover:bg-blue-100 w-full">
+            <a
+              [routerLink]="[item.routerLink]"
+              routerLinkActive="bg-blue-100"
+              class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer w-full decoration"
+            >
+              <span>
+                <i *ngIf="item.icon" [ngClass]="item.icon" class="mr-2"></i>
+                {{ item.name }}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
