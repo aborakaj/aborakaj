@@ -22,7 +22,6 @@ import { DividerModule } from 'primeng/divider';
 
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
 import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
 import { CalendarModule } from 'primeng/calendar';
@@ -41,7 +40,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
-
 import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -53,13 +51,17 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
 import { JwtModule } from "@auth0/angular-jwt";
+import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
+import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
+import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LandingPageComponent,
-    HeaderComponent,
     AddSpaceModalComponent,
     ReservationComponent,
     UserReservationComponent,
@@ -74,7 +76,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     PageHeaderComponent,
     AddUserComponent,
     UserPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    NestedSidebarComponent,
+    ChildLayoutComponent,
+    MySpacesComponent,
+    AvailabilityComponent,
+    PersonalDetailsComponent,
   ],
   imports: [
     FontAwesomeModule,

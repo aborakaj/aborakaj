@@ -187,8 +187,3 @@ export class ReservationComponent {
     this.reservationId = null;
   }
 }
-
-// if (!startTimeISO || !endTimeISO) {
-//   this.toastr.error('Please select a time and a date!');
-//   return;
-// }
