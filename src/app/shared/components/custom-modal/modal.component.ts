@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalComponent {
 
-  private defaultStyles: object = { width: '640px' }
+  private defaultStyles: object = { width: '640px' };
 
   @Input() actionButtonLabel!: string;
   @Input() visible!: boolean;

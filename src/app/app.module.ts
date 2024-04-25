@@ -51,7 +51,8 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,6 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -101,19 +101,22 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,    
+    FilterEventsPipe,
     CardModule,
     SidebarModule,
-
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
