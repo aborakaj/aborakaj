@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LOGIN_URL } from '../../shared/constants/url';
-import { TokenPayload } from '../models/tokenPayload.interface';
+import { TokenPayload } from '../models/token-payload.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
