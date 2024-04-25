@@ -49,6 +49,8 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
@@ -109,14 +111,19 @@ import { ChildLayoutComponent } from './shared/components/child-layout/child-lay
     FilterEventsPipe,
     CardModule,
     SidebarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
+
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

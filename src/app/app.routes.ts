@@ -4,6 +4,7 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { AuthGuard } from './core/guards/auth-guard.guard';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';

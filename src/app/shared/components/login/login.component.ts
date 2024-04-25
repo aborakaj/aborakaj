@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup; 
+  loginForm!: FormGroup;
   isSubmitted = false;
 
   constructor(
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
- login(): void {
+  login(): void {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       this.toastr.error('Please correct the errors in the form', 'Error');
@@ -45,14 +45,13 @@ export class LoginComponent implements OnInit {
       this.authService.login(identifier, password).subscribe({
         next: (response) => {
           this.authService.saveToken(response.access_token);
-          const jwtData = response.access_token.split('.')[1]
-          const decodedJwtData = JSON.parse(atob(jwtData))
 
-          const isAdmin = decodedJwtData.role=='Admin';
-          if(isAdmin) { 
-            this.router.navigate(['/admin']);
+          const userRole = this.authService.getTokenPayload().role;
+
+          if (userRole === 'Admin') {
+            this.router.navigate(['/home/users']);
           } else {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home/reservations']);
           }
           this.toastr.success('Logged in successfully', 'Success');
         },
