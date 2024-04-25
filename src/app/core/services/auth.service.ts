@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LOGIN_URL } from '../../shared/constants/url';
-import { jwtDecode } from 'jwt-decode';
-import { tokenPayload } from '../models/tokenPayload.interface';
+import { TokenPayload } from '../models/tokenPayload.interface';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,70 +11,30 @@ import { tokenPayload } from '../models/tokenPayload.interface';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private JwtHelper: JwtHelperService) { }
 
-  getUserId(): string | undefined {
+  getTokenPayload(): TokenPayload {
     const token = this.getToken();
-
     if (!token) {
-      return;
+      throw new Error('Token not available');
     }
-    else {
-      const payload: tokenPayload = jwtDecode(token);
-      return payload.sub;
-    }
-  }
 
-  getUserRole(): string | undefined {
-    const token = this.getToken();
-
-    if (!token) {
-      return;
+    try {
+      const payload = this.JwtHelper.decodeToken(token);
+      return payload;
+    } catch (error) {
+      throw new Error('Failed to decode token');
     }
-    else {
-      const payload: tokenPayload = jwtDecode(token);
-      return payload.role;
-    }
-  }
-
-  getUserPermissions(): [] | undefined {
-    const token = this.getToken();
-
-    if (!token) {
-      return;
-    }
-    else {
-      const payload: tokenPayload = jwtDecode(token);
-      return payload.permissions;
-    }
-  }
-
-  getTokenExpiration(): number | undefined {
-    const token = this.getToken();
-
-    if (!token) {
-      return;
-    }
-    else {
-      const payload: tokenPayload = jwtDecode(token);
-      return payload.exp;
-    }
-  }
-
-  dateToUnixEpoch(date: Date): number {
-    return Math.floor(date.getTime() / 1000);
   }
 
   checkTokenExp(): boolean {
-    const expirationDate = this.getTokenExpiration();
-    const date = new Date();
-    const currentDate = this.dateToUnixEpoch(date);
+    const token = this.getToken();
+    const isExpired: boolean = this.JwtHelper.isTokenExpired(token);
 
-    if (expirationDate! > currentDate)
-      return true;
-    else {
+    if (isExpired) {
       return false;
     }
+    return true;
   }
 
   login(identifier: string, password: string): Observable<any> {
@@ -85,7 +45,7 @@ export class AuthService {
     localStorage.setItem('jwt', token);
   }
 
-  getToken(): string | null {
+  getToken() {
     return localStorage.getItem('jwt');
   }
 

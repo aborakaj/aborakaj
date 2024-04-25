@@ -52,6 +52,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,6 @@ import { ErrorInterceptor } from './core/interceptors/error-interceptor.intercep
     LoginComponent,
     LandingPageComponent,
     HeaderComponent,
-
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -104,7 +104,13 @@ import { ErrorInterceptor } from './core/interceptors/error-interceptor.intercep
     FilterEventsPipe,
     CardModule,
     SidebarModule,
-
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
 
   ],
   providers: [

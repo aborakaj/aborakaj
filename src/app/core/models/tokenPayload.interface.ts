@@ -1,6 +1,11 @@
-import { JwtPayload } from "jwt-decode";
-
-export interface tokenPayload extends JwtPayload {
+export interface TokenPayload {
+  iss?: string;
+  sub?: string;
+  aud?: string[] | string;
+  exp?: number;
+  nbf?: number;
+  iat?: number;
+  jti?: string;
   role: string;
   permissions: [];
 }
