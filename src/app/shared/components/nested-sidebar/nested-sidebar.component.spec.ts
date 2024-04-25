@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubmenuLayoutComponent } from './submenu-layout.component';
+import { SubmenuComponent } from './nested-sidebar.component';
 
-describe('LayoutComponent', () => {
-  let component: SubmenuLayoutComponent;
-  let fixture: ComponentFixture<SubmenuLayoutComponent>;
+describe('SubmenuComponent', () => {
+  let component: SubmenuComponent;
+  let fixture: ComponentFixture<SubmenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubmenuLayoutComponent]
+      imports: [SubmenuComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SubmenuLayoutComponent);
+    fixture = TestBed.createComponent(SubmenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,22 +1,22 @@
 <div class="grid m-0 h-screen app-layout-wrapper">
   <div class="col-fixed p-0" style="width: 240px">
     <ng-container *ngIf="activeSubmenu === 'settings'">
-      <app-submenu
+      <app-nested-sidebar
         [(sidebarVisible)]="sidebarVisible"
         title="Settings"
         subtitle="Room Settings"
         [submenuItems]="settingsItems"
       >
-      </app-submenu>
+      </app-nested-sidebar>
     </ng-container>
 
     <ng-container *ngIf="activeSubmenu === 'profile'">
-      <app-submenu
+      <app-nested-sidebar
         [(sidebarVisible)]="sidebarVisible"
         title="My Profile"
         [submenuItems]="profileItems"
       >
-      </app-submenu>
+      </app-nested-sidebar>
     </ng-container>
   </div>
 

@@ -5,9 +5,9 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
-import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'users', component: UserPageComponent },
       {
         path: 'settings',
-        component: SubmenuLayoutComponent,
+        component: ChildLayoutComponent,
         data: { submenu: 'settings' },
         children: [
           {
@@ -40,7 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: SubmenuLayoutComponent,
+        component: ChildLayoutComponent,
         data: { submenu: 'profile' },
         children: [
           {

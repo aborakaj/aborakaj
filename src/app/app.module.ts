@@ -49,11 +49,11 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
-import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 
 @NgModule({
   declarations: [
@@ -74,8 +74,8 @@ import { AvailabilityComponent } from './features/settings-page/availabilty/avai
     AddUserComponent,
     UserPageComponent,
     SidebarComponent,
-    SubmenuComponent,
-    SubmenuLayoutComponent,
+    NestedSidebarComponent,
+    ChildLayoutComponent,
     MySpacesComponent,
     AvailabilityComponent,
     PersonalDetailsComponent,

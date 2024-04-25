@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { SubmenuItem } from '../../../core/models/submenu-items.interface';
+import { NestedSidebarItems } from '../../../core/models/nested-sidebar-items.interface';
 
 @Component({
   selector: 'app-submenu-layout',
-  templateUrl: './submenu-layout.component.html',
-  styleUrl: './submenu-layout.component.scss',
+  templateUrl: './child-layout.component.html',
+  styleUrl: './child-layout.component.scss',
 })
-export class SubmenuLayoutComponent {
+export class ChildLayoutComponent {
   @Input() sidebarVisible: boolean = true;
 
   activeSubmenu!: string;
@@ -21,7 +21,7 @@ export class SubmenuLayoutComponent {
       });
   }
 
-  settingsItems: SubmenuItem[] = [
+  settingsItems: NestedSidebarItems[] = [
     {
       name: 'My spaces',
       icon: 'pi pi-building',
@@ -34,7 +34,7 @@ export class SubmenuLayoutComponent {
     },
   ];
 
-  profileItems: SubmenuItem[] = [
+  profileItems: NestedSidebarItems[] = [
     {
       name: 'Personal details',
       routerLink: './details',
