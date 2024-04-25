@@ -14,7 +14,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { CommonModule } from '@angular/common';
 
 import { PasswordModule } from 'primeng/password';
@@ -45,12 +44,15 @@ import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
 
 import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { AddUserComponent } from './features/add-user/add-user.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
 import { InputTextareaModule } from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
@@ -71,7 +73,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     TableComponent,
     PageHeaderComponent,
     AddUserComponent,
-    UserPageComponent
+    UserPageComponent,
+    SidebarComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -99,18 +102,23 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,    
+    FilterEventsPipe,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    SidebarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
