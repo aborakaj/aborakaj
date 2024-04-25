@@ -19,17 +19,7 @@ const routes: Routes = [
       { path: 'settings', component: UserReservationComponent },
       { path: 'profile', component: UserReservationComponent }], canActivate: [AuthGuard]
   },
-
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' },
-  { path: 'auth/login', component: LoginComponent },
-  {path: 'home', component: LandingPageComponent},
-  {path: 'user', component: UserPageComponent},
-  {path: 'reservation', component: UserReservationComponent},
-  {path: 'table', component: TableComponent},
-  {path: 'calendar', component: ReservationCalendarComponent},
-  {path: 'add-space-modal', component:AddSpaceModalComponent },
-  // {path: 'new-reservation', component: ReservationComponent}, //commented until dashboard is ready
+  { path: 'space', component: AddSpaceModalComponent },
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },
   
