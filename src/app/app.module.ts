@@ -51,7 +51,7 @@ import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
 import { AddUserComponent } from './features/add-user/add-user.component';
-
+import { InputTextareaModule } from 'primeng/inputtextarea';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,6 +101,7 @@ import { AddUserComponent } from './features/add-user/add-user.component';
     FullCalendarModule,
     FilterEventsPipe,    
     CardModule,
+    InputTextareaModule
 
   ],
   providers: [
