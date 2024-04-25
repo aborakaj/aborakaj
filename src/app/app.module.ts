@@ -49,13 +49,13 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
-import { SettingsSubmenuComponent } from './features/settings-page/settings-submenu/settings-submenu.component';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
-import { ProfileSubmenuComponent } from './features/profile-page/profile-submenu/profile-submenu.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
-import { SubmenuLayoutComponent } from './shared/components/submenu-layout/submenu-layout.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 
 @NgModule({
   declarations: [
@@ -76,12 +76,10 @@ import { AvailabilityComponent } from './features/settings-page/availabilty/avai
     AddUserComponent,
     UserPageComponent,
     SidebarComponent,
-    SubmenuComponent,
-    SubmenuLayoutComponent,
-    SettingsSubmenuComponent,
+    NestedSidebarComponent,
+    ChildLayoutComponent,
     MySpacesComponent,
     AvailabilityComponent,
-    ProfileSubmenuComponent,
     PersonalDetailsComponent,
   ],
   imports: [
@@ -113,14 +111,19 @@ import { AvailabilityComponent } from './features/settings-page/availabilty/avai
     FilterEventsPipe,
     CardModule,
     SidebarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
+
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

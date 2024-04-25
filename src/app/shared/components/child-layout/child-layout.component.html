@@ -1,0 +1,26 @@
+<div class="grid m-0 h-screen app-layout-wrapper">
+  <div class="col-fixed p-0" style="width: 240px">
+    <ng-container *ngIf="activeSubmenu === 'settings'">
+      <app-nested-sidebar
+        [(sidebarVisible)]="sidebarVisible"
+        title="Settings"
+        subtitle="Room Settings"
+        [submenuItems]="settingsItems"
+      >
+      </app-nested-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="activeSubmenu === 'profile'">
+      <app-nested-sidebar
+        [(sidebarVisible)]="sidebarVisible"
+        title="My Profile"
+        [submenuItems]="profileItems"
+      >
+      </app-nested-sidebar>
+    </ng-container>
+  </div>
+
+  <div class="col p-0">
+    <router-outlet></router-outlet>
+  </div>
+</div>

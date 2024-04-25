@@ -3,6 +3,8 @@
   position="left"
   [modal]="false"
   styleClass="w-15rem"
+  transitionOptions="0ms"
+  [closeOnEscape]="false"
 >
   <ng-template pTemplate="headless">
     <div class="flex flex-column bg-color text-black h-screen">
@@ -13,15 +15,16 @@
       <div class="flex flex-column mt-3 w-full">
         <div *ngFor="let item of submenuItems" class="w-full">
           <div class="hover:bg-blue-100 w-full">
-            <span
-              class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer text-black w-full"
-              [routerLink]="item.routerLink"
+            <a
+              [routerLink]="[item.routerLink]"
               routerLinkActive="bg-blue-100"
-              (click)="onSubmenuItemClick(item)"
+              class="flex align-items-center font-medium px-4 py-3 text-sm cursor-pointer w-full decoration"
             >
-              <i *ngIf="item.icon" [ngClass]="item.icon + ' mr-3'"></i>
-              {{ item.name }}
-            </span>
+              <span>
+                <i *ngIf="item.icon" [ngClass]="item.icon" class="mr-2"></i>
+                {{ item.name }}
+              </span>
+            </a>
           </div>
         </div>
       </div>

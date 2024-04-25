@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingsSubmenuComponent } from './settings-submenu.component';
+import { SubmenuComponent } from './nested-sidebar.component';
 
-describe('SettingsSubmenuComponent', () => {
-  let component: SettingsSubmenuComponent;
-  let fixture: ComponentFixture<SettingsSubmenuComponent>;
+describe('SubmenuComponent', () => {
+  let component: SubmenuComponent;
+  let fixture: ComponentFixture<SubmenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SettingsSubmenuComponent]
+      imports: [SubmenuComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SettingsSubmenuComponent);
+    fixture = TestBed.createComponent(SubmenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
