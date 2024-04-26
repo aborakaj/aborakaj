@@ -78,10 +78,10 @@
                   <label for="identifier">Email address*</label>
                   <input pInputText formControlName="identifier" [ngClass]="{'ng-dirty': fc['identifier'].touched}" />
                 </div>
-                <span [ngStyle]="{'visibility':   loginForm.get('identifier')?.touched ? 'visible':'hidden'}"
+                <span [ngStyle]="{'visibility':   fc['identifier'].touched ? 'visible':'hidden'}"
                   class="p-error h-1rem">
                   <small
-                    *ngIf="(loginForm.get('identifier')!.touched)">{{checkForErrorsIn((loginForm.get('identifier')))}}</small>
+                    *ngIf="fc['identifier'].touched">{{checkForErrorsIn(fc['identifier'])}}</small>
                 </span>
               </span>
             </div>
@@ -90,12 +90,12 @@
                 <div class="flex flex-column gap-3">
                   <label for="password">Password*</label>
                   <p-password [toggleMask]="true" [feedback]="false" formControlName="password"
-                    [ngClass]="{'ng-dirty': loginForm.get('password')?.touched}"></p-password>
+                    [ngClass]="{'ng-dirty': fc['password'].touched}"></p-password>
                 </div>
-                <span [ngStyle]="{'visibility': loginForm.get('password')?.touched ? 'visible':'hidden'}"
+                <span [ngStyle]="{'visibility': fc['password'].touched ? 'visible':'hidden'}"
                   class="p-error h-1rem">
                   <small class="p-error"
-                    *ngIf="(loginForm.get('password')!.touched)">{{checkForErrorsIn((loginForm.get('password')))}}</small>
+                    *ngIf="fc['password'].touched">{{checkForErrorsIn(fc['password'])}}</small>
                 </span>
               </span>
             </div>
@@ -118,35 +118,3 @@
     </p-card>
   </div>
 </div>
-
-
-<!-- <div class="form-group text-sm">
-
-            <div class="flex flex-column gap-2">
-              <label for="username">Email address*</label>
-              <input id="username" type="text" pInputText formControlName="identifier"
-                [ngClass]="{'p-invalid': isSubmitted && fc['identifier'].invalid}" />
-
-            </div>
-            <div *ngIf="isSubmitted && fc['identifier'].errors" class="invalid-feedback">
-              <div *ngIf="fc['identifier'].errors['required']">
-                Email is required.
-              </div>
-              <div *ngIf="fc['identifier'].errors['email']">
-                Email must be a valid email address.
-              </div>
-            </div>
-          </div>
-          <div class="form-group text-sm">
-            <div class="flex flex-column gap-2">
-              <label for="password">Password*</label>
-              <input id="password" type="password" pInputText formControlName="password"
-                [ngClass]="{'p-invalid': isSubmitted && fc['password'].invalid}" />
-
-            </div>
-            <div *ngIf="isSubmitted && fc['password'].errors" class="invalid-feedback">
-              <div *ngIf="fc['password'].errors['required']">
-                Password is required.
-              </div>
-            </div>
-          </div> -->
