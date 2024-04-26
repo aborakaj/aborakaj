@@ -13,13 +13,9 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
-
 import { PasswordModule } from 'primeng/password';
-
 import { DividerModule } from 'primeng/divider';
-
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
@@ -40,7 +36,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
-
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
@@ -56,6 +51,12 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+import { MessagesModule } from 'primeng/messages';
+import { ImageModule } from 'primeng/image';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
+
+
 
 @NgModule({
   declarations: [
@@ -118,6 +119,11 @@ import { ChildLayoutComponent } from './shared/components/child-layout/child-lay
         },
       },
     }),
+    MessagesModule,
+    ImageModule,
+    RadioButtonModule,
+    CheckboxModule
+
 
   ],
   providers: [

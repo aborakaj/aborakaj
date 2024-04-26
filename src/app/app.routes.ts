@@ -55,7 +55,7 @@ const routes: Routes = [
           },
         ],
       },
-    ],
+    ], canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
@@ -66,4 +66,4 @@ export { routes };
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
