@@ -55,6 +55,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ImageModule } from 'primeng/image';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
+import { RegisterComponent } from './features/register/register.component';
 
 
 
@@ -82,6 +83,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     MySpacesComponent,
     AvailabilityComponent,
     PersonalDetailsComponent,
+    RegisterComponent,
   ],
   imports: [
     FontAwesomeModule,

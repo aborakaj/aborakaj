@@ -9,9 +9,11 @@ import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+import { RegisterComponent } from './features/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'home',
     component: LayoutComponent,
