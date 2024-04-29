@@ -34,8 +34,7 @@ export class ReservationModalComponent implements OnInit {
   formattedDate!: string;
   minDateValue!: Date;
 
-  private spaceSubscription!: Subscription;
-  private dateSubscription!: Subscription;
+  private subscriptions = new Subscription();
 
   reservationForm: FormGroup = this.fb.group({
     startTime: ['', Validators.required],
@@ -99,7 +98,6 @@ export class ReservationModalComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.spaceSubscription.unsubscribe();
-    this.dateSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
