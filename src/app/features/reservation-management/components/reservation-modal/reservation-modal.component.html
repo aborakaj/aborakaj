@@ -17,12 +17,13 @@
         <div class="field col-12">
           <label for="space" class="text-sm font-normal">Space*</label>
           <p-dropdown
+            (onSelect)="filterTimesBySpaceAndDate()"
             id="space"
             [options]="spaces"
             optionLabel="name"
             filterBy="name"
             formControlName="space"
-            dataKey="floorId"
+            dataKey="id"
             placeholder="Select Space"
             appendTo="body"
           ></p-dropdown>
@@ -32,9 +33,9 @@
         <div class="field col-12 md:col-6">
           <label for="date" class="text-sm font-normal">Date*</label>
           <p-calendar
-            (onSelect)="updateTimeAvailability()"
+            (onSelect)="filterTimesBySpaceAndDate()"
             [minDate]="minDateValue"
-            [disabledDays]="[0,6]"
+            [disabledDays]="[0, 6]"
             [firstDayOfWeek]="1"
             formControlName="startTime"
             dataType="date"
@@ -52,7 +53,9 @@
         </div>
 
         <div class="field col-12 md:col-3">
-          <label for="startTime" class="text-sm font-normal col-offset-4">Time*</label>
+          <label for="startTime" class="text-sm font-normal col-offset-4"
+            >Time*</label
+          >
           <div class="field grid">
             <label for="time" class="text-sm font-normal col-fixed">From</label>
             <div class="col">
@@ -86,7 +89,9 @@
 
       <div class="grid">
         <div class="field col-12">
-          <label for="bookingTitle" class="text-sm font-normal">Booking Title</label>
+          <label for="bookingTitle" class="text-sm font-normal"
+            >Booking Title</label
+          >
           <input
             type="text"
             id="bookingTitle"

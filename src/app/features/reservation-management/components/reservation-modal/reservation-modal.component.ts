@@ -10,6 +10,7 @@ import {
   spacesMock,
   timesMock,
 } from '../reservation.mock';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -33,6 +34,9 @@ export class ReservationModalComponent implements OnInit {
   formattedDate!: string;
   minDateValue!: Date;
 
+  private spaceSubscription!: Subscription;
+  private dateSubscription!: Subscription;
+
   reservationForm: FormGroup = this.fb.group({
     startTime: ['', Validators.required],
     endTime: ['', Validators.required],
@@ -44,24 +48,40 @@ export class ReservationModalComponent implements OnInit {
     this.spaces = spacesMock;
     this.times = timesMock;
     this.reservationMock = reservationMock;
-    this.updateTimeAvailability();
     this.disabledDates();
+
+    this.reservationForm.get('space')?.valueChanges.subscribe(() => {
+      if (this.reservationForm.get('startTime')?.value) {
+        this.filterTimesBySpaceAndDate();
+      }
+    });
+
+    this.reservationForm.get('startTime')?.valueChanges.subscribe(() => {
+      if (this.reservationForm.get('space')?.value) {
+        this.filterTimesBySpaceAndDate();
+      }
+    });
   }
 
-  updateTimeAvailability(): void {
+  filterTimesBySpaceAndDate(): void {
     const selectedDate = this.reservationForm.get('startTime')?.value;
+    const selectedSpaceId = this.reservationForm.get('space')?.value?.id;
 
-    this.times.forEach((timesMock) => {
-      const [hour, minute] = timesMock.time.split(':').map(Number);
+    this.times.forEach((timeSlot) => {
+      const [hour, minute] = timeSlot.time.split(':').map(Number);
       const timeSlotDate = setMinutes(setHours(selectedDate, hour), minute);
 
       const isReserved = this.reservationMock.some((reservation) => {
         const start = new Date(reservation.startTime);
         const end = new Date(reservation.endTime);
-        return timeSlotDate >= start && timeSlotDate < end;
+        return (
+          reservation.spaceId === selectedSpaceId &&
+          timeSlotDate >= start &&
+          timeSlotDate < end
+        );
       });
 
-      timesMock.disabled = isReserved;
+      timeSlot.disabled = isReserved;
     });
   }
 
@@ -76,5 +96,10 @@ export class ReservationModalComponent implements OnInit {
   onVisibleChange(event: boolean) {
     this.visibleChange.emit(event);
     this.reservationForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.spaceSubscription.unsubscribe();
+    this.dateSubscription.unsubscribe();
   }
 }
