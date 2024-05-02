@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { User } from '../../core/models/user.interface';
 
 @Component({
   selector: 'app-add-user',
@@ -7,25 +8,25 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
   styleUrls: ['./add-user.component.scss']
 })
 
-export class AddUserComponent implements OnInit {
+export class AddUserComponent {
   userForm!: FormGroup;
+  editingUserId!: string;
+
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;
+  @Input() isEditMode!: boolean;
+  @Input() selectedUser!: User;
   @Output() addUserClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  onAddUserClick() {
-    this.addUserClick.emit();
-  }
-
   onVisibleChange(event: boolean) {
     this.visibleChange.emit(event);
-    this.userForm.reset();
   }
 
   constructor(private fb: FormBuilder) { }
-  ngOnInit() {
+
+  ngOnChanges() {
     this.userForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
@@ -34,11 +35,39 @@ export class AddUserComponent implements OnInit {
     },
       { updateOn: "blur" }
     );
+
+    if (this.isEditMode) {
+      this.userForm.setValue({
+        firstName: this.selectedUser.firstName,
+        lastName: this.selectedUser.lastName,
+        email: this.selectedUser.email,
+        phoneNumber: this.selectedUser.phoneNumber,
+      });
+    }
+
   }
 
   onSubmitUser() {
     if (this.userForm.valid) {
       const userData = { ...this.userForm.value };
+
+      if (this.isEditMode) {
+
+        this.editingUserId = this.selectedUser.email; //check matching
+        this.userForm.patchValue({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          phoneNumber: userData.username,
+        });
+
+        //send request to update
+
+      }
+      else {
+        //send request to create
+      }
+      this.addUserClick.emit();
     }
   }
 

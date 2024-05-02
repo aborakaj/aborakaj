@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FilterService } from 'primeng/api';
+import { User } from '../../../../core/models/user.interface';
 
 @Component({
   selector: 'app-user-page',
@@ -141,11 +142,47 @@ export class UserPageComponent {
   ];
   filteredData = this.data;
   globalFilterFields = this.cols.map(col => col.field);
+  actionButtonLabel: string = ' ';
+  header: string = ' ';
+  isEditMode!: boolean;
+  selection!: User;
 
   changeVisibility(value: boolean) {
     this.visible = value;
+    if (this.visible === false) {
+      this.resetSelection();
+    }
   }
-  
+
+  onEdit(event: any) {
+    this.isEditMode = true;
+    this.selection = event.data;
+    this.header = "Edit user";
+    this.actionButtonLabel = "Save User";
+    this.visible = true;
+  }
+
+  OnAdd() {
+    this.isEditMode = false;
+    this.header = "Add user";
+    this.actionButtonLabel = "Add User";
+    this.visible = true;
+  }
+
+  resetSelection() {
+    this.selection = {
+      id: '',
+      firstName: '',
+      lastName: '',
+      username: '',
+      phoneNumber: '',
+      email: '',
+      updatedAt: '',
+      updatedBy: '',
+      reservation: [],
+    };
+  }
+
   onSearch(query: string) {
     this.filteredData = this.filterService.filter(this.data, this.globalFilterFields, query, 'contains');
   }
