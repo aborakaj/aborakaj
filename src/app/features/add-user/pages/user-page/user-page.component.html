@@ -5,7 +5,7 @@
     actionButtonIcon="pi pi-user-plus"
     tableReference="dt"
     (searchValue)="onSearch($event)"
-    (actionButtonClick)="changeVisibility(true)"
+    (actionButtonClick)="OnAdd()"
   ></app-page-header>
 
   <app-table
@@ -14,13 +14,16 @@
     [rows]="10"
     [data]="filteredData"
     currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
-    (rowSelect)="changeVisibility(true)"
-  >
-  </app-table>
+    (rowSelect)="onEdit($event)"
+    [selection]="selection"
+  ></app-table>
 
   <app-add-user
     [(visible)]="visible"
-    actionButtonLabel="Add User"
-    header="Add user"
-  >
-  </app-add-user>
+    [actionButtonLabel]="actionButtonLabel"
+    [header]="header"
+    [isEditMode]="isEditMode"
+    [selectedUser]="selection"
+    (addUserClick)="changeVisibility(false)"
+    (visibleChange)="resetSelection()"
+  ></app-add-user>

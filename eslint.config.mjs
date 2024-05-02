@@ -4,13 +4,17 @@ import tseslint from "typescript-eslint";
 
 
 export default [
-  {languageOptions: { globals: globals.browser }},
+  { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
     rules: {
-        semi: ["warn", "always"]
+      eqeqeq: "warn",
+      semi: ["warn", "always"],
+      "no-unused-expressions": "warn",
+      "no-inline-comments": "warn",
+      "no-console": "warn",
     }
-}
-  
+  }
+
 ];
