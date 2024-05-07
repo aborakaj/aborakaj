@@ -1,12 +1,16 @@
-  <app-page-header
-    title="Users"
-    subtitle="Add, edit or remove users from your spaces"
-    actionButtonLabel="Add User"
-    actionButtonIcon="pi pi-user-plus"
-    tableReference="dt"
-    (searchValue)="onSearch($event)"
-    (actionButtonClick)="changeVisibility(true)"
-  ></app-page-header>
+ <app-page-header
+  title="Users"
+  subtitle="Add, edit or remove users from your spaces"
+  actionButtonLabel="Add User"
+  actionButtonIcon="pi pi-user-plus"
+  (actionButtonClick)="changeVisibility(true)">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" placeholder="Search..." [(ngModel)]="filterValue" 
+      (input)="onSearch()"/>
+    </span>
+</app-page-header>
+
 
   <app-table
     dataKey="firstName"
@@ -14,13 +18,11 @@
     [rows]="10"
     [data]="filteredData"
     currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
-    (rowSelect)="changeVisibility(true)"
-  >
+    (rowSelect)="changeVisibility(true)">
   </app-table>
 
   <app-add-user
     [(visible)]="visible"
     actionButtonLabel="Add User"
-    header="Add user"
-  >
+    header="Add user">
   </app-add-user>
