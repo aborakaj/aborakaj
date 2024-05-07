@@ -5,25 +5,24 @@
     actionButtonIcon="pi pi-user-plus"
     tableReference="dt"
     (searchValue)="onSearch($event)"
-    (actionButtonClick)="OnAdd()"
+    (actionButtonClick)="onEditOrAdd($event, false)"
   ></app-page-header>
 
   <app-table
-    dataKey="firstName"
+    dataKey="email"
     [cols]="cols"
     [rows]="10"
     [data]="filteredData"
     currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
-    (rowSelect)="onEdit($event)"
+    (rowSelect)="onEditOrAdd($event, true)"
     [selection]="selection"
   ></app-table>
 
-  <app-add-user
+  <app-add-user #addUser
     [(visible)]="visible"
     [actionButtonLabel]="actionButtonLabel"
     [header]="header"
-    [isEditMode]="isEditMode"
     [selectedUser]="selection"
-    (addUserClick)="changeVisibility(false)"
+    (addUserClick)="onSubmit()"
     (visibleChange)="resetSelection()"
   ></app-add-user>

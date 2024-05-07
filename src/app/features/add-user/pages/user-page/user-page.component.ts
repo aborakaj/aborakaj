@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FilterService } from 'primeng/api';
 import { User } from '../../../../core/models/user.interface';
+import { AddUserComponent } from '../../add-user.component';
 
 @Component({
   selector: 'app-user-page',
@@ -9,8 +10,10 @@ import { User } from '../../../../core/models/user.interface';
   providers: [FilterService]
 })
 export class UserPageComponent {
-  constructor(private filterService: FilterService) { }
 
+  @ViewChild('addUser') addUser!: AddUserComponent;
+
+  editingUserId!: string;
   visible: boolean = false;
   cols = [
     { field: 'firstName', header: 'First name' },
@@ -145,42 +148,38 @@ export class UserPageComponent {
   actionButtonLabel: string = ' ';
   header: string = ' ';
   isEditMode!: boolean;
-  selection!: User;
+  selection: User = {} as User;
 
-  changeVisibility(value: boolean) {
-    this.visible = value;
-    if (this.visible === false) {
+
+  constructor(private filterService: FilterService) { }
+
+  onEditOrAdd(event: any, isEditMode: boolean) {
+    this.isEditMode = isEditMode;
+    this.selection = isEditMode ? event.data : { } as User;
+    this.header = isEditMode ? "Edit user" : "Add user";
+    this.actionButtonLabel = isEditMode ? "Save User" : "Add User";
+    this.visible = true;
+  }
+
+  onSubmit() {
+    if (this.isEditMode) {
+
+      this.editingUserId = this.selection.email; //check matching
+      //send request to update
       this.resetSelection();
     }
-  }
 
-  onEdit(event: any) {
-    this.isEditMode = true;
-    this.selection = event.data;
-    this.header = "Edit user";
-    this.actionButtonLabel = "Save User";
-    this.visible = true;
-  }
-
-  OnAdd() {
-    this.isEditMode = false;
-    this.header = "Add user";
-    this.actionButtonLabel = "Add User";
-    this.visible = true;
+    else {
+      console.log(this.selection);
+      const userData = { ...this.addUser.userForm.value };
+      console.log(userData);
+      //send request to create
+    }
+    this.visible = false;
   }
 
   resetSelection() {
-    this.selection = {
-      id: '',
-      firstName: '',
-      lastName: '',
-      username: '',
-      phoneNumber: '',
-      email: '',
-      updatedAt: '',
-      updatedBy: '',
-      reservation: [],
-    };
+    this.selection = {} as User;
   }
 
   onSearch(query: string) {

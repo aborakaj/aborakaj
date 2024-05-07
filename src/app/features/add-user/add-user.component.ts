@@ -9,13 +9,11 @@ import { User } from '../../core/models/user.interface';
 })
 
 export class AddUserComponent {
-  userForm!: FormGroup;
-  editingUserId!: string;
 
+  userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;
-  @Input() isEditMode!: boolean;
   @Input() selectedUser!: User;
   @Output() addUserClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -28,47 +26,17 @@ export class AddUserComponent {
 
   ngOnChanges() {
     this.userForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+      firstName: [this.selectedUser.firstName, [Validators.required, Validators.minLength(2)]],
+      lastName: [this.selectedUser.lastName, [Validators.required, Validators.minLength(2)]],
+      phoneNumber: [this.selectedUser.phoneNumber, [Validators.required, Validators.minLength(10)]],
+      email: [this.selectedUser.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
     },
       { updateOn: "blur" }
     );
-
-    if (this.isEditMode) {
-      this.userForm.setValue({
-        firstName: this.selectedUser.firstName,
-        lastName: this.selectedUser.lastName,
-        email: this.selectedUser.email,
-        phoneNumber: this.selectedUser.phoneNumber,
-      });
-    }
-
   }
 
   onSubmitUser() {
-    if (this.userForm.valid) {
-      const userData = { ...this.userForm.value };
-
-      if (this.isEditMode) {
-
-        this.editingUserId = this.selectedUser.email; //check matching
-        this.userForm.patchValue({
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          email: userData.email,
-          phoneNumber: userData.username,
-        });
-
-        //send request to update
-
-      }
-      else {
-        //send request to create
-      }
-      this.addUserClick.emit();
-    }
+    this.addUserClick.emit();
   }
 
   checkForErrorsIn(control: AbstractControl | null): string {
