@@ -25,15 +25,27 @@ export class AvailabilityComponent implements OnInit {
       { time: '09:00', status: 'enabled' },
       { time: '10:00', status: 'enabled' }
     ];
-    this.addRow();
+
+    const savedTimeSpans = localStorage.getItem('timeSpans');
+    if (savedTimeSpans && JSON.parse(savedTimeSpans).length > 0) {
+      this.timeSpans = JSON.parse(savedTimeSpans);
+    } else {
+      this.addRow();
+    }
   }
 
   addRow() {
-    const timespan = {} as Timespan;
+    const timespan: Timespan = {} as Timespan;
     this.timeSpans.push(timespan);
+    this.saveTimeSpans();
   }
 
   delete(rowIndex: number) {
     this.timeSpans.splice(rowIndex, 1);
+    this.saveTimeSpans();
+  }
+
+  saveTimeSpans() {
+    localStorage.setItem('timeSpans', JSON.stringify(this.timeSpans));
   }
 }
