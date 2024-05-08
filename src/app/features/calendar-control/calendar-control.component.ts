@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { format } from 'date-fns';
-import { RoomService } from '../../../core/services/room.service';
-import { Room, RoomSelected } from '../../../core/models/room.interface';
+import { RoomService } from '../../core/services/room.service';
+import { Room, RoomSelected } from '../../core/models/room.interface';
 import { Subscription } from 'rxjs';
-import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
+import { ReservationStoreService } from '../../core/services/reservation/reservation-store.service';
 
 @Component({
   selector: 'app-calendar-control',

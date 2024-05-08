@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './shared/components/login/login.component';
 import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
-import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { ReservationCalendarComponent } from './features/reservation-calendar/reservation-calendar.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
-import { AuthGuard } from './core/guards/auth-guard.guard';
-import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
+import { MySpacesComponent } from './features/settings-page/pages/my-spaces/my-spaces.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
-import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { AvailabilityComponent } from './features/settings-page/pages/availabilty/availability.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 
 const routes: Routes = [

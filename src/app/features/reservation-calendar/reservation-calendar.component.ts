@@ -9,10 +9,10 @@ import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { ReservationEvent } from '../../../core/models/reservation.interface';
+import { ReservationEvent } from '../../core/models/reservation.interface';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { RoomSelected } from '../../../core/models/room.interface';
-import { ReservationStoreService } from '../../../core/services/reservation/reservation-store.service';
+import { RoomSelected } from '../../core/models/room.interface';
+import { ReservationStoreService } from '../../core/services/reservation/reservation-store.service';
 import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
