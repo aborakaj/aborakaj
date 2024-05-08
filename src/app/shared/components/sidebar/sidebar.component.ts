@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+
   
+constructor (private authService: AuthService) {}
+
+userRole = this.authService.getTokenPayload().role;
 }

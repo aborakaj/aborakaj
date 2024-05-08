@@ -17,7 +17,7 @@
         >
           <i class="pi pi-calendar" style="font-size: 1em"></i>
         </div>
-        <div
+        <div *ngIf = "userRole === 'Admin'"
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
           routerLink="./users"
           routerLinkActive="bg-blue-500"
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="grid pb-4 w-full">
-        <div
+        <div *ngIf = "userRole === 'Admin'"
           class="col-12 text-center h-2rem text-white hover:bg-blue-500"
           routerLink="./settings"
           routerLinkActive="bg-blue-500"
