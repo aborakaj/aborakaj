@@ -13,7 +13,7 @@ import { ChildLayoutComponent } from './shared/components/child-layout/child-lay
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
-    path: 'home',
+    path: 'admin',
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'reservations', pathMatch: 'full' },
@@ -56,6 +56,33 @@ const routes: Routes = [
         ],
       },
     ],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'reservations', pathMatch: 'full' },
+      { path: 'reservations', component: ReservationCalendarComponent },
+
+      {
+        path: 'profile',
+        component: ChildLayoutComponent,
+        data: { submenu: 'profile' },
+        children: [
+          {
+            path: '',
+            redirectTo: 'details',
+            pathMatch: 'full',
+          },
+          {
+            path: 'details',
+            component: PersonalDetailsComponent,
+          },
+        ],
+      },
+    ],
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
@@ -66,4 +93,4 @@ export { routes };
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

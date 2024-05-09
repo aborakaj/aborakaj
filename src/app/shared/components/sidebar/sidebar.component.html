@@ -1,46 +1,60 @@
-<p-sidebar
-  [visible]="true"
-  position="left"
-  [style]="{ width: '70px' }"
-  [modal]="false"
-  transitionOptions="0ms"
->
+<p-sidebar [visible]="true" position="left" [style]="{width: '70px'}" [modal]="false" transitionOptions="0ms"
+  [closeOnEscape]="false">
   <ng-template pTemplate="headless">
-    <div
-      class="flex flex-column flex-wrap justify-content-between align-items-center h-full bg-blue-400"
-    >
-      <div class="grid pt-4 w-full">
-        <div
-          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="./reservations"
-          routerLinkActive="bg-blue-500"
-        >
-          <i class="pi pi-calendar" style="font-size: 1em"></i>
+
+    <ng-container *ngIf="menuItems.length > 0; else noItems">
+      <ng-container *ngIf="menuItems.length % 2 === 0; else oddLength">
+        <div class=" flex flex-column  h-full py-3 justify-content-between bg-blue-400 ">
+          <div class="flex flex-column ">
+            <ng-container *ngFor="let item of menuItems.slice(0, menuItems.length / 2)">
+              <div class="w-full">
+                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500 cursor-pointer"
+                  [routerLink]="[item.routerLink]" routerLinkActive="bg-blue-500">
+                  <i [ngClass]="item.icon" style="font-size: 1em"></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-column">
+            <ng-container *ngFor="let item of menuItems.slice(menuItems.length / 2)">
+              <div class="w-full">
+                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500 cursor-pointer"
+                  [routerLink]="[item.routerLink]" routerLinkActive="bg-blue-500">
+                  <i [ngClass]="item.icon" style="font-size: 1em"></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
         </div>
-        <div *ngIf = "userRole === 'Admin'"
-          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="./users"
-          routerLinkActive="bg-blue-500"
-        >
-          <i class="pi pi-users" style="font-size: 1em"></i>
+      </ng-container>
+      <ng-template #oddLength>
+        <div class=" flex flex-column  h-full py-3 justify-content-between bg-blue-400 ">
+          <div class="flex flex-column">
+            <ng-container *ngFor="let item of menuItems.slice(0, (menuItems.length + 1) / 2)">
+              <div class="w-full">
+                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500 cursor-pointer"
+                  [routerLink]="[item.routerLink]" routerLinkActive="bg-blue-500">
+                  <i [ngClass]="item.icon" style="font-size: 1em"></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-column">
+            <ng-container *ngFor="let item of menuItems.slice((menuItems.length + 1) / 2)">
+              <div class="w-full">
+                <div class="col-12 text-center h-2rem text-white hover:bg-blue-500 cursor-pointer"
+                  [routerLink]="[item.routerLink]" routerLinkActive="bg-blue-500">
+                  <i [ngClass]="item.icon" style="font-size: 1em"></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
         </div>
-      </div>
-      <div class="grid pb-4 w-full">
-        <div *ngIf = "userRole === 'Admin'"
-          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="./settings"
-          routerLinkActive="bg-blue-500"
-        >
-          <i class="pi pi-cog" style="font-size: 1em"></i>
-        </div>
-        <div
-          class="col-12 text-center h-2rem text-white hover:bg-blue-500"
-          routerLink="./profile"
-          routerLinkActive="bg-blue-500"
-        >
-          <i class="pi pi-user" style="font-size: 1em"></i>
-        </div>
-      </div>
-    </div>
+      </ng-template>
+    </ng-container>
+    <ng-template #noItems>
+      <div>No items found</div>
+    </ng-template>
+
   </ng-template>
 </p-sidebar>

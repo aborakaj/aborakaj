@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
+import { Component, Input } from '@angular/core';
+import { SidebarItems } from '../../../core/models/sidebar-items.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +8,6 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class SidebarComponent {
 
-  
-constructor (private authService: AuthService) {}
+  @Input() menuItems: SidebarItems[] = [];
 
-userRole = this.authService.getTokenPayload().role;
 }

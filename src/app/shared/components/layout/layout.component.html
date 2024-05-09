@@ -1,6 +1,12 @@
 <div class="grid m-0 h-screen">
   <div class="col-fixed p-0" style="width: 70px">
-    <app-sidebar></app-sidebar>
+    <ng-container *ngIf="url === 'admin'">
+      <app-sidebar [menuItems]="adminItems"></app-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="url === 'user'">
+      <app-sidebar [menuItems]="userItems"></app-sidebar>
+    </ng-container>
   </div>
 
   <div class="col p-0">
