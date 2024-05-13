@@ -141,12 +141,14 @@ export class UserPageComponent {
   ];
   filteredData = this.data;
   globalFilterFields = this.cols.map(col => col.field);
+  filterValue: string = '';
 
   changeVisibility(value: boolean) {
     this.visible = value;
   }
-  
-  onSearch(query: string) {
+
+  onSearch() {
+    const query = this.filterValue;
     this.filteredData = this.filterService.filter(this.data, this.globalFilterFields, query, 'contains');
   }
 }
