@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { NestedSidebarItems } from '../../../core/models/nested-sidebar-items.interface';
 
 @Component({
