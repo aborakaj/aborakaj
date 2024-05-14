@@ -17,19 +17,16 @@ import { CommonModule } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
-import { LoginComponent } from './shared/components/login/login.component';
-import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
-import { UserReservationComponent } from './features/reservation-management/pages/user-reservation/user-reservation.component';
+import { LoginComponent } from './shared/components/login-page/login.component';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
-import { DashboardComponent } from './features/user-dashboard/components/dashboard/dashboard.component';
+import { DashboardComponent } from './features/user-panel/components/dashboard/dashboard.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { ReservationModalComponent } from './features/reservation-management/components/reservation-modal/reservation-modal.component';
 import { ModalComponent } from './shared/components/custom-modal/modal.component';
 import { TableModule } from 'primeng/table';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -40,12 +37,10 @@ import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from './shared/components/page-header/page-header.component';
-import { UserPageComponent } from './features/add-user/pages/user-page/user-page.component';
-import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
-import { JwtModule } from "@auth0/angular-jwt";
+import { JwtModule } from '@auth0/angular-jwt';
 import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
@@ -55,9 +50,12 @@ import { MessagesModule } from 'primeng/messages';
 import { ImageModule } from 'primeng/image';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
-import { RegisterComponent } from './features/register/register.component';
-
-
+import { RegisterComponent } from './features/register-page/register.component';
+import { ReservationModalComponent } from './features/reservation-page/components/reservation-modal/reservation-modal.component';
+import { ReservationComponent } from './features/reservation-page/components/reservation/reservation.component';
+import { UserReservationComponent } from './features/reservation-page/pages/user-reservation/user-reservation.component';
+import { UserPageComponent } from './features/user-page/pages/user-page/user-page.component';
+import { UserPageModalComponent } from './features/user-page/components/user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +73,8 @@ import { RegisterComponent } from './features/register/register.component';
     CalendarControlComponent,
     TableComponent,
     PageHeaderComponent,
-    AddUserComponent,
     UserPageComponent,
+    UserPageModalComponent,
     SidebarComponent,
     NestedSidebarComponent,
     ChildLayoutComponent,
@@ -124,9 +122,7 @@ import { RegisterComponent } from './features/register/register.component';
     MessagesModule,
     ImageModule,
     RadioButtonModule,
-    CheckboxModule
-
-
+    CheckboxModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -134,4 +130,4 @@ import { RegisterComponent } from './features/register/register.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

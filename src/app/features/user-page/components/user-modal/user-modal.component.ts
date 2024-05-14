@@ -1,13 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.scss']
+  templateUrl: './user-modal.component.html',
+  styleUrls: ['./user-modal.component.scss'],
 })
-
-export class AddUserComponent implements OnInit {
+export class UserPageModalComponent implements OnInit {
   userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
@@ -24,15 +28,24 @@ export class AddUserComponent implements OnInit {
     this.userForm.reset();
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
   ngOnInit() {
-    this.userForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-    },
-      { updateOn: "blur" }
+    this.userForm = this.fb.group(
+      {
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
+        lastName: ['', [Validators.required, Validators.minLength(2)]],
+        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
+            ),
+          ],
+        ],
+      },
+      { updateOn: 'blur' }
     );
   }
 
@@ -55,7 +68,6 @@ export class AddUserComponent implements OnInit {
   }
 
   allFieldsFilled(): boolean {
-
     for (const controlName in this.userForm.controls) {
       if (this.userForm.controls.hasOwnProperty(controlName)) {
         const control = this.userForm.get(controlName);
