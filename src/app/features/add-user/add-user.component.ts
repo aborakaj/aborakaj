@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 })
 
 export class AddUserComponent implements OnInit {
-  userForm!: FormGroup
+  userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;

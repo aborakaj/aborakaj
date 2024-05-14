@@ -33,7 +33,6 @@ export class ApiService {
   }
 
   private handleErrors(err: HttpErrorResponse) {
-    console.log(err);
     return throwError(() => new Error('Something went wrong'));
   }
 }

@@ -1,0 +1,13 @@
+.bg-color {
+  background-color: #eff6ff;
+}
+
+:host ::ng-deep .p-sidebar {
+  left: 70px;
+  z-index: -999;
+}
+
+.decoration {
+  text-decoration: none;
+  color: #1e293b;
+}

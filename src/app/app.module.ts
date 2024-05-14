@@ -13,13 +13,9 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
-
 import { PasswordModule } from 'primeng/password';
-
 import { DividerModule } from 'primeng/divider';
-
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
@@ -40,8 +36,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
-
-
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
@@ -50,7 +44,19 @@ import { UserPageComponent } from './features/add-user/pages/user-page/user-page
 import { AddUserComponent } from './features/add-user/add-user.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
-import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.component';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { JwtModule } from "@auth0/angular-jwt";
+import { MySpacesComponent } from './features/settings-page/my-spaces/my-spaces.component';
+import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
+import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
+import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+import { MessagesModule } from 'primeng/messages';
+import { ImageModule } from 'primeng/image';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RegisterComponent } from './features/register/register.component';
+
 
 
 @NgModule({
@@ -72,7 +78,12 @@ import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.co
     AddUserComponent,
     UserPageComponent,
     SidebarComponent,
-    SubmenuComponent
+    NestedSidebarComponent,
+    ChildLayoutComponent,
+    MySpacesComponent,
+    AvailabilityComponent,
+    PersonalDetailsComponent,
+    RegisterComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -100,19 +111,27 @@ import { SubmenuComponent } from './shared/components/sidebar/submenu/submenu.co
     DropdownModule,
     TableModule,
     FullCalendarModule,
-    FilterEventsPipe,    
+    FilterEventsPipe,
     CardModule,
     SidebarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('jwt');
+        },
+      },
+    }),
+    MessagesModule,
+    ImageModule,
+    RadioButtonModule,
+    CheckboxModule
 
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
