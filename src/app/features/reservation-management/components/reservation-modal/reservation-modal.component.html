@@ -17,7 +17,6 @@
         <div class="field col-12">
           <label for="space" class="text-sm font-normal">Space*</label>
           <p-dropdown
-            (onSelect)="filterTimesBySpaceAndDate()"
             id="space"
             [options]="spaces"
             optionLabel="name"
@@ -26,62 +25,89 @@
             dataKey="id"
             placeholder="Select Space"
             appendTo="body"
+            [ngClass]="{'is-invalid': reservationForm.get('space')?.touched}"
           ></p-dropdown>
+          <span
+            [ngStyle]="{'visibility': reservationForm.get('space')?.touched ? 'visible' : 'hidden'}"
+            class="p-error h-1rem"
+          >
+            <small *ngIf="reservationForm.get('space')!.touched">{{ checkForErrorsIn(reservationForm.get('space')) }}</small>
+          </span>
         </div>
       </div>
       <div class="formgrid grid">
         <div class="field col-12 md:col-6">
           <label for="date" class="text-sm font-normal">Date*</label>
           <p-calendar
-            (onSelect)="filterTimesBySpaceAndDate()"
+            id="date"
             [minDate]="minDateValue"
             [disabledDays]="[0, 6]"
             [firstDayOfWeek]="1"
             formControlName="startTime"
             dataType="date"
-            inputId="startTime"
             dateFormat="DD d MM"
             [iconDisplay]="'input'"
             [showIcon]="true"
             appendTo="body"
             [showButtonBar]="true"
+            (onSelect)="filterTimesBySpaceAndDate()"
+            [ngClass]="{'is-invalid': reservationForm.get('startTime')?.touched}"
           >
             <ng-template pTemplate="inputicon">
               <i class="pi pi-angle-down pointer-events-none"></i>
             </ng-template>
           </p-calendar>
+          <span
+            [ngStyle]="{'visibility': reservationForm.get('startTime')?.touched ? 'visible' : 'hidden'}"
+            class="p-error h-1rem"
+          >
+            <small *ngIf="reservationForm.get('startTime')!.touched">{{ checkForErrorsIn(reservationForm.get('startTime')) }}</small>
+          </span>
         </div>
 
         <div class="field col-12 md:col-3">
-          <label for="startTime" class="text-sm font-normal col-offset-4"
-            >Time*</label
-          >
+          <label for="time" class="text-sm font-normal col-offset-4">Time*</label>
           <div class="field grid">
-            <label for="time" class="text-sm font-normal col-fixed">From</label>
+            <label for="startTime" class="text-sm font-normal col-fixed">From</label>
             <div class="col">
               <p-dropdown
-                id="times"
+                id="startTime"
                 [options]="times"
-                optionLabel="time"
-                filterBy="time"
-                formControlName="space"
+                optionLabel="label"
+                optionValue="time"
+                formControlName="startTime"
                 appendTo="body"
+                [ngClass]="{'is-invalid': reservationForm.get('startTime')?.touched}"
               ></p-dropdown>
+              <span
+                [ngStyle]="{'visibility': reservationForm.get('startTime')?.touched ? 'visible' : 'hidden'}"
+                class="p-error h-1rem"
+              >
+                <small *ngIf="reservationForm.get('startTime')!.touched">{{ checkForErrorsIn(reservationForm.get('startTime')) }}</small>
+              </span>
             </div>
           </div>
         </div>
         <div class="field col-12 md:col-3 mt-auto">
           <div class="field grid">
-            <label for="time" class="text-sm font-normal col-fixed">To</label>
+            <label for="endTime" class="text-sm font-normal col-fixed">To</label>
             <div class="col">
               <p-dropdown
-                id="times"
-                [options]="times"
-                optionLabel="time"
-                filterBy="time"
-                formControlName="space"
+                id="endTime"
+                [options]="endTimes"
+                optionLabel="label"
+                optionValue="time"
+                dataType="Date"
+                formControlName="endTime"
                 appendTo="body"
+                [ngClass]="{'is-invalid': reservationForm.get('endTime')?.touched}"
               ></p-dropdown>
+              <span
+                [ngStyle]="{'visibility': reservationForm.get('endTime')?.touched ? 'visible' : 'hidden'}"
+                class="p-error h-1rem"
+              >
+                <small *ngIf="reservationForm.get('endTime')!.touched">{{ checkForErrorsIn(reservationForm.get('endTime')) }}</small>
+              </span>
             </div>
           </div>
         </div>
@@ -89,9 +115,7 @@
 
       <div class="grid">
         <div class="field col-12">
-          <label for="bookingTitle" class="text-sm font-normal"
-            >Booking Title</label
-          >
+          <label for="bookingTitle" class="text-sm font-normal">Booking Title</label>
           <input
             type="text"
             id="bookingTitle"
