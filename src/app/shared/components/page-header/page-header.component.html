@@ -2,12 +2,7 @@
     <ng-template pTemplate="content">
         <div class="flex justify-content-start column-gap-4">
             <p-button [label]="actionButtonLabel" [icon]="actionButtonIcon" (click)="onActionButtonClick()"></p-button>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" placeholder="Search..." [(ngModel)]="filterValue" 
-                (input)=" onInputChange()" />
-            </span>
+            <ng-content></ng-content>
         </div>
     </ng-template>
 </p-card>
-

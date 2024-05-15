@@ -13,13 +13,9 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
-
 import { PasswordModule } from 'primeng/password';
-
 import { DividerModule } from 'primeng/divider';
-
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { ReservationComponent } from './features/reservation-management/components/reservation/reservation.component';
@@ -56,7 +52,17 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+<<<<<<< HEAD
 import { InputTextareaModule } from 'primeng/inputtextarea';
+=======
+import { MessagesModule } from 'primeng/messages';
+import { ImageModule } from 'primeng/image';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RegisterComponent } from './features/register/register.component';
+
+
+>>>>>>> origin/main
 
 @NgModule({
   declarations: [
@@ -83,6 +89,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MySpacesComponent,
     AvailabilityComponent,
     PersonalDetailsComponent,
+    RegisterComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -121,6 +128,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
         },
       },
     }),
+    MessagesModule,
+    ImageModule,
+    RadioButtonModule,
+    CheckboxModule
+
 
   ],
   providers: [

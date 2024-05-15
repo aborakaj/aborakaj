@@ -2,21 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../core/services/auth.service';
-
+import { AuthService } from '../../core/services/auth.service';
 import { Message } from 'primeng/api';
 
+
+interface Department {
+  name: string;
+}
+interface EmployeeNumber {
+  number: Number;
+}
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+export class RegisterComponent implements OnInit {
+  registerForm!: FormGroup;
+  departments: Department[] | undefined;
+
+  selectedDepartment: Department | undefined;
+
+  employeeNrs: EmployeeNumber[] | undefined;
+
+  selectedEmployeeNr: EmployeeNumber | undefined;
 
   message!: Message[];
 
-  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,33 +38,55 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      identifier: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
+    this.registerForm = this.formBuilder.group({
+      organizationName: ['', [Validators.required, Validators.minLength(3)]],
+      selectedDepartment: ['',],
+      selectedEmployeeNr: ['',],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
       remember: [false]
     },
       { updateOn: "blur" }
     );
-    this.message = [
-      { severity: 'info', detail: 'This is a private space. If you have an approved account, please log in below.' },
+
+    this.departments = [
+      { name: 'IT' },
+      { name: 'Finance' },
+      { name: 'Logistics' },
+      { name: 'Service' },
+
     ];
+    this.employeeNrs = [
+      { number: 20 },
+      { number: 50 },
+      { number: 100 },
+      { number: 200 },
+
+
+    ];
+
+
   }
 
 
 
   get fc() {
-    return this.loginForm.controls;
+    return this.registerForm.controls;
   }
 
+
+
   login(): void {
-    
-    if (this.loginForm.invalid) {
+
+    if (this.registerForm.invalid) {
       this.toastr.error('Please correct the errors in the form', 'Error');
       return;
     }
 
-    const identifier = this.loginForm.get('identifier')?.value;
-    const password = this.loginForm.get('password')?.value;
+    const identifier = this.registerForm.get('identifier')?.value;
+    const password = this.registerForm.get('password')?.value;
 
     if (identifier && password) {
       this.authService.login(identifier, password).subscribe({

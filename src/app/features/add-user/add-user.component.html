@@ -11,7 +11,7 @@
                     <span class="flex flex-column pr-3">
                         <label for="firstName">First Name</label>
                         <input pInputText formControlName="firstName" placeholder="e.g. Jane"
-                            [ngClass]="{'is-invalid': userForm.get('firstName')?.touched}" class="mt-2" />
+                            [ngClass]="{'ng-dirty': userForm.get('firstName')?.touched}" class="mt-2" />
                         <span [ngStyle]="{'visibility':   userForm.get('firstName')?.touched ? 'visible':'hidden'}"
                             class="p-error h-1rem">
                             <small
