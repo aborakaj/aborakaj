@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'reservations', pathMatch: 'full' },
       { path: 'reservations', component: ReservationCalendarComponent },
       { path: 'users', component: UserPageComponent },
+      { path: 'space', component: AddSpaceModalComponent },
       {
         path: 'settings',
         component: ChildLayoutComponent,
@@ -57,7 +58,8 @@ const routes: Routes = [
         ],
       },
     ],
-  },  { path: 'space', component: AddSpaceModalComponent },
+  }, 
+  
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/login' },
   

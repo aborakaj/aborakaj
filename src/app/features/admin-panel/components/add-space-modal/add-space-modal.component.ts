@@ -8,10 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddSpaceModalComponent implements OnInit {
   spaceForm!: FormGroup;
-  @Input() visible: boolean=true;
+  @Input() visible: boolean = true;
   @Input() actionButtonLabel!: string;
   @Input() title!: string ;
-  @Output() addRoomClick = new EventEmitter<void>();
+  @Output() addRoomClick = new EventEmitter<{ spaceName: string, spaceDescription: string }>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder) { }
@@ -24,7 +24,11 @@ export class AddSpaceModalComponent implements OnInit {
   }
 
   onAddRoom() {
-      this.addRoomClick.emit();
+    if (this.spaceForm.valid) {
+      const spaceName = this.spaceForm.get('spaceName')?.value;
+      const spaceDescription = this.spaceForm.get('spaceDescription')?.value;
+      this.addRoomClick.emit({ spaceName: spaceName, spaceDescription: spaceDescription });
+    }
   }
 
   onVisibleChange(event: boolean) {
@@ -41,8 +45,9 @@ export class AddSpaceModalComponent implements OnInit {
         return 'Field is required';
     }
     return '';
-}
-allFieldsFilled(): boolean {
-  return this.spaceForm.get('spaceName')?.valid ?? false; 
-}
+  }
+
+  allFieldsFilled(): boolean {
+    return this.spaceForm.get('spaceName')?.valid ?? false; 
+  }
 }

@@ -57,6 +57,7 @@ import { AvailabilityComponent } from './features/settings-page/availabilty/avai
 import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+
 @NgModule({
   declarations: [
     AppComponent,
