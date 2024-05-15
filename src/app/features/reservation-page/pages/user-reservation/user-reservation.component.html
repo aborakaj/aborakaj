@@ -1,16 +1,3 @@
-<div class="desk-container">
-  <div *ngFor="let room of rooms; let roomIndex = index">
-    <div *ngFor="let desk of desks; let deskIndex = index" class="desk-button">
-      <p-button
-        type="button"
-        label="Desk {{ deskIndex + 1 }}"
-        class="pl-4"
-        (click)="onDeskClicked(desk)"
-      ></p-button>
-    </div>
-  </div>
-</div>
-
 <app-reservation-modal
   [title]="'Xhulio Gazidede'"
   [subtitle]="'xhgazidede@ritech.co'"

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-user',
+  selector: 'app-user-modal',
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.scss'],
 })

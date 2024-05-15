@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Room } from '../../../core/models/room.interface';
-import { Timespan } from '../../../core/models/timespan.interface';
+import { Room } from '../../../../../core/models/room.interface';
+import { Timespan } from '../../../../../core/models/timespan.interface';
 
 @Component({
   selector: 'app-availability',

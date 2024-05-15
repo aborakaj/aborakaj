@@ -10,11 +10,11 @@ import { Room } from '../../../../core/models/room.interface';
 import { User } from '../../../../core/models/user.interface';
 
 @Component({
-  selector: 'app-reservation',
-  templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.scss'],
+  selector: 'app-admin-reservation',
+  templateUrl: './admin-reservation.component.html',
+  styleUrls: ['./admin-reservation.component.scss'],
 })
-export class ReservationComponent {
+export class AdminReservationComponent {
   selectedSpace: any = null;
   reservation = {
     date: '',
