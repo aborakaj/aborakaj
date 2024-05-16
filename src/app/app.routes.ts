@@ -10,6 +10,7 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/admin-panel/pages/settings-page/availabilty/availability.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 import { RegisterComponent } from './features/register-page/register.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -60,7 +61,7 @@ const routes: Routes = [
     ], canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 export { routes };
 
