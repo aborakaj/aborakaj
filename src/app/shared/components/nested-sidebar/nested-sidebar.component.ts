@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NestedSidebarItems } from '../../../core/models/nested-sidebar-items.interface';
+import { SidebarsItems } from '../../../core/models/sidebars-items.interface';
 
 @Component({
   selector: 'app-nested-sidebar',
@@ -11,5 +11,5 @@ export class NestedSidebarComponent {
   @Output() sidebarVisibleChange = new EventEmitter<boolean>();
   @Input() title!: string;
   @Input() subtitle?: string;
-  @Input() submenuItems: NestedSidebarItems[] = [];
+  @Input() submenuItems: SidebarsItems[] = [];
 }
