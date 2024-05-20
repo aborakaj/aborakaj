@@ -9,11 +9,10 @@ import { RegisterComponent } from './register-page/register.component';
 import { UserManagementModule } from './admin-panel/pages/user-management/user-management.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { ReservationPageModule } from './reservation-page/reservation-page.module';
+import { AdminPanelModule } from './admin-panel/admin-panel.module';
 
 @NgModule({
   declarations: [
-    AvailabilityComponent,
-    MySpacesComponent,
     CalendarControlComponent,
     ReservationCalendarComponent,
     RegisterComponent,
@@ -24,6 +23,7 @@ import { ReservationPageModule } from './reservation-page/reservation-page.modul
     UserManagementModule,
     ProfilePageModule,
     ReservationPageModule,
+    AdminPanelModule
   ],
 })
 export class FeaturesModule {}
