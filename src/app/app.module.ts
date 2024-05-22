@@ -52,17 +52,14 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
-<<<<<<< HEAD
 import { InputTextareaModule } from 'primeng/inputtextarea';
-=======
 import { MessagesModule } from 'primeng/messages';
 import { ImageModule } from 'primeng/image';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RegisterComponent } from './features/register/register.component';
+import { DeleteConfirmationComponent } from './features/settings-page/my-spaces/delete-confirmation.component';
 
-
->>>>>>> origin/main
 
 @NgModule({
   declarations: [
@@ -90,6 +87,7 @@ import { RegisterComponent } from './features/register/register.component';
     AvailabilityComponent,
     PersonalDetailsComponent,
     RegisterComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     FontAwesomeModule,

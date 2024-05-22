@@ -3,10 +3,11 @@
     [header]="header"
     [isActionButtonDisabled]="!allFieldsFilled()"
     (visibleChange)="onVisibleChange($event)">
+    
     <ng-container modal-body-content>
         <form [formGroup]="userForm">
             <div class="grid grid-nogutter p-fluid row-gap-1">
-                <div class="col-6">
+                <div class="col-12">
 
                     <span class="flex flex-column pr-3">
                         <label for="firstName">First Name</label>

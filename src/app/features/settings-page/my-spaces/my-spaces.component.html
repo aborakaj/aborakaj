@@ -6,36 +6,44 @@
     (actionButtonClick)="changeVisibility(true)"
 ></app-page-header>
 
-<div style="padding: 17px">
+<div class="p-3">
+<div class="border-round border-1 surface-border overflow-hidden pt-4 pb-4">
     <p-table 
         #dt 
         [value]="spaces" 
-        [tableStyle]="{ 'border-collapse': 'collapse', 'width': '1070px', 'height': '226px', 'border-spacing': '0','padding-top': '25px', 'padding-bottom': '25px' }"
-        [paginator]="false"
+        [paginator]="false" 
         [showCurrentPageReport]="false" 
         [breakpoint]="'960px'"
-        responsiveLayout="stack" 
-    >
-      <ng-template pTemplate="body" let-space>
-        <tr class="space-item">
-            <td class="p-p-2 p-text-normal" style="border: none;">{{ space.name }}</td>
-            <td class="p-p-2 p-text-normal" style="border: none;">{{ space.description }}</td>
-            <td class="p-p-2 p-text-right" style="border: none; display: flex; justify-content: flex-end; align-items: center;">
-                <div class="button-container">
-                <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text" style="width: 24px; height: 24px; color: blue; margin-right: 5px;" (click)="editSpace(space)"></button>
-                <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" style="width: 17.5px; height: 17.5px; color: red;" (click)="deleteSpace(space)"></button>
-            </div>
-            </td>
-        </tr>
-    </ng-template>
+        responsiveLayout="stack"
+        >
+        <ng-template pTemplate="body" let-space>
+            <tr class="space-item">
+                <td class="py-1 px-3 p-text-normal border-none">{{ space.name }}</td>
+                <td class="py-1 px-3 p-text-normal border-none">{{ space.description }}</td>
+                <td class="py-1 px-3 p-text-right border-none">
+                    <div class="flex justify-content-end">
+                        <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text p-button-plain text-blue-900" (click)="editSpace(space)"></button>
+                        <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-plain text-red-600" (click)="showDeleteConfirmationModal(space)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
     </p-table>
+</div>
 </div>
 
 <app-add-space-modal
     [(visible)]="visible"
+    [selectedSpace]="selectedSpace"
     (addRoomClick)="onAddRoom($event)"
-    actionButtonLabel="Add Spaces"
-    header="Add spaces"
+    actionButtonLabel="{{ isEditMode ? 'Save Changes' : 'Add Space' }}"
+    header="{{ isEditMode ? 'Edit Space' : 'Add Space' }}"
 ></app-add-space-modal> 
 
-  
+<app-delete-confirmation
+    [visible]="deleteModalVisible"
+    (visibleChange)="deleteModalVisible = $event"      
+    [space]="selectedSpace"
+    (onConfirm)="deleteSpaceConfirmed()"
+    (onCancel)="cancelDelete()"
+></app-delete-confirmation>
