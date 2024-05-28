@@ -36,6 +36,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
 import { CalendarControlComponent } from './shared/components/calendar-control/calendar-control.component';
 import { FilterEventsPipe } from './shared/pipes/filter-events.pipe';
+import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
@@ -51,12 +52,13 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/settings-page/availabilty/availability.component';
 import { NestedSidebarComponent } from './shared/components/nested-sidebar/nested-sidebar.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
 import { ImageModule } from 'primeng/image';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RegisterComponent } from './features/register/register.component';
-
+import { DeleteConfirmationComponent } from './features/settings-page/my-spaces/delete-confirmation.component';
 
 
 @NgModule({
@@ -64,6 +66,7 @@ import { RegisterComponent } from './features/register/register.component';
     AppComponent,
     LoginComponent,
     LandingPageComponent,
+    AddSpaceModalComponent,
     ReservationComponent,
     UserReservationComponent,
     DashboardComponent,
@@ -84,6 +87,7 @@ import { RegisterComponent } from './features/register/register.component';
     AvailabilityComponent,
     PersonalDetailsComponent,
     RegisterComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -113,6 +117,7 @@ import { RegisterComponent } from './features/register/register.component';
     FullCalendarModule,
     FilterEventsPipe,
     CardModule,
+    InputTextareaModule,
     SidebarModule,
     JwtModule.forRoot({
       config: {

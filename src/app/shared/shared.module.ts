@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [],
@@ -13,7 +14,9 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    DynamicDialogModule,
+    DialogModule
   ],
   
 })
