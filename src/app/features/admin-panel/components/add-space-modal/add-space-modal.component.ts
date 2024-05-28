@@ -11,7 +11,7 @@ export class AddSpaceModalComponent implements OnInit, OnChanges {
   @Input() actionButtonLabel: string = '';
   @Input() header: string = '';
   @Input() visible: boolean = false;
-  @Input() isEditMode: boolean = false; //dallimi i editit me addin 
+  @Input() isEditMode: boolean = false;
   @Input() selectedSpace: any;
   @Output() addRoomClick = new EventEmitter<{ spaceName: string, spaceDescription: string }>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
