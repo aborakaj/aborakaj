@@ -9,7 +9,8 @@ import { MySpacesComponent } from './features/admin-panel/pages/settings-page/my
 import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
 import { AvailabilityComponent } from './features/admin-panel/pages/settings-page/availabilty/availability.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
-import { RegisterComponent } from './features/register-page/register.component';
+import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
+import { RegisterComponent } from './features/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'reservations', pathMatch: 'full' },
       { path: 'reservations', component: ReservationCalendarComponent },
       { path: 'users', component: UserPageComponent },
+      { path: 'space', component: AddSpaceModalComponent },
       {
         path: 'settings',
         component: ChildLayoutComponent,
