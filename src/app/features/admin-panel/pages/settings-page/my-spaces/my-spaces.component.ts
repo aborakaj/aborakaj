@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-my-spaces',
   templateUrl: './my-spaces.component.html',
-  styleUrls: ['./my-spaces.component.scss']
+  styleUrls: ['./my-spaces.component.scss'],
 })
 export class MySpacesComponent {
   visible: boolean = false;
@@ -12,7 +12,11 @@ export class MySpacesComponent {
   spaces = [
     { id: 1, name: 'Meeting Room', description: 'A room for meetings' },
     { id: 2, name: 'HR Office', description: 'Human Resources department' },
-    { id: 3, name: 'Marketing Office', description: 'Marketing team workspace' }
+    {
+      id: 3,
+      name: 'Marketing Office',
+      description: 'Marketing team workspace',
+    },
   ];
   selectedSpace: any;
 
@@ -24,13 +28,17 @@ export class MySpacesComponent {
     this.visible = true;
   }
 
-  onAddRoom(spaceData: { spaceName: string, spaceDescription: string }) {
+  onAddRoom(spaceData: { spaceName: string; spaceDescription: string }) {
     if (this.selectedSpace) {
       this.selectedSpace.name = spaceData.spaceName;
       this.selectedSpace.description = spaceData.spaceDescription;
     } else {
       if (spaceData.spaceName) {
-        const newSpace = { id: this.spaces.length + 1, name: spaceData.spaceName, description: spaceData.spaceDescription };
+        const newSpace = {
+          id: this.spaces.length + 1,
+          name: spaceData.spaceName,
+          description: spaceData.spaceDescription,
+        };
         this.spaces.unshift(newSpace);
       }
     }
@@ -42,7 +50,7 @@ export class MySpacesComponent {
   editSpace(space: any) {
     this.selectedSpace = space;
     this.visible = true;
-    this.isEditMode = true; 
+    this.isEditMode = true;
   }
 
   showDeleteConfirmationModal(space: any) {
@@ -51,7 +59,7 @@ export class MySpacesComponent {
   }
 
   deleteSpaceConfirmed() {
-    const index = this.spaces.findIndex(s => s.id === this.selectedSpace.id);
+    const index = this.spaces.findIndex((s) => s.id === this.selectedSpace.id);
     if (index !== -1) {
       this.spaces.splice(index, 1);
     }

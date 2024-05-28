@@ -1,9 +1,26 @@
-<p-dialog header="Confirm Deletion" [(visible)]="visible" [modal]="true" [closable]="false">
-    <div class="p-flex p-flex-column">
-        <p>Are you sure you want to delete "{{ space?.name }}"?</p>
-        <div class="p-flex p-jc-end mt-4">
-            <button pButton label="Cancel" icon="pi pi-times" (click)="cancelDelete()" class="p-button-text mr-2"></button>
-            <button pButton label="Delete" icon="pi pi-check" (click)="confirmDelete()" class="p-button-danger"></button>
-        </div>
+<p-dialog
+  header="Confirm Deletion"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="false"
+>
+  <div class="p-flex p-flex-column">
+    <p>Are you sure you want to delete "{{ space?.name }}"?</p>
+    <div class="p-flex p-jc-end mt-4">
+      <button
+        pButton
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="cancelDelete()"
+        class="p-button-text mr-2"
+      ></button>
+      <button
+        pButton
+        label="Delete"
+        icon="pi pi-check"
+        (click)="confirmDelete()"
+        class="p-button-danger"
+      ></button>
     </div>
+  </div>
 </p-dialog>
