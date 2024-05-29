@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           const userRole = this.authService.getTokenPayload().role;
 
           if (userRole === 'Admin') {
-            this.router.navigate(['/home/admin/reservations']);
+            this.router.navigate(['/admin/home/reservations']);
           } else {
             this.router.navigate(['/home/reservations']);
           }
