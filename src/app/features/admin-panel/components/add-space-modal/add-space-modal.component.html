@@ -42,11 +42,11 @@
             <label for="spaceDescription">Space description</label>
             <textarea
               pInputTextarea
-              autoResize="true"
               formControlName="spaceDescription"
               placeholder="Any details that users might find helpful."
               [value]="selectedSpace?.description"
               class="mt-2 h-10rem"
+              [autoResize]="true"
             ></textarea>
           </span>
         </div>
