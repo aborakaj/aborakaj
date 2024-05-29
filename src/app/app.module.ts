@@ -6,6 +6,7 @@ import { FeaturesModule } from './features/features.module';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
     FeaturesModule,
     BrowserModule,
     AppRoutingModule,
+    // SharedModule
 
   ],
   providers: [],

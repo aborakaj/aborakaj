@@ -1,18 +1,15 @@
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "./core/guards/auth-guard.guard";
-import { AvailabilityComponent } from "./features/admin-panel/pages/settings-page/availabilty/availability.component";
-import { MySpacesComponent } from "./features/admin-panel/pages/settings-page/my-spaces/my-spaces.component";
-import { UserPageComponent } from "./features/admin-panel/pages/user-management/pages/user-page/user-page.component";
-import { PersonalDetailsComponent } from "./features/profile-page/personal-details/personal-details.component";
-import { RegisterComponent } from "./features/register-page/register.component";
-import { ChildLayoutComponent } from "./shared/components/child-layout/child-layout.component";
-import { LoginComponent } from "./shared/components/login-page/login.component";
-import { PageNotFoundComponent } from "./shared/components/page-not-found/page-not-found.component";
-import { ReservationCalendarComponent } from "./shared/components/reservation-calendar/reservation-calendar.component";
-import { AdminPanelComponent } from "./features/admin-panel/admin-panel.component";
-import { UserPanelComponent } from "./features/user-panel/user-panel.component";
-import { NgModule } from "@angular/core";
-
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './shared/components/login-page/login.component';
+import { UserPageComponent } from './features/admin-panel/pages/user-management/pages/user-page/user-page.component';
+import { ReservationCalendarComponent } from './shared/components/reservation-calendar/reservation-calendar.component';
+import { LayoutComponent } from './shared/components/layout/layout.component';
+import { AuthGuard } from './core/guards/auth-guard.guard';
+import { MySpacesComponent } from './features/admin-panel/pages/settings-page/my-spaces/my-spaces.component';
+import { PersonalDetailsComponent } from './features/profile-page/personal-details/personal-details.component';
+import { AvailabilityComponent } from './features/admin-panel/pages/settings-page/availabilty/availability.component';
+import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
+import { RegisterComponent } from './features/register-page/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +21,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'reservations', pathMatch: 'full' },
       { path: 'reservations', component: ReservationCalendarComponent },
       { path: 'users', component: UserPageComponent },
+      { path: 'space', component: AddSpaceModalComponent },
       {
         path: 'settings',
         component: ChildLayoutComponent,
