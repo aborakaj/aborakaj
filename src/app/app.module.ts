@@ -1,12 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app.routes';
-import { CoreModule } from './core/core.module';
-import { FeaturesModule } from './features/features.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app.routes";
+import { CoreModule } from "./core/core.module";
+import { FeaturesModule } from "./features/features.module";
 
-import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { SharedModule } from './shared/shared.module';
     FeaturesModule,
     BrowserModule,
     AppRoutingModule,
-    // SharedModule
 
   ],
   providers: [],
