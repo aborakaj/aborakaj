@@ -10,7 +10,7 @@ import { PersonalDetailsComponent } from './features/profile-page/personal-detai
 import { AvailabilityComponent } from './features/admin-panel/pages/settings-page/availabilty/availability.component';
 import { ChildLayoutComponent } from './shared/components/child-layout/child-layout.component';
 import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
-import { RegisterComponent } from './features/register/register.component';
+import { RegisterComponent } from './features/register-page/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -59,7 +59,8 @@ const routes: Routes = [
           },
         ],
       },
-    ], canActivate: [AuthGuard]
+    ],
+    canActivate: [AuthGuard],
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
@@ -70,4 +71,4 @@ export { routes };
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

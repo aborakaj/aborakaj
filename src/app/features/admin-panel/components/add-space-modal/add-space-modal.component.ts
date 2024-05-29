@@ -1,30 +1,40 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-space-modal',
   templateUrl: './add-space-modal.component.html',
-  styleUrls: ['./add-space-modal.component.scss']
+  styleUrls: ['./add-space-modal.component.scss'],
 })
 export class AddSpaceModalComponent implements OnInit, OnChanges {
   spaceForm!: FormGroup;
   @Input() actionButtonLabel: string = '';
   @Input() header: string = '';
   @Input() visible: boolean = false;
-  @Input() isEditMode: boolean = false; //dallimi i editit me addin 
+  @Input() isEditMode: boolean = false;
   @Input() selectedSpace: any;
-  @Output() addRoomClick = new EventEmitter<{ spaceName: string, spaceDescription: string }>();
+  @Output() addRoomClick = new EventEmitter<{
+    spaceName: string;
+    spaceDescription: string;
+  }>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.spaceForm = this.fb.group({
       spaceName: ['', Validators.required],
-      spaceDescription: ['']
+      spaceDescription: [''],
     });
-    this.updateHeader(); 
+    this.updateHeader();
     this.updateForm();
   }
 
@@ -33,7 +43,6 @@ export class AddSpaceModalComponent implements OnInit, OnChanges {
       this.updateForm();
     }
   }
-
 
   updateHeader() {
     this.header = this.isEditMode ? 'Edit Space' : 'Add Space';
@@ -44,7 +53,7 @@ export class AddSpaceModalComponent implements OnInit, OnChanges {
     if (this.isEditMode && this.selectedSpace) {
       this.spaceForm.patchValue({
         spaceName: this.selectedSpace.name,
-        spaceDescription: this.selectedSpace.description
+        spaceDescription: this.selectedSpace.description,
       });
     } else {
       this.spaceForm.reset();
