@@ -1,0 +1,24 @@
+<div class="grid nested-grid grid-nogutter p-fluid" [style]="{padding: '17px'}">
+    <div class="col-12 p-fluid">
+        <div class="col-12 text-lg font-semibold my-0">Availability hours</div>
+        <div class="col-12 text-xs my-0">Let users know what hours will each space be available for.</div>
+        <div class="field col-2 m-0">
+            <p-button type="submit" label="Add hours" icon="pi pi-plus" (click)="addRow()"
+                styleClass="text-sm"></p-button>
+        </div>
+    </div>
+    <div *ngFor="let timeSpan of timeSpans; let i = index" class="col-12 w-20 p-fluid">
+        <div class="col-12 flex text-sm gap-3 align-items-center">
+            <p-dropdown [options]="spaces" optionLabel="name" placeholder="Select a space"
+                [(ngModel)]="timeSpan.selectedSpace" styleClass="w-12rem"></p-dropdown>
+            <div>will be available from</div>
+            <p-dropdown [options]="times" optionLabel="time" placeholder="Time" [(ngModel)]="timeSpan.startTime"
+                styleClass="w-8rem"></p-dropdown>
+            <div>to</div>
+            <p-dropdown [options]="times" optionLabel="time" placeholder="Time" [(ngModel)]="timeSpan.endTime"
+                styleClass="w-8rem"></p-dropdown>
+            <p-button icon="pi pi-times" severity="danger" [outlined]="true" [text]="true"
+                (click)="delete(i)"></p-button>
+        </div>
+    </div>
+</div>

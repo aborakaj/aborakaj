@@ -1,1 +1,54 @@
-<p>personal-details works!</p>
+<div class="grid p-fluid" [style]="{padding: '17px'}">
+    <div class="col-12 text-lg font-semibold my-0">Personal details</div>
+    <form [formGroup]="userForm" class="formgrid grid col-12 text-sm">
+        <div class="field col-6">
+            <span class="flex flex-column">
+                <label for="firstName">First name*</label>
+                <input pInputText formControlName="firstName"
+                    [ngClass]="{'ng-dirty': userForm.get('firstName')?.touched}" class="mt-2" />
+                <span [ngStyle]="{'visibility':   userForm.get('firstName')?.touched ? 'visible':'hidden'}"
+                    class="p-error h-1rem">
+                    <small
+                        *ngIf="(userForm.get('firstName')!.touched)">{{checkForErrorsIn((userForm.get('firstName')))}}</small>
+                </span>
+            </span>
+        </div>
+        <div class="field col-6">
+            <span class="flex flex-column">
+                <label for="lastName">Last name*</label>
+                <input pInputText formControlName="lastName" [ngClass]="{'ng-dirty': userForm.get('lastName')?.touched}"
+                    class="mt-2" />
+                <span [ngStyle]="{'visibility': userForm.get('lastName')?.touched ? 'visible':'hidden'}"
+                    class="p-error h-1rem">
+                    <small class="p-error"
+                        *ngIf="(userForm.get('lastName')!.touched)">{{checkForErrorsIn((userForm.get('lastName')))}}</small>
+                </span>
+            </span>
+        </div>
+        <div class="field col">
+            <span class="flex flex-column">
+                <label for="email">Email address*</label>
+                <input pInputText formControlName="email" [ngClass]="{'ng-dirty': userForm.get('email')?.touched}"
+                    class="mt-2" />
+                <span [ngStyle]="{'visibility': userForm.get('email')?.touched ? 'visible':'hidden'}"
+                    class="p-error h-1rem">
+                    <small class="p-error"
+                        *ngIf="(userForm.get('email')!.touched)">{{checkForErrorsIn((userForm.get('email')))}}</small>
+                </span>
+            </span>
+        </div>
+        <div class="field col-fixed " style="width:200px">
+            <div class="flex flex-column ">
+                <label for="password">Password</label>
+                <p-button label="Reset password" class="mt-2" [outlined]="true" severity="secondary"
+                    [routerLink]="'/reset'" styleClass="md:w-auto lg:w-full"></p-button>
+            </div>
+        </div>
+        <div class="col-12 flex justify-content-end p-0">
+            <div class="field  col-fixed " style="width:200px">
+                <p-button type="submit" label="Save changes" (click)="update()"></p-button>
+            </div>
+        </div>
+
+    </form>
+</div>
