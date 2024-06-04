@@ -22,6 +22,14 @@ export class MySpacesComponent {
 
   changeVisibility(value: boolean) {
     this.visible = value;
+    if (!value) {
+      this.resetState();
+    }
+  }
+  
+  resetState() {
+    this.isEditMode = false;
+    this.selectedSpace = null;
   }
 
   addSpaces() {
