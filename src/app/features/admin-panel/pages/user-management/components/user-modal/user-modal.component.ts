@@ -1,11 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from '../../../../../../core/models/user.interface';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-user-modal',
@@ -13,7 +8,7 @@ import { User } from '../../../../../../core/models/user.interface';
   styleUrls: ['./user-modal.component.scss'],
 })
 export class UserPageModalComponent{
-
+  
   userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
