@@ -5,7 +5,17 @@ actionButtonLabel="Add User"
 actionButtonIcon="pi pi-user-plus"
 tableReference="dt"
 (actionButtonClick)="onEditOrAdd($event, false)"
-></app-page-header>
+>
+<span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input
+      pInputText
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="filterValue"
+      (input)="onSearch()"
+    />
+  </span></app-page-header>
 
 <app-table
 dataKey="email"
