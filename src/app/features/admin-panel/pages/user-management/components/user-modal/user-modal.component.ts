@@ -5,54 +5,42 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { User } from '../../../../../../core/models/user.interface';
 
 @Component({
   selector: 'app-user-modal',
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.scss'],
 })
-export class UserPageModalComponent implements OnInit {
+export class UserPageModalComponent{
+
   userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;
+  @Input() selectedUser!: User;
   @Output() addUserClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  onAddUserClick() {
-    this.addUserClick.emit();
-  }
-
   onVisibleChange(event: boolean) {
     this.visibleChange.emit(event);
-    this.userForm.reset();
   }
 
-  constructor(private fb: FormBuilder) {}
-  ngOnInit() {
-    this.userForm = this.fb.group(
-      {
-        firstName: ['', [Validators.required, Validators.minLength(2)]],
-        lastName: ['', [Validators.required, Validators.minLength(2)]],
-        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
-        email: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(
-              '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
-            ),
-          ],
-        ],
-      },
-      { updateOn: 'blur' }
+  constructor(private fb: FormBuilder) { }
+
+  ngOnChanges() {
+    this.userForm = this.fb.group({
+      firstName: [this.selectedUser.firstName, [Validators.required, Validators.minLength(2)]],
+      lastName: [this.selectedUser.lastName, [Validators.required, Validators.minLength(2)]],
+      phoneNumber: [this.selectedUser.phoneNumber, [Validators.required, Validators.minLength(10)]],
+      email: [this.selectedUser.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+    },
+      { updateOn: "blur" }
     );
   }
 
   onSubmitUser() {
-    if (this.userForm.valid) {
-      const userData = { ...this.userForm.value };
-    }
+    this.addUserClick.emit();
   }
 
   checkForErrorsIn(control: AbstractControl | null): string {
@@ -68,6 +56,7 @@ export class UserPageModalComponent implements OnInit {
   }
 
   allFieldsFilled(): boolean {
+
     for (const controlName in this.userForm.controls) {
       if (this.userForm.controls.hasOwnProperty(controlName)) {
         const control = this.userForm.get(controlName);
