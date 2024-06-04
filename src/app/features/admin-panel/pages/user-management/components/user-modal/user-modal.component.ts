@@ -1,14 +1,25 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { User } from '../../../../../../core/models/user.interface';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-user-modal',
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.scss'],
 })
-export class UserPageModalComponent{
-  
+export class UserPageModalComponent {
   userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
@@ -21,16 +32,34 @@ export class UserPageModalComponent{
     this.visibleChange.emit(event);
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnChanges() {
-    this.userForm = this.fb.group({
-      firstName: [this.selectedUser.firstName, [Validators.required, Validators.minLength(2)]],
-      lastName: [this.selectedUser.lastName, [Validators.required, Validators.minLength(2)]],
-      phoneNumber: [this.selectedUser.phoneNumber, [Validators.required, Validators.minLength(10)]],
-      email: [this.selectedUser.email, [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-    },
-      { updateOn: "blur" }
+    this.userForm = this.fb.group(
+      {
+        firstName: [
+          this.selectedUser.firstName,
+          [Validators.required, Validators.minLength(2)],
+        ],
+        lastName: [
+          this.selectedUser.lastName,
+          [Validators.required, Validators.minLength(2)],
+        ],
+        phoneNumber: [
+          this.selectedUser.phoneNumber,
+          [Validators.required, Validators.minLength(10)],
+        ],
+        email: [
+          this.selectedUser.email,
+          [
+            Validators.required,
+            Validators.pattern(
+              '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
+            ),
+          ],
+        ],
+      },
+      { updateOn: 'blur' }
     );
   }
 
@@ -51,7 +80,6 @@ export class UserPageModalComponent{
   }
 
   allFieldsFilled(): boolean {
-
     for (const controlName in this.userForm.controls) {
       if (this.userForm.controls.hasOwnProperty(controlName)) {
         const control = this.userForm.get(controlName);

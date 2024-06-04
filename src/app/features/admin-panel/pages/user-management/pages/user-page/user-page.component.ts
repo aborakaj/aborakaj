@@ -164,16 +164,12 @@ export class UserPageComponent {
   onSubmit() {
     if (this.isEditMode) {
 
-      this.editingUserId = this.selection.email; //check matching
-      //send request to update
+      this.editingUserId = this.selection.email;
       this.resetSelection();
     }
 
     else {
-      console.log(this.selection);
       const userData = { ...this.addUser.userForm.value };
-      console.log(userData);
-      //send request to create
     }
     this.visible = false;
   }
