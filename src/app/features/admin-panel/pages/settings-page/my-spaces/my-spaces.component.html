@@ -51,6 +51,7 @@
   [(visible)]="visible"
   [selectedSpace]="selectedSpace"
   (addRoomClick)="onAddRoom($event)"
+  (visibleChange)="changeVisibility($event)"
   actionButtonLabel="{{ isEditMode ? 'Save Changes' : 'Add Space' }}"
   header="{{ isEditMode ? 'Edit Space' : 'Add Space' }}"
 ></app-add-space-modal>
