@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  FormBuilder,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { User } from '../../../../../../core/models/user.interface';
+import {
   FormGroup,
+  FormBuilder,
   Validators,
   AbstractControl,
 } from '@angular/forms';
@@ -11,32 +19,38 @@ import {
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.scss'],
 })
-export class UserPageModalComponent implements OnInit {
+export class UserPageModalComponent {
   userForm!: FormGroup;
   @Input() visible!: boolean;
   @Input() actionButtonLabel!: string;
   @Input() header!: string;
+  @Input() selectedUser!: User;
   @Output() addUserClick = new EventEmitter<void>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  onAddUserClick() {
-    this.addUserClick.emit();
-  }
-
   onVisibleChange(event: boolean) {
     this.visibleChange.emit(event);
-    this.userForm.reset();
   }
 
   constructor(private fb: FormBuilder) {}
-  ngOnInit() {
+
+  ngOnChanges() {
     this.userForm = this.fb.group(
       {
-        firstName: ['', [Validators.required, Validators.minLength(2)]],
-        lastName: ['', [Validators.required, Validators.minLength(2)]],
-        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+        firstName: [
+          this.selectedUser.firstName,
+          [Validators.required, Validators.minLength(2)],
+        ],
+        lastName: [
+          this.selectedUser.lastName,
+          [Validators.required, Validators.minLength(2)],
+        ],
+        phoneNumber: [
+          this.selectedUser.phoneNumber,
+          [Validators.required, Validators.minLength(10)],
+        ],
         email: [
-          '',
+          this.selectedUser.email,
           [
             Validators.required,
             Validators.pattern(
@@ -50,9 +64,7 @@ export class UserPageModalComponent implements OnInit {
   }
 
   onSubmitUser() {
-    if (this.userForm.valid) {
-      const userData = { ...this.userForm.value };
-    }
+    this.addUserClick.emit();
   }
 
   checkForErrorsIn(control: AbstractControl | null): string {

@@ -1,11 +1,12 @@
 <app-page-header
-  title="Users"
-  subtitle="Add, edit or remove users from your spaces"
-  actionButtonLabel="Add User"
-  actionButtonIcon="pi pi-user-plus"
-  (actionButtonClick)="changeVisibility(true)"
+title="Users"
+subtitle="Add, edit or remove users from your spaces"
+actionButtonLabel="Add User"
+actionButtonIcon="pi pi-user-plus"
+tableReference="dt"
+(actionButtonClick)="onEditOrAdd($event, false)"
 >
-  <span class="p-input-icon-left">
+<span class="p-input-icon-left">
     <i class="pi pi-search"></i>
     <input
       pInputText
@@ -14,22 +15,23 @@
       [(ngModel)]="filterValue"
       (input)="onSearch()"
     />
-  </span>
-</app-page-header>
+  </span></app-page-header>
 
 <app-table
-  dataKey="firstName"
-  [cols]="cols"
-  [rows]="10"
-  [data]="filteredData"
-  currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
-  (rowSelect)="changeVisibility(true)"
->
-</app-table>
+dataKey="email"
+[cols]="cols"
+[rows]="10"
+[data]="filteredData"
+currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
+(rowSelect)="onEditOrAdd($event, true)"
+[selection]="selection"
+></app-table>
 
-<app-user-modal
-  [(visible)]="visible"
-  actionButtonLabel="Add User"
-  header="Add user"
->
-</app-user-modal>
+<app-user-modal #addUser
+[(visible)]="visible"
+[actionButtonLabel]="actionButtonLabel"
+[header]="header"
+[selectedUser]="selection"
+(addUserClick)="onSubmit()"
+(visibleChange)="resetSelection()"
+></app-user-modal>

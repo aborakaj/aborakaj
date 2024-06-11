@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FilterService } from 'primeng/api';
+import { UserPageModalComponent } from '../../components/user-modal/user-modal.component';
+import { User } from '../../../../../../core/models/user.interface';
 
 @Component({
   selector: 'app-user-page',
@@ -8,8 +10,9 @@ import { FilterService } from 'primeng/api';
   providers: [FilterService],
 })
 export class UserPageComponent {
-  constructor(private filterService: FilterService) {}
+  @ViewChild('addUser') addUser!: UserPageModalComponent;
 
+  editingUserId!: string;
   visible: boolean = false;
   cols = [
     { field: 'firstName', header: 'First name' },
@@ -141,10 +144,34 @@ export class UserPageComponent {
   ];
   filteredData = this.data;
   globalFilterFields = this.cols.map((col) => col.field);
+  actionButtonLabel: string = ' ';
+  header: string = ' ';
+  isEditMode!: boolean;
+  selection: User = {} as User;
   filterValue: string = '';
 
-  changeVisibility(value: boolean) {
-    this.visible = value;
+  constructor(private filterService: FilterService) {}
+
+  onEditOrAdd(event: any, isEditMode: boolean) {
+    this.isEditMode = isEditMode;
+    this.selection = isEditMode ? event.data : ({} as User);
+    this.header = isEditMode ? 'Edit user' : 'Add user';
+    this.actionButtonLabel = isEditMode ? 'Save User' : 'Add User';
+    this.visible = true;
+  }
+
+  onSubmit() {
+    if (this.isEditMode) {
+      this.editingUserId = this.selection.email;
+      this.resetSelection();
+    } else {
+      const userData = { ...this.addUser.userForm.value };
+    }
+    this.visible = false;
+  }
+
+  resetSelection() {
+    this.selection = {} as User;
   }
 
   onSearch() {
