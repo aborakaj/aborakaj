@@ -8,6 +8,7 @@ import { UserManagementModule } from './admin-panel/pages/user-management/user-m
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { ReservationPageModule } from './reservation-page/reservation-page.module';
 import { AdminPanelModule } from './admin-panel/admin-panel.module';
+import { UserDashboardModule } from './user-panel/user-panel.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AdminPanelModule } from './admin-panel/admin-panel.module';
     ProfilePageModule,
     ReservationPageModule,
     AdminPanelModule,
+    UserDashboardModule
   ],
 })
 export class FeaturesModule {}

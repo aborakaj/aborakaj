@@ -37,6 +37,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FilterEventsPipe } from '../shared/pipes/filter-events.pipe';
 import { LoginComponent } from './components/login-page/login.component';
 import { MessagesModule } from 'primeng/messages';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MessagesModule } from 'primeng/messages';
     SidebarComponent,
     NestedSidebarComponent,
     ChildLayoutComponent,
+    PageNotFoundComponent
   ],
   imports: [
     FontAwesomeModule,

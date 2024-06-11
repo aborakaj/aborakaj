@@ -1,1 +1,16 @@
-<p>page-not-found works!</p>
+<div class="flex align-items-center justify-content-center h-screen">
+  <div class="text-center">
+    <i
+      class="pi pi-exclamation-circle"
+      style="font-size: 4rem; color: var(--blue-500)"
+    ></i>
+    <h1 class="text-4xl text-blue-600">404</h1>
+    <p class="text-lg">Oops! The page you are looking for was not found.</p>
+    <p-button
+      type="button"
+      label="Go Back"
+      class="p-button-rounded p-button-info mt-3"
+      (click)="goBack()"
+    ></p-button>
+  </div>
+</div>
