@@ -1,0 +1,15 @@
+<app-page-header
+  [title]="'Roles'"
+  [subtitle]="'Add user roles with ease, ensuring clear delegation of responsibilities across your organization.'"
+  [actionButtonLabel]="'Add Roles'"
+  [actionButtonIcon]="'pi pi-plus'"
+  (actionButtonClick)="changeVisibility(true)"
+>
+</app-page-header> 
+
+<app-role-modal
+  [(visible)]="visible"
+  (visibleChange)="changeVisibility($event)"
+  [header]="header"
+  [actionButtonLabel]="actionButtonLabel"
+></app-role-modal>

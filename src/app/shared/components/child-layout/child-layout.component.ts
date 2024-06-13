@@ -32,6 +32,11 @@ export class ChildLayoutComponent {
       icon: 'pi pi-clock',
       routerLink: './availability',
     },
+    {
+      name: 'Roles',
+      icon: 'pi pi-id-card',
+      routerLink: './roles',
+    },
   ];
 
   profileItems: SidebarsItems[] = [

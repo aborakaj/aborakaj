@@ -13,6 +13,8 @@ import { AdminPanelComponent } from './features/admin-panel/admin-panel.componen
 import { AddSpaceModalComponent } from './features/admin-panel/components/add-space-modal/add-space-modal.component';
 import { UserPanelComponent } from './features/user-panel/user-panel.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { RoleModalComponent } from './features/admin-panel/components/role-modal/role-modal.component';
+import { RolesComponent } from './features/admin-panel/pages/settings-page/roles/roles.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +27,7 @@ const routes: Routes = [
       { path: 'reservations', component: ReservationCalendarComponent },
       { path: 'users', component: UserPageComponent },
       { path: 'space', component: AddSpaceModalComponent },
+      { path: 'role', component: RoleModalComponent },
       {
         path: 'settings',
         component: ChildLayoutComponent,
@@ -42,6 +45,10 @@ const routes: Routes = [
           {
             path: 'availability',
             component: AvailabilityComponent,
+          },
+          {
+            path: 'roles',
+            component: RolesComponent,
           },
         ],
       },

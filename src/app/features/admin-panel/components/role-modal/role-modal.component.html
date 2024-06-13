@@ -1,0 +1,56 @@
+<app-modal
+  [actionButtonLabel]="actionButtonLabel"
+  (onActionButtonClick)="onAddRole()"
+  [visible]="visible"
+  [isActionButtonDisabled]="!allFieldsFilled()"
+  (visibleChange)="onVisibleChange($event)"
+  [header]="header"
+>
+  <ng-container modal-body-content>
+    <form [formGroup]="roleForm">
+      <div class="grid grid-nogutter p-fluid row-gap-1">
+        <div class="col-12">
+          <span class="p-flex flex-column">
+            <label for="roleName">Role Name*</label>
+            <input
+              pInputText
+              formControlName="roleName"
+              class="mt-2"
+              placeholder="e.g. Project Manager/PM"
+              [value]="selectedRole?.name"
+              [ngClass]="{ 'is-invalid': roleForm.get('roleName')?.touched }"
+            />
+            <span
+              [ngStyle]="{
+                visibility: roleForm.get('roleName')?.touched
+                  ? 'visible'
+                  : 'hidden'
+              }"
+              class="p-error h-1rem"
+            >
+              <small *ngIf="roleForm.get('roleName')?.touched">
+                {{ checkForErrorsIn("roleName") }}
+              </small>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
+        <div class="col-12">
+          <span class="p-flex p-flex-column">
+            <label for="roleDescription">Role description</label>
+            <textarea
+              pInputTextarea
+              formControlName="spaceDescription"
+              placeholder="Any information related to the role that was just added."
+              [value]="selectedRole?.description"
+              class="mt-2 h-10rem"
+              [autoResize]="true"
+            ></textarea>
+          </span>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</app-modal>
