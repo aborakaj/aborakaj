@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,11 +6,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './role-modal.component.html',
   styleUrls: ['./role-modal.component.scss']
 })
-export class RoleModalComponent implements OnInit {
+export class RoleModalComponent implements OnInit, OnChanges {
   @Input() actionButtonLabel: string = '';
   @Input() visible: boolean = false;
   @Input() header: string = '';
-  @Input() selectedRole: any;
+  @Input() selectedRole: any; 
   @Output() onActionButtonClick = new EventEmitter<void>();
   @Output() visibleChange = new EventEmitter<boolean>();
 
@@ -24,16 +24,35 @@ export class RoleModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.selectedRole) {
-      this.roleForm.patchValue({
-        roleName: this.selectedRole.name,
-        roleDescription: this.selectedRole.description
-      });
+    this.patchRoleForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedRole'] && !changes['selectedRole'].firstChange) {
+      this.patchRoleForm();
     }
   }
 
+  patchRoleForm(): void {
+    if (this.selectedRole) {
+      this.roleForm.patchValue({
+        roleName: this.selectedRole['name'], 
+        roleDescription: this.selectedRole['description'] 
+      });
+    } else {
+      this.roleForm.reset();
+    }
+  }
+
+
   allFieldsFilled(): boolean {
     return this.roleForm.valid;
+  }
+
+  onAddRole(): void {
+    if (this.roleForm.valid) {
+      this.onActionButtonClick.emit();
+    }
   }
 
   checkForErrorsIn(field: string): string {
@@ -44,12 +63,6 @@ export class RoleModalComponent implements OnInit {
       }
     }
     return '';
-  }
-
-  onAddRole(): void {
-    if (this.roleForm.valid) {
-      this.onActionButtonClick.emit();
-    }
   }
 
   onVisibleChange(event: boolean): void {

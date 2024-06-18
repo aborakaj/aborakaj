@@ -7,9 +7,71 @@
 >
 </app-page-header> 
 
+<div class="p-3">
+    <div class="border-round border-1 surface-border overflow-hidden">
+      <p-table 
+      [value]="roles" 
+      editable="true" 
+      [paginator]="true" 
+      [rows]="10" 
+      responsiveLayout="stack">
+      
+        <ng-template pTemplate="header">
+          <tr>
+            <th pEditableColumn>Role Name</th>
+            <th pEditableColumn>Role Description</th>
+            <th class="w-2rem"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-role let-editing="editing">
+          <tr>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText [(ngModel)]="role.name" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ role.name }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText [(ngModel)]="role.description" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{ role.description }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td class="border-left-1 surface-border text-center" >
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+                (click)="confirmDeleteRole(role)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
 <app-role-modal
   [(visible)]="visible"
   (visibleChange)="changeVisibility($event)"
   [header]="header"
   [actionButtonLabel]="actionButtonLabel"
+  (onActionButtonClick)="saveRole()"
 ></app-role-modal>
+
+<app-delete-confirmation
+  [visible]="deleteModalVisible"
+  (visibleChange)="deleteModalVisible = $event"
+  [space]="selectedRole"
+  (onConfirm)="deleteSpaceConfirmed()"
+  (onCancel)="cancelDelete()"
+></app-delete-confirmation>
