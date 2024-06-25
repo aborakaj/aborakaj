@@ -24,6 +24,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardModule } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
 
 import { LayoutComponent } from '../shared/components/layout/layout.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
@@ -38,6 +40,7 @@ import { FilterEventsPipe } from '../shared/pipes/filter-events.pipe';
 import { LoginComponent } from './components/login-page/login.component';
 import { MessagesModule } from 'primeng/messages';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -118,7 +121,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     CardModule,
     SidebarModule,
     CheckboxModule,
-    MessagesModule
+    MessagesModule,
+    ChipModule,
+    ChipsModule
   ],
 
 })

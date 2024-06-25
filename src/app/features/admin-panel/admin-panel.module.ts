@@ -5,6 +5,7 @@ import { UserManagementModule } from './pages/user-management/user-management.mo
 import { AdminPanelComponent } from './admin-panel.component';
 import { SharedModule } from '../../shared/shared.module';
 
+
 @NgModule({
   declarations: [AdminPanelComponent],
   imports: [CommonModule, SettingsModule, UserManagementModule, SharedModule],
