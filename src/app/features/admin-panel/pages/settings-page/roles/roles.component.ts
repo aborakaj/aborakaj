@@ -19,6 +19,10 @@ export class RolesComponent {
   deleteModalVisible: boolean = false;
   header: string = 'Role Management';
   actionButtonLabel: string = '';
+  cols: any[] = [
+    { field: 'name', header: 'Role Name' },
+    { field: 'description', header: 'Role Description' }
+  ];
 
   constructor() {}
 
@@ -62,5 +66,10 @@ export class RolesComponent {
 
   cancelDelete(): void {
     this.deleteModalVisible = false;
+  }
+
+  onRowSelect(event: any): void {
+    this.selectedRole = event.data; 
+    this.confirmDeleteRole(this.selectedRole);
   }
 }

@@ -3,62 +3,44 @@
   [subtitle]="'Add user roles with ease, ensuring clear delegation of responsibilities across your organization.'"
   [actionButtonLabel]="'Add Roles'"
   [actionButtonIcon]="'pi pi-plus'"
-  (actionButtonClick)="changeVisibility(true)"
+  (actionButtonClick)="addRole()"
 >
-</app-page-header> 
+</app-page-header>
 
 <div class="p-3">
-    <div class="border-round border-1 surface-border overflow-hidden">
-      <p-table 
-      [value]="roles" 
-      editable="true" 
-      [paginator]="true" 
-      [rows]="10" 
-      responsiveLayout="stack">
-      
-        <ng-template pTemplate="header">
-          <tr>
-            <th pEditableColumn>Role Name</th>
-            <th pEditableColumn>Role Description</th>
-            <th class="w-2rem"></th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-role let-editing="editing">
-          <tr>
-            <td pEditableColumn>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText [(ngModel)]="role.name" />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ role.name }}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td pEditableColumn>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText [(ngModel)]="role.description" />
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{ role.description }}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td class="border-left-1 surface-border text-center" >
-              <button
-                pButton
-                type="button"
-                icon="pi pi-trash"
-                class="p-button-rounded p-button-text p-button-danger"
-                (click)="confirmDeleteRole(role)"
-              ></button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
+  <div class="border-round border-1 surface-border overflow-hidden">
+    <app-table
+      [dataKey]="'name'"
+      [cols]="cols"
+      [rows]="10"
+      [data]="roles"
+      currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
+      (rowSelect)="onRowSelect($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Role Name</th>
+          <th>Role Description</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-role>
+        <tr>
+          <td>{{ role.name }}</td>
+          <td>{{ role.description }}</td>
+          <td class="text-center">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-danger"
+              (click)="confirmDeleteRole(role)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </app-table>
   </div>
+</div>
 
 <app-role-modal
   [(visible)]="visible"
