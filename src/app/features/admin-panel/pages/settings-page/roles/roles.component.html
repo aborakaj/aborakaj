@@ -1,0 +1,59 @@
+<app-page-header
+  [title]="'Roles'"
+  [subtitle]="'Add user roles with ease, ensuring clear delegation of responsibilities across your organization.'"
+  [actionButtonLabel]="'Add Roles'"
+  [actionButtonIcon]="'pi pi-plus'"
+  (actionButtonClick)="addRole()"
+>
+</app-page-header>
+
+<div class="p-3">
+  <div class="border-round border-1 surface-border overflow-hidden">
+    <app-table
+      [dataKey]="'name'"
+      [cols]="cols"
+      [rows]="10"
+      [data]="roles"
+      currentPageReportTemplate="Rows per page: {rows} &nbsp;&nbsp; {first} - {last} of {totalRecords}"
+      (rowSelect)="onRowSelect($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Role Name</th>
+          <th>Role Description</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-role>
+        <tr>
+          <td>{{ role.name }}</td>
+          <td>{{ role.description }}</td>
+          <td class="text-center">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-danger"
+              (click)="confirmDeleteRole(role)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </app-table>
+  </div>
+</div>
+
+<app-role-modal
+  [(visible)]="visible"
+  (visibleChange)="changeVisibility($event)"
+  [header]="header"
+  [actionButtonLabel]="actionButtonLabel"
+  (onActionButtonClick)="saveRole()"
+></app-role-modal>
+
+<app-delete-confirmation
+  [visible]="deleteModalVisible"
+  (visibleChange)="deleteModalVisible = $event"
+  [space]="selectedRole"
+  (onConfirm)="deleteSpaceConfirmed()"
+  (onCancel)="cancelDelete()"
+></app-delete-confirmation>
