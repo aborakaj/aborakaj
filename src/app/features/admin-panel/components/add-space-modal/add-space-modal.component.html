@@ -9,8 +9,7 @@
   <ng-container modal-body-content>
     <form [formGroup]="spaceForm">
       <div class="grid grid-nogutter p-fluid row-gap-1">
-        <div class="col-12">
-          <span class="p-flex p-flex-column">
+          <span class="p-flex p-flex-column col-12">
             <label for="spaceName">Space name*</label>
             <input
               pInputText
@@ -30,12 +29,10 @@
               </small>
             </span>
           </span>
-        </div>
       </div>
 
       <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
-        <div class="col-12">
-          <span class="p-flex p-flex-column">
+          <span class="p-flex p-flex-column col-12">
             <label for="numberOfDesks">Number of desks</label>
             <input
               pInputText
@@ -44,12 +41,10 @@
               min="1"
             />
           </span>
-        </div>
       </div>
 
       <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
-        <div class="col-12">
-          <span class="p-flex p-flex-column ">
+          <span class="p-flex p-flex-column col-12">
             <label for="tags">Tags</label>
             <div class="chips-container mt-2">
               <p-chips
@@ -59,12 +54,10 @@
               ></p-chips>
             </div>
           </span>
-        </div>
       </div>
       
       <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
-        <div class="col-12">
-          <span class="p-flex p-flex-column">
+          <span class="p-flex p-flex-column col-12">
             <label for="spaceDescription">Space description</label>
             <textarea
               pInputTextarea
@@ -74,7 +67,6 @@
               [autoResize]="true"
             ></textarea>
           </span>
-        </div>
       </div>
 
       <div class="col-12 text-center mt-0">
@@ -97,13 +89,12 @@
               pInputText
               formControlName="floor"
               type="number"
-              min="1"
+              min="-2"
             />
           </span>
         </div>
 
-        <div class="col-6">
-          <span class="p-flex p-flex-column">
+          <span class="p-flex p-flex-column col-6">
             <label for="table">Table</label>
             <input
               pInputText
@@ -112,7 +103,6 @@
               min="1"
             />
           </span>
-        </div>
         
         <div class="col-6 mt-2 pr-3">
           <span class="p-flex p-flex-column">
