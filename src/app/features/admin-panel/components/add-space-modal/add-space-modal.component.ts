@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FloorStoreService } from '../../../../core/services/floor/floor-store.service';
 
 @Component({
   selector: 'app-add-space-modal',
@@ -23,7 +24,11 @@ export class AddSpaceModalComponent implements OnInit, OnChanges {
     { label: 'Table', value: 'Table' }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private floorStoreService: FloorStoreService
+  ) {}
+
 
   ngOnInit() {
     this.spaceForm = this.fb.group({
@@ -68,7 +73,19 @@ export class AddSpaceModalComponent implements OnInit, OnChanges {
 
   onAddRoom() {
     if (this.spaceForm.valid) {
-      this.addRoomClick.emit(this.spaceForm.value);
+      
+      const floorData = {
+        name: this.spaceForm.get('floor')?.value.toString(), 
+        capacity: this.spaceForm.get('numberOfDesks')?.value,
+        location: "TIRANE/QENDER", 
+        organizationId: "557735b2-3a29-47c9-ae31-2e8a40461e73"
+      };
+      
+      if (this.isEditMode) {
+        this.floorStoreService.updateFloor(this.selectedSpace.id, floorData);
+      } else {
+        this.floorStoreService.addFloor(floorData);
+      }
       this.onVisibleChange(false);
     }
   }
