@@ -2,52 +2,112 @@
   [actionButtonLabel]="actionButtonLabel"
   (onActionButtonClick)="onAddRoom()"
   [visible]="visible"
-  [isActionButtonDisabled]="!allFieldsFilled()"
+  [isActionButtonDisabled]="!allFieldsFilled"
   (visibleChange)="onVisibleChange($event)"
   [header]="header"
 >
   <ng-container modal-body-content>
     <form [formGroup]="spaceForm">
       <div class="grid grid-nogutter p-fluid row-gap-1">
-        <div class="col-12">
-          <span class="p-flex flex-column">
+          <span class="p-flex p-flex-column col-12">
             <label for="spaceName">Space name*</label>
             <input
               pInputText
               formControlName="spaceName"
               class="mt-2"
               placeholder="e.g. Meeting room"
-              [value]="selectedSpace?.name"
               [ngClass]="{ 'is-invalid': spaceForm.get('spaceName')?.touched }"
             />
             <span
               [ngStyle]="{
-                visibility: spaceForm.get('spaceName')?.touched
-                  ? 'visible'
-                  : 'hidden'
+                visibility: spaceForm.get('spaceName')?.touched ? 'visible' : 'hidden'
               }"
               class="p-error h-1rem"
             >
               <small *ngIf="spaceForm.get('spaceName')?.touched">
-                {{ checkForErrorsIn("spaceName") }}
+                {{ checkForErrorsIn('spaceName') }}
               </small>
             </span>
           </span>
-        </div>
       </div>
 
       <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
-        <div class="col-12">
-          <span class="p-flex p-flex-column">
+          <span class="p-flex p-flex-column col-12">
+            <label for="numberOfDesks">Number of desks</label>
+            <input
+              pInputText
+              formControlName="numberOfDesks"
+              type="number"
+              min="1"
+            />
+          </span>
+      </div>
+
+      <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
+          <span class="p-flex p-flex-column col-12">
+            <label for="tags">Tags</label>
+            <div class="chips-container mt-2">
+              <p-chips
+                formControlName="tags"
+                [ngModel]="spaceForm.get('tags')?.value"
+                (ngModelChange)="spaceForm.get('tags')?.setValue($event)"
+              ></p-chips>
+            </div>
+          </span>
+      </div>
+      
+      <div class="grid grid-nogutter p-fluid row-gap-1 mt-3">
+          <span class="p-flex p-flex-column col-12">
             <label for="spaceDescription">Space description</label>
             <textarea
               pInputTextarea
               formControlName="spaceDescription"
               placeholder="Any details that users might find helpful."
-              [value]="selectedSpace?.description"
               class="mt-2 h-10rem"
               [autoResize]="true"
             ></textarea>
+          </span>
+      </div>
+
+      <div class="col-12 text-center mt-0">
+        <button
+          pButton
+          type="button"
+          (click)="toggleAdditionalSettings()"
+          class="p-button-link underline p-text-center text-color"
+        >
+          {{ additionalSettingsButtonLabel }}
+        </button>
+      </div>
+
+      <div *ngIf="showAdditionalSettings" class="grid grid-nogutter p-fluid row-gap-1 mt-2">
+
+        <div class="col-6 pr-3">
+          <span class="p-flex p-flex-column">
+            <label for="floor">Floor</label>
+            <input
+              pInputText
+              formControlName="floor"
+              type="number"
+              min="-2"
+            />
+          </span>
+        </div>
+
+          <span class="p-flex p-flex-column col-6">
+            <label for="table">Table</label>
+            <input
+              pInputText
+              formControlName="table"
+              type="number"
+              min="1"
+            />
+          </span>
+        
+        <div class="col-6 mt-2 pr-3">
+          <span class="p-flex p-flex-column">
+            <label for="deskName">Desk name</label>
+            <p-dropdown formControlName="deskName" [options]="deskOptions "></p-dropdown>
           </span>
         </div>
       </div>
