@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { NestedSidebarItems } from '../../../core/models/nested-sidebar-items.interface';
+import { SidebarsItems } from '../../../core/models/sidebars-items.interface';
 
 @Component({
   selector: 'app-submenu-layout',
@@ -21,7 +21,7 @@ export class ChildLayoutComponent {
       });
   }
 
-  settingsItems: NestedSidebarItems[] = [
+  settingsItems: SidebarsItems[] = [
     {
       name: 'My spaces',
       icon: 'pi pi-building',
@@ -32,9 +32,14 @@ export class ChildLayoutComponent {
       icon: 'pi pi-clock',
       routerLink: './availability',
     },
+    {
+      name: 'Roles',
+      icon: 'pi pi-id-card',
+      routerLink: './roles',
+    },
   ];
 
-  profileItems: NestedSidebarItems[] = [
+  profileItems: SidebarsItems[] = [
     {
       name: 'Personal details',
       routerLink: './details',

@@ -1,6 +1,9 @@
 <div class="grid m-0 h-screen">
   <div class="col-fixed p-0" style="width: 70px">
-    <app-sidebar></app-sidebar>
+    <app-sidebar
+      [mainSidebarItems]="mainSidebarItems"
+      [secondarySidebarItems]="secondarySidebarItems"
+    ></app-sidebar>
   </div>
 
   <div class="col p-0">

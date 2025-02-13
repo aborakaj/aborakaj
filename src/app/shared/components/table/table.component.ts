@@ -8,13 +8,14 @@ import { faSort, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 })
 
 export class TableComponent {
-  selectedRow!: any[];
+
   @Input() dataKey!: string;
   @Input() cols!: any[];
   @Input() rows!: number;
   @Input() data!: any[];
   @Input() currentPageReportTemplate!: string;
   @Input() filterText!: string;
+  @Input() selection!: any;
   @Output() rowSelect: EventEmitter<void> = new EventEmitter<void>();
 
   sortIcon = faSort;

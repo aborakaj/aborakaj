@@ -1,0 +1,39 @@
+:host ::ng-deep .p-card {
+    box-shadow: none !important;
+
+    .p-placeholder {
+        font-size: 14px;
+    }
+
+    .p-card-body {
+        padding: 0;
+        display: grid;
+        gap: 25px;
+        font-size: 14px;
+    }
+
+    .p-card-content {
+        padding: 0;
+    }
+
+    .p-card-footer {
+        padding: 0;
+        display: grid;
+        gap: 12px;
+
+    }
+
+    .grid {
+        padding: 10px 24px;
+        margin: 0;
+    }
+
+    .col-12 {
+        padding: 0;
+    }
+
+    .col-6 {
+        padding: 0;
+    }
+
+}

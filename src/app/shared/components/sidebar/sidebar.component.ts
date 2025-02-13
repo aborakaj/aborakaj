@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SidebarsItems } from '../../../core/models/sidebars-items.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,28 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  
+
+  @Input() mainSidebarItems: SidebarsItems[] = [];
+  @Input() secondarySidebarItems: SidebarsItems[] = [];
 }
+  // mainSidebarItems: SidebarsItems[] = [
+  //   {
+  //     icon: 'pi pi-calendar',
+  //     routerLink: './reservations',
+  //   },
+  //   {
+  //     icon: 'pi pi-users',
+  //     routerLink: './users',
+  //   },
+  // ];
+
+  // secondarySidebarItems: SidebarsItems[] = [
+  //   {
+  //     icon: 'pi pi-cog',
+  //     routerLink: './settings',
+  //   },
+  //   {
+  //     icon: 'pi pi-user',
+  //     routerLink: './profile',
+  //   },
+  // ];

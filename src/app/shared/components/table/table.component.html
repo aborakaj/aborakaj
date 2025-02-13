@@ -13,6 +13,7 @@ responsiveLayout="stack"
 paginatorStyleClass="bg-blue-50 flex justify-content-end"
 [showFirstLastIcon]="false" 
 [showPageLinks]="false"
+[(selection)]="selection"
 selectionMode="single" 
 (onRowSelect)="onRowSelect($event)"
 sortMode="single">
